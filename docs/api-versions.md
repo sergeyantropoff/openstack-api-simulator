@@ -33,7 +33,7 @@ curl -X POST http://127.0.0.1:5000/ui/api/openstack/contracts/activate \
   -d '{"series":"dalmatian"}'
 ```
 
-Or Web UI → Environment → OpenStack API pack → Activate.
+Or Web UI → API catalog → select series → **Apply as runtime**.
 
 Hot-swap remounts schema routes (`remount_schema_services`) without rebuilding
 the image.

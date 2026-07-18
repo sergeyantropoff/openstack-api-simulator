@@ -23,4 +23,4 @@ make seed-demo
 
 ## Microversion rejected
 
-Lower the requested compute microversion or clear Web UI overrides.
+Lower the requested compute microversion or apply an earlier series in the API catalog.

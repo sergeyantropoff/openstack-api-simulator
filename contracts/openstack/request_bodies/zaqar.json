@@ -1,0 +1,1414 @@
+{
+  "by_path": {
+    "PATCH /v2/queues/{id}": {
+      "description": "",
+      "properties": {
+        "queue": {
+          "description": "",
+          "properties": {
+            "_metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "queue_name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "queue"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/queues/{queue_name}/claims/{id}": {
+      "description": "",
+      "properties": {
+        "claim": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "claim",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "claim"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/queues/{queue_name}/messages/{id}": {
+      "description": "",
+      "properties": {
+        "message": {
+          "description": "",
+          "properties": {
+            "messages": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "body": {
+                    "description": "",
+                    "properties": {
+                      "event": {
+                        "description": "",
+                        "example": "example",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ttl": {
+                    "description": "",
+                    "example": 3600,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "body"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/queues/{queue_name}/subscriptions/{id}": {
+      "description": "",
+      "properties": {
+        "subscription": {
+          "description": "",
+          "properties": {
+            "options": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "subscriber": {
+              "description": "",
+              "example": "http://example.com/hook",
+              "format": "uri",
+              "type": "string"
+            },
+            "ttl": {
+              "description": "",
+              "example": 3600,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "subscription"
+      ],
+      "type": "object"
+    },
+    "POST /v2/queues": {
+      "description": "",
+      "properties": {
+        "queue": {
+          "description": "",
+          "properties": {
+            "_metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "queue_name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            }
+          },
+          "required": [
+            "queue_name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "queue"
+      ],
+      "type": "object"
+    },
+    "POST /v2/queues/{queue_name}/claims": {
+      "description": "",
+      "properties": {
+        "claim": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "claim",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "claim"
+      ],
+      "type": "object"
+    },
+    "POST /v2/queues/{queue_name}/messages": {
+      "description": "",
+      "properties": {
+        "message": {
+          "description": "",
+          "properties": {
+            "messages": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "body": {
+                    "description": "",
+                    "properties": {
+                      "event": {
+                        "description": "",
+                        "example": "example",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ttl": {
+                    "description": "",
+                    "example": 3600,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "body"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "messages"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "POST /v2/queues/{queue_name}/subscriptions": {
+      "description": "",
+      "properties": {
+        "subscription": {
+          "description": "",
+          "properties": {
+            "options": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "subscriber": {
+              "description": "",
+              "example": "http://example.com/hook",
+              "format": "uri",
+              "type": "string"
+            },
+            "ttl": {
+              "description": "",
+              "example": 3600,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "subscriber"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "subscription"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/queues/{id}": {
+      "description": "",
+      "properties": {
+        "_metadata": {
+          "description": "",
+          "properties": {},
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "PUT /v2/queues/{queue_name}/claims/{id}": {
+      "description": "",
+      "properties": {
+        "claim": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "claim",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "claim"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/queues/{queue_name}/messages/{id}": {
+      "description": "",
+      "properties": {
+        "message": {
+          "description": "",
+          "properties": {
+            "messages": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "body": {
+                    "description": "",
+                    "properties": {
+                      "event": {
+                        "description": "",
+                        "example": "example",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ttl": {
+                    "description": "",
+                    "example": 3600,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "body"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/queues/{queue_name}/subscriptions/{id}": {
+      "description": "",
+      "properties": {
+        "subscription": {
+          "description": "",
+          "properties": {
+            "options": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "subscriber": {
+              "description": "",
+              "example": "http://example.com/hook",
+              "format": "uri",
+              "type": "string"
+            },
+            "ttl": {
+              "description": "",
+              "example": 3600,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "subscription"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "claim_create": {
+      "description": "",
+      "properties": {
+        "claim": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "claim",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "claim"
+      ],
+      "type": "object"
+    },
+    "claim_patch": {
+      "description": "",
+      "properties": {
+        "claim": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "claim",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "claim"
+      ],
+      "type": "object"
+    },
+    "claim_update": {
+      "description": "",
+      "properties": {
+        "claim": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "claim",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "claim"
+      ],
+      "type": "object"
+    },
+    "message_create": {
+      "description": "",
+      "properties": {
+        "message": {
+          "description": "",
+          "properties": {
+            "messages": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "body": {
+                    "description": "",
+                    "properties": {
+                      "event": {
+                        "description": "",
+                        "example": "example",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ttl": {
+                    "description": "",
+                    "example": 3600,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "body"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "messages"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "message_patch": {
+      "description": "",
+      "properties": {
+        "message": {
+          "description": "",
+          "properties": {
+            "messages": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "body": {
+                    "description": "",
+                    "properties": {
+                      "event": {
+                        "description": "",
+                        "example": "example",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ttl": {
+                    "description": "",
+                    "example": 3600,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "body"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "message_update": {
+      "description": "",
+      "properties": {
+        "message": {
+          "description": "",
+          "properties": {
+            "messages": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "body": {
+                    "description": "",
+                    "properties": {
+                      "event": {
+                        "description": "",
+                        "example": "example",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ttl": {
+                    "description": "",
+                    "example": 3600,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "body"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "queue_create": {
+      "description": "",
+      "properties": {
+        "queue": {
+          "description": "",
+          "properties": {
+            "_metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "queue_name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            }
+          },
+          "required": [
+            "queue_name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "queue"
+      ],
+      "type": "object"
+    },
+    "queue_patch": {
+      "description": "",
+      "properties": {
+        "queue": {
+          "description": "",
+          "properties": {
+            "_metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "queue_name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "queue"
+      ],
+      "type": "object"
+    },
+    "queue_update": {
+      "description": "",
+      "properties": {
+        "_metadata": {
+          "description": "",
+          "properties": {},
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "subscription_create": {
+      "description": "",
+      "properties": {
+        "subscription": {
+          "description": "",
+          "properties": {
+            "options": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "subscriber": {
+              "description": "",
+              "example": "http://example.com/hook",
+              "format": "uri",
+              "type": "string"
+            },
+            "ttl": {
+              "description": "",
+              "example": 3600,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "subscriber"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "subscription"
+      ],
+      "type": "object"
+    },
+    "subscription_patch": {
+      "description": "",
+      "properties": {
+        "subscription": {
+          "description": "",
+          "properties": {
+            "options": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "subscriber": {
+              "description": "",
+              "example": "http://example.com/hook",
+              "format": "uri",
+              "type": "string"
+            },
+            "ttl": {
+              "description": "",
+              "example": 3600,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "subscription"
+      ],
+      "type": "object"
+    },
+    "subscription_update": {
+      "description": "",
+      "properties": {
+        "subscription": {
+          "description": "",
+          "properties": {
+            "options": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "subscriber": {
+              "description": "",
+              "example": "http://example.com/hook",
+              "format": "uri",
+              "type": "string"
+            },
+            "ttl": {
+              "description": "",
+              "example": 3600,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "subscription"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "zaqar",
+  "source": "generated-from-api-ref-catalog"
+}

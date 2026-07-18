@@ -1,0 +1,2356 @@
+{
+  "by_path": {
+    "PATCH /v2/alarms/{alarm_id}/history/{id}": {
+      "description": "",
+      "properties": {
+        "alarm_history": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "alarm_history",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm_history"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/alarms/{id}": {
+      "description": "",
+      "properties": {
+        "alarm": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enabled",
+              "type": "boolean"
+            },
+            "insufficient_data_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "ok_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "repeat_actions": {
+              "default": true,
+              "description": "Repeat actions",
+              "type": "boolean"
+            },
+            "severity_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "threshold_rule": {
+              "description": "",
+              "properties": {
+                "comparison_operator": {
+                  "description": "",
+                  "enum": [
+                    "gt",
+                    "lt",
+                    "ge",
+                    "le",
+                    "eq",
+                    "ne"
+                  ],
+                  "example": "gt",
+                  "type": "string"
+                },
+                "evaluation_periods": {
+                  "description": "",
+                  "example": 1,
+                  "type": "integer"
+                },
+                "meter_name": {
+                  "description": "",
+                  "example": "cpu_util",
+                  "type": "string"
+                },
+                "period": {
+                  "description": "",
+                  "example": 60,
+                  "type": "integer"
+                },
+                "query": {
+                  "description": "",
+                  "items": {
+                    "description": "",
+                    "properties": {
+                      "field": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "op": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "value": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "statistic": {
+                  "description": "",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum",
+                    "count"
+                  ],
+                  "example": "avg",
+                  "type": "string"
+                },
+                "threshold": {
+                  "description": "",
+                  "example": 80,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "description": "Alarm type",
+              "enum": [
+                "threshold",
+                "event",
+                "gnocchi_resources_threshold"
+              ],
+              "example": "threshold",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/quotas/{id}": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    },
+    "POST /v2/alarms": {
+      "description": "",
+      "properties": {
+        "alarm": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enabled",
+              "type": "boolean"
+            },
+            "insufficient_data_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "ok_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "repeat_actions": {
+              "default": true,
+              "description": "Repeat actions",
+              "type": "boolean"
+            },
+            "severity_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "threshold_rule": {
+              "description": "",
+              "properties": {
+                "comparison_operator": {
+                  "description": "",
+                  "enum": [
+                    "gt",
+                    "lt",
+                    "ge",
+                    "le",
+                    "eq",
+                    "ne"
+                  ],
+                  "example": "gt",
+                  "type": "string"
+                },
+                "evaluation_periods": {
+                  "description": "",
+                  "example": 1,
+                  "type": "integer"
+                },
+                "meter_name": {
+                  "description": "",
+                  "example": "cpu_util",
+                  "type": "string"
+                },
+                "period": {
+                  "description": "",
+                  "example": 60,
+                  "type": "integer"
+                },
+                "query": {
+                  "description": "",
+                  "items": {
+                    "description": "",
+                    "properties": {
+                      "field": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "op": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "value": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "statistic": {
+                  "description": "",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum",
+                    "count"
+                  ],
+                  "example": "avg",
+                  "type": "string"
+                },
+                "threshold": {
+                  "description": "",
+                  "example": 80,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "description": "Alarm type",
+              "enum": [
+                "threshold",
+                "event",
+                "gnocchi_resources_threshold"
+              ],
+              "example": "threshold",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "type"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm"
+      ],
+      "type": "object"
+    },
+    "POST /v2/alarms/{alarm_id}/history": {
+      "description": "",
+      "properties": {
+        "alarm_history": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "alarm_history",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm_history"
+      ],
+      "type": "object"
+    },
+    "POST /v2/quotas": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/alarms/{alarm_id}/history/{id}": {
+      "description": "",
+      "properties": {
+        "alarm_history": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "alarm_history",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm_history"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/alarms/{id}": {
+      "description": "",
+      "properties": {
+        "alarm": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enabled",
+              "type": "boolean"
+            },
+            "insufficient_data_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "ok_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "repeat_actions": {
+              "default": true,
+              "description": "Repeat actions",
+              "type": "boolean"
+            },
+            "severity_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "threshold_rule": {
+              "description": "",
+              "properties": {
+                "comparison_operator": {
+                  "description": "",
+                  "enum": [
+                    "gt",
+                    "lt",
+                    "ge",
+                    "le",
+                    "eq",
+                    "ne"
+                  ],
+                  "example": "gt",
+                  "type": "string"
+                },
+                "evaluation_periods": {
+                  "description": "",
+                  "example": 1,
+                  "type": "integer"
+                },
+                "meter_name": {
+                  "description": "",
+                  "example": "cpu_util",
+                  "type": "string"
+                },
+                "period": {
+                  "description": "",
+                  "example": 60,
+                  "type": "integer"
+                },
+                "query": {
+                  "description": "",
+                  "items": {
+                    "description": "",
+                    "properties": {
+                      "field": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "op": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "value": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "statistic": {
+                  "description": "",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum",
+                    "count"
+                  ],
+                  "example": "avg",
+                  "type": "string"
+                },
+                "threshold": {
+                  "description": "",
+                  "example": 80,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "description": "Alarm type",
+              "enum": [
+                "threshold",
+                "event",
+                "gnocchi_resources_threshold"
+              ],
+              "example": "threshold",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/quotas/{id}": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "alarm_create": {
+      "description": "",
+      "properties": {
+        "alarm": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enabled",
+              "type": "boolean"
+            },
+            "insufficient_data_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "ok_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "repeat_actions": {
+              "default": true,
+              "description": "Repeat actions",
+              "type": "boolean"
+            },
+            "severity_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "threshold_rule": {
+              "description": "",
+              "properties": {
+                "comparison_operator": {
+                  "description": "",
+                  "enum": [
+                    "gt",
+                    "lt",
+                    "ge",
+                    "le",
+                    "eq",
+                    "ne"
+                  ],
+                  "example": "gt",
+                  "type": "string"
+                },
+                "evaluation_periods": {
+                  "description": "",
+                  "example": 1,
+                  "type": "integer"
+                },
+                "meter_name": {
+                  "description": "",
+                  "example": "cpu_util",
+                  "type": "string"
+                },
+                "period": {
+                  "description": "",
+                  "example": 60,
+                  "type": "integer"
+                },
+                "query": {
+                  "description": "",
+                  "items": {
+                    "description": "",
+                    "properties": {
+                      "field": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "op": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "value": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "statistic": {
+                  "description": "",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum",
+                    "count"
+                  ],
+                  "example": "avg",
+                  "type": "string"
+                },
+                "threshold": {
+                  "description": "",
+                  "example": 80,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "description": "Alarm type",
+              "enum": [
+                "threshold",
+                "event",
+                "gnocchi_resources_threshold"
+              ],
+              "example": "threshold",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "type"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm"
+      ],
+      "type": "object"
+    },
+    "alarm_history_create": {
+      "description": "",
+      "properties": {
+        "alarm_history": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "alarm_history",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm_history"
+      ],
+      "type": "object"
+    },
+    "alarm_history_patch": {
+      "description": "",
+      "properties": {
+        "alarm_history": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "alarm_history",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm_history"
+      ],
+      "type": "object"
+    },
+    "alarm_history_update": {
+      "description": "",
+      "properties": {
+        "alarm_history": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "alarm_history",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm_history"
+      ],
+      "type": "object"
+    },
+    "alarm_patch": {
+      "description": "",
+      "properties": {
+        "alarm": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enabled",
+              "type": "boolean"
+            },
+            "insufficient_data_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "ok_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "repeat_actions": {
+              "default": true,
+              "description": "Repeat actions",
+              "type": "boolean"
+            },
+            "severity_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "threshold_rule": {
+              "description": "",
+              "properties": {
+                "comparison_operator": {
+                  "description": "",
+                  "enum": [
+                    "gt",
+                    "lt",
+                    "ge",
+                    "le",
+                    "eq",
+                    "ne"
+                  ],
+                  "example": "gt",
+                  "type": "string"
+                },
+                "evaluation_periods": {
+                  "description": "",
+                  "example": 1,
+                  "type": "integer"
+                },
+                "meter_name": {
+                  "description": "",
+                  "example": "cpu_util",
+                  "type": "string"
+                },
+                "period": {
+                  "description": "",
+                  "example": 60,
+                  "type": "integer"
+                },
+                "query": {
+                  "description": "",
+                  "items": {
+                    "description": "",
+                    "properties": {
+                      "field": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "op": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "value": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "statistic": {
+                  "description": "",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum",
+                    "count"
+                  ],
+                  "example": "avg",
+                  "type": "string"
+                },
+                "threshold": {
+                  "description": "",
+                  "example": 80,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "description": "Alarm type",
+              "enum": [
+                "threshold",
+                "event",
+                "gnocchi_resources_threshold"
+              ],
+              "example": "threshold",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm"
+      ],
+      "type": "object"
+    },
+    "alarm_update": {
+      "description": "",
+      "properties": {
+        "alarm": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Enabled",
+              "type": "boolean"
+            },
+            "insufficient_data_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "ok_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "repeat_actions": {
+              "default": true,
+              "description": "Repeat actions",
+              "type": "boolean"
+            },
+            "severity_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "threshold_rule": {
+              "description": "",
+              "properties": {
+                "comparison_operator": {
+                  "description": "",
+                  "enum": [
+                    "gt",
+                    "lt",
+                    "ge",
+                    "le",
+                    "eq",
+                    "ne"
+                  ],
+                  "example": "gt",
+                  "type": "string"
+                },
+                "evaluation_periods": {
+                  "description": "",
+                  "example": 1,
+                  "type": "integer"
+                },
+                "meter_name": {
+                  "description": "",
+                  "example": "cpu_util",
+                  "type": "string"
+                },
+                "period": {
+                  "description": "",
+                  "example": 60,
+                  "type": "integer"
+                },
+                "query": {
+                  "description": "",
+                  "items": {
+                    "description": "",
+                    "properties": {
+                      "field": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "op": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "value": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "statistic": {
+                  "description": "",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum",
+                    "count"
+                  ],
+                  "example": "avg",
+                  "type": "string"
+                },
+                "threshold": {
+                  "description": "",
+                  "example": 80,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "description": "Alarm type",
+              "enum": [
+                "threshold",
+                "event",
+                "gnocchi_resources_threshold"
+              ],
+              "example": "threshold",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "alarm"
+      ],
+      "type": "object"
+    },
+    "quota_create": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    },
+    "quota_patch": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    },
+    "quota_update": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "aodh",
+  "source": "generated-from-api-ref-catalog"
+}

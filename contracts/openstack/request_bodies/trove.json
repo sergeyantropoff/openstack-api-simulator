@@ -1,0 +1,3078 @@
+{
+  "by_path": {
+    "PATCH /v1.0/backups/{id}": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1.0/clusters/{id}": {
+      "description": "",
+      "properties": {
+        "cluster": {
+          "description": "",
+          "properties": {
+            "cluster_template_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "docker_volume_size": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "keypair": {
+              "description": "Keypair name",
+              "type": "string"
+            },
+            "labels": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "master_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "master_flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "node_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "cluster"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1.0/configurations/{id}": {
+      "description": "",
+      "properties": {
+        "configuration": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "configuration",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1.0/datastores/{id}": {
+      "description": "",
+      "properties": {
+        "datastore": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "datastore",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "datastore"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1.0/instances/{id}": {
+      "description": "",
+      "properties": {
+        "instance": {
+          "description": "",
+          "properties": {
+            "availability_zone": {
+              "description": "",
+              "type": "string"
+            },
+            "databases": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "datastore": {
+              "description": "",
+              "properties": {
+                "type": {
+                  "description": "",
+                  "example": "mysql",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "",
+                  "example": "8.0",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "version"
+              ],
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavorRef": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "nics": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "net-id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "users": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "databases": {
+                    "description": "",
+                    "items": {
+                      "description": "",
+                      "properties": {
+                        "name": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "volume_size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "instance"
+      ],
+      "type": "object"
+    },
+    "POST /v1.0/backups": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "volume_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "POST /v1.0/clusters": {
+      "description": "",
+      "properties": {
+        "cluster": {
+          "description": "",
+          "properties": {
+            "cluster_template_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "docker_volume_size": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "keypair": {
+              "description": "Keypair name",
+              "type": "string"
+            },
+            "labels": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "master_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "master_flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "node_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "cluster_template_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "cluster"
+      ],
+      "type": "object"
+    },
+    "POST /v1.0/configurations": {
+      "description": "",
+      "properties": {
+        "configuration": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "configuration",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "type": "object"
+    },
+    "POST /v1.0/datastores": {
+      "description": "",
+      "properties": {
+        "datastore": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "datastore",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "datastore"
+      ],
+      "type": "object"
+    },
+    "POST /v1.0/instances": {
+      "description": "",
+      "properties": {
+        "instance": {
+          "description": "",
+          "properties": {
+            "availability_zone": {
+              "description": "",
+              "type": "string"
+            },
+            "databases": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "datastore": {
+              "description": "",
+              "properties": {
+                "type": {
+                  "description": "",
+                  "example": "mysql",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "",
+                  "example": "8.0",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "version"
+              ],
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavorRef": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "nics": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "net-id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "users": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "databases": {
+                    "description": "",
+                    "items": {
+                      "description": "",
+                      "properties": {
+                        "name": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "volume_size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "flavorRef"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "instance"
+      ],
+      "type": "object"
+    },
+    "PUT /v1.0/backups/{id}": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "PUT /v1.0/clusters/{id}": {
+      "description": "",
+      "properties": {
+        "cluster": {
+          "description": "",
+          "properties": {
+            "cluster_template_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "docker_volume_size": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "keypair": {
+              "description": "Keypair name",
+              "type": "string"
+            },
+            "labels": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "master_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "master_flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "node_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "cluster"
+      ],
+      "type": "object"
+    },
+    "PUT /v1.0/configurations/{id}": {
+      "description": "",
+      "properties": {
+        "configuration": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "configuration",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "type": "object"
+    },
+    "PUT /v1.0/datastores/{id}": {
+      "description": "",
+      "properties": {
+        "datastore": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "datastore",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "datastore"
+      ],
+      "type": "object"
+    },
+    "PUT /v1.0/instances/{id}": {
+      "description": "",
+      "properties": {
+        "instance": {
+          "description": "",
+          "properties": {
+            "availability_zone": {
+              "description": "",
+              "type": "string"
+            },
+            "databases": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "datastore": {
+              "description": "",
+              "properties": {
+                "type": {
+                  "description": "",
+                  "example": "mysql",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "",
+                  "example": "8.0",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "version"
+              ],
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavorRef": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "nics": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "net-id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "users": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "databases": {
+                    "description": "",
+                    "items": {
+                      "description": "",
+                      "properties": {
+                        "name": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "volume_size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "instance"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "backup_create": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "volume_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "backup_patch": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "backup_update": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "cluster_create": {
+      "description": "",
+      "properties": {
+        "cluster": {
+          "description": "",
+          "properties": {
+            "cluster_template_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "docker_volume_size": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "keypair": {
+              "description": "Keypair name",
+              "type": "string"
+            },
+            "labels": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "master_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "master_flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "node_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "cluster_template_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "cluster"
+      ],
+      "type": "object"
+    },
+    "cluster_patch": {
+      "description": "",
+      "properties": {
+        "cluster": {
+          "description": "",
+          "properties": {
+            "cluster_template_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "docker_volume_size": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "keypair": {
+              "description": "Keypair name",
+              "type": "string"
+            },
+            "labels": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "master_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "master_flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "node_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "cluster"
+      ],
+      "type": "object"
+    },
+    "cluster_update": {
+      "description": "",
+      "properties": {
+        "cluster": {
+          "description": "",
+          "properties": {
+            "cluster_template_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "docker_volume_size": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "keypair": {
+              "description": "Keypair name",
+              "type": "string"
+            },
+            "labels": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "master_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "master_flavor_id": {
+              "description": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "node_count": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "cluster"
+      ],
+      "type": "object"
+    },
+    "configuration_create": {
+      "description": "",
+      "properties": {
+        "configuration": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "configuration",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "type": "object"
+    },
+    "configuration_patch": {
+      "description": "",
+      "properties": {
+        "configuration": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "configuration",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "type": "object"
+    },
+    "configuration_update": {
+      "description": "",
+      "properties": {
+        "configuration": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "configuration",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "type": "object"
+    },
+    "datastore_create": {
+      "description": "",
+      "properties": {
+        "datastore": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "datastore",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "datastore"
+      ],
+      "type": "object"
+    },
+    "datastore_patch": {
+      "description": "",
+      "properties": {
+        "datastore": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "datastore",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "datastore"
+      ],
+      "type": "object"
+    },
+    "datastore_update": {
+      "description": "",
+      "properties": {
+        "datastore": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "datastore",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "datastore"
+      ],
+      "type": "object"
+    },
+    "instance_create": {
+      "description": "",
+      "properties": {
+        "instance": {
+          "description": "",
+          "properties": {
+            "availability_zone": {
+              "description": "",
+              "type": "string"
+            },
+            "databases": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "datastore": {
+              "description": "",
+              "properties": {
+                "type": {
+                  "description": "",
+                  "example": "mysql",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "",
+                  "example": "8.0",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "version"
+              ],
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavorRef": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "nics": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "net-id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "users": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "databases": {
+                    "description": "",
+                    "items": {
+                      "description": "",
+                      "properties": {
+                        "name": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "volume_size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "flavorRef"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "instance"
+      ],
+      "type": "object"
+    },
+    "instance_patch": {
+      "description": "",
+      "properties": {
+        "instance": {
+          "description": "",
+          "properties": {
+            "availability_zone": {
+              "description": "",
+              "type": "string"
+            },
+            "databases": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "datastore": {
+              "description": "",
+              "properties": {
+                "type": {
+                  "description": "",
+                  "example": "mysql",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "",
+                  "example": "8.0",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "version"
+              ],
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavorRef": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "nics": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "net-id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "users": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "databases": {
+                    "description": "",
+                    "items": {
+                      "description": "",
+                      "properties": {
+                        "name": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "volume_size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "instance"
+      ],
+      "type": "object"
+    },
+    "instance_update": {
+      "description": "",
+      "properties": {
+        "instance": {
+          "description": "",
+          "properties": {
+            "availability_zone": {
+              "description": "",
+              "type": "string"
+            },
+            "databases": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "datastore": {
+              "description": "",
+              "properties": {
+                "type": {
+                  "description": "",
+                  "example": "mysql",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "",
+                  "example": "8.0",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "version"
+              ],
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavorRef": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "nics": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "net-id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "users": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "databases": {
+                    "description": "",
+                    "items": {
+                      "description": "",
+                      "properties": {
+                        "name": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "volume_size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "instance"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "trove",
+  "source": "generated-from-api-ref-catalog"
+}

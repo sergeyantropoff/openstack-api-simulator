@@ -9,19 +9,28 @@ from typing import Any
 
 from _lib.validate import payload_nonempty
 
-# Methods that normally return a JSON body on success (DELETE / 204 may be empty).
+# Methods that normally return a JSON body on success (DELETE / 204 / HEAD may be empty).
 _BODY_METHODS = frozenset({"GET", "POST", "PUT", "PATCH"})
+_VERB_ORDER = ("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD")
 
 
-def _expected_ops(packs: dict[str, Any], *, collections_only: bool) -> int:
+def _expected_ops(packs: dict[str, Any], *, collections_only: bool) -> tuple[int, int, int]:
+    """Return (expected_total, declared_pack_ops, synthetic_head_ops)."""
+
+    from app.openstack.surface_probe import count_declared_ops
+
     if not collections_only:
-        return sum(len(p.operations) for p in packs.values())
-    total = 0
+        declared, heads = count_declared_ops(packs)
+        return declared + heads, declared, heads
+
+    declared = 0
+    heads = 0
     for pack in packs.values():
         for op in pack.operations:
             if op.method == "GET" and "{" not in op.path:
-                total += 1
-    return total
+                declared += 1
+                heads += 1
+    return declared + heads, declared, heads
 
 
 def _methods_breakdown(results: list[Any]) -> dict[str, int]:
@@ -30,16 +39,16 @@ def _methods_breakdown(results: list[Any]) -> dict[str, int]:
         method = getattr(r, "method", None) or (r.get("method") if isinstance(r, dict) else None)
         if method:
             counts[str(method).upper()] += 1
-    return {m: counts.get(m, 0) for m in ("GET", "POST", "PUT", "PATCH", "DELETE")}
+    return {m: counts.get(m, 0) for m in _VERB_ORDER}
 
 
 def _nonempty_from_lifecycle(report: Any) -> list[dict[str, Any]]:
-    """Check succeeded lifecycle bodies (skip DELETE / 204 / 202 / no-body)."""
+    """Check succeeded lifecycle bodies (skip DELETE / HEAD / 204 / 202 / no-body)."""
     failures: list[dict[str, Any]] = []
     for r in report.results:
         if not r.succeeded:
             continue
-        if r.method == "DELETE" or r.status in {202, 204}:
+        if r.method in {"DELETE", "HEAD"} or r.status in {202, 204}:
             continue
         if r.method not in _BODY_METHODS:
             continue
@@ -74,6 +83,8 @@ def _nonempty_smoke_collections(
         fill_path,
         http_request,
         issue_token,
+        microversion_headers,
+        service_base_url,
         _seed_context,
     )
 
@@ -96,8 +107,14 @@ def _nonempty_smoke_collections(
                     "account": project_id,
                 },
             )
-            url = f"{host.rstrip('/')}{path}"
-            status, payload = http_request(op.method, url, token=token, service=pack.name)
+            url = f"{service_base_url(host, pack.name, port=pack.port)}{path}"
+            status, payload = http_request(
+                op.method,
+                url,
+                token=token,
+                service=pack.name,
+                headers=microversion_headers(pack, op) or None,
+            )
             if status not in SUCCESS or status == 204:
                 continue
             if not payload_nonempty(payload, collection_key=op.collection_key, method=op.method):
@@ -134,7 +151,7 @@ def probe_pack_operations(
     )
 
     packs = load_series_pack(series)
-    expected_ops = _expected_ops(packs, collections_only=collections_only)
+    expected_ops, declared_ops, head_ops = _expected_ops(packs, collections_only=collections_only)
     methods = _methods_breakdown(report.results)
     coverage_incomplete = len(report.results) != expected_ops
 
@@ -168,23 +185,31 @@ def probe_pack_operations(
                 "method": "*",
                 "path": "*",
                 "status": 0,
-                "detail": f"coverage_incomplete: total={len(report.results)} expected_ops={expected_ops}",
+                "detail": (
+                    f"coverage_incomplete: total={len(report.results)} "
+                    f"expected_ops={expected_ops} "
+                    f"(declared={declared_ops} + HEAD={head_ops})"
+                ),
                 "ok": False,
                 "nonempty": True,
             }
         )
 
+    critical = len(coverage_failures) + len(probe_failures) + len(nonempty_failures)
     return {
         "series": series,
         "host": host,
         "mode": report.mode,
         "total": len(report.results),
         "expected_ops": expected_ops,
+        "declared_ops": declared_ops,
+        "head_ops": head_ops,
         "coverage_incomplete": coverage_incomplete,
         "methods": methods,
         "ok_count": len(report.results) - len(report.failures),
         "fail_count": len(report.failures) + (1 if coverage_incomplete else 0),
         "nonempty_fail_count": len(nonempty_failures),
+        "critical": critical,
         "results": [
             {
                 "service": r.service,

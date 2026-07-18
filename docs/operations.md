@@ -69,6 +69,21 @@ PYTHONPATH=tools python3 tools/os_api_inventory/generate_packs.py
 PYTHONPATH=tools python3 tools/os_api_inventory/coverage_report.py
 ```
 
+## Request body schemas (console)
+
+Write methods (`POST`/`PUT`/`PATCH`) expose full JSON Schema field lists in the
+web console. Schemas live in `contracts/openstack/request_bodies/<service>.json`
+and are merged onto pack operations at load time (shared across series).
+
+```bash
+make request-bodies-generate   # rebuild from in-repo api-ref catalog
+make request-bodies-import     # overlay Tier-1 services from openstack-openapi
+make request-bodies-coverage   # assert every write op has a schema
+```
+
+Tier-1 OpenAPI import covers nova, neutron, keystone, glance, cinder, octavia,
+swift, and placement. Other services use the curated catalog generator.
+
 ## Backing up lab state
 
 PostgreSQL is the system of record. Use `pg_dump` / volume snapshots.

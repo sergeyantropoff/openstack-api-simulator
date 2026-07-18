@@ -19,7 +19,7 @@ Generated from `contracts/openstack/dalmatian/manifest.json`.
 | Yoga | 6 | 1060 |
 
 Older series omit paths introduced later (`tools/os_api_inventory/series_deltas.py`)
-and use lower microversion ceilings. Apply a pack in the Environment drawer to hot-swap.
+and use lower microversion ceilings. Apply a pack in the API catalog drawer to hot-swap.
 
 Surface-complete means every operation in the pack is mounted by the schema engine
 (specialized routers still win on overlapping stateful paths).

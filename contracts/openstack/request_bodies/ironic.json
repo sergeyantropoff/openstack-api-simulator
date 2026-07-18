@@ -1,0 +1,6134 @@
+{
+  "by_path": {
+    "PATCH /v1/allocations/{id}": {
+      "description": "",
+      "properties": {
+        "allocation": {
+          "description": "",
+          "properties": {
+            "allocations": {
+              "description": "Map of resource provider UUID to resources",
+              "properties": {},
+              "type": "object"
+            },
+            "consumer_generation": {
+              "description": "Consumer generation",
+              "example": 0,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "user_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "allocation"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1/chassis/{id}": {
+      "description": "",
+      "properties": {
+        "chassi": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "chassis",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "chassi"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1/deploy_templates/{id}": {
+      "description": "",
+      "properties": {
+        "deploy_template": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "deploy_template",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "deploy_template"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1/nodes/{id}": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "node"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1/portgroups/{id}": {
+      "description": "",
+      "properties": {
+        "portgroup": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "portgroup",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "portgroup"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1/ports/{id}": {
+      "description": "",
+      "properties": {
+        "port": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "Administrative state",
+              "type": "boolean"
+            },
+            "allowed_address_pairs": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "mac_address": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "binding:vnic_type": {
+              "description": "VNIC type",
+              "enum": [
+                "normal",
+                "direct",
+                "macvtap",
+                "baremetal"
+              ],
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "device_id": {
+              "description": "Device UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "device_owner": {
+              "description": "Device owner",
+              "type": "string"
+            },
+            "fixed_ips": {
+              "description": "Fixed IPs",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subnet_id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "mac_address": {
+              "description": "MAC address",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_id": {
+              "description": "Network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_security_enabled": {
+              "description": "Port security",
+              "type": "boolean"
+            },
+            "security_groups": {
+              "description": "",
+              "items": {
+                "description": "Security group UUID",
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1/volume/connectors/{id}": {
+      "description": "",
+      "properties": {
+        "connector": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_connector",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "connector"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1/volume/targets/{id}": {
+      "description": "",
+      "properties": {
+        "target": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_target",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "POST /v1/allocations": {
+      "description": "",
+      "properties": {
+        "allocation": {
+          "description": "",
+          "properties": {
+            "allocations": {
+              "description": "Map of resource provider UUID to resources",
+              "properties": {},
+              "type": "object"
+            },
+            "consumer_generation": {
+              "description": "Consumer generation",
+              "example": 0,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "user_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "allocations",
+            "project_id",
+            "user_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "allocation"
+      ],
+      "type": "object"
+    },
+    "POST /v1/chassis": {
+      "description": "",
+      "properties": {
+        "chassi": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "chassis",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "chassi"
+      ],
+      "type": "object"
+    },
+    "POST /v1/deploy_templates": {
+      "description": "",
+      "properties": {
+        "deploy_template": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "deploy_template",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "deploy_template"
+      ],
+      "type": "object"
+    },
+    "POST /v1/nodes": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "driver"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "node"
+      ],
+      "type": "object"
+    },
+    "POST /v1/nodes/{id}/vifs": {
+      "description": "",
+      "properties": {
+        "os-start": {
+          "description": "Action os-start body (null object)",
+          "type": "null"
+        }
+      },
+      "required": [
+        "os-start"
+      ],
+      "type": "object"
+    },
+    "POST /v1/portgroups": {
+      "description": "",
+      "properties": {
+        "portgroup": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "portgroup",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "portgroup"
+      ],
+      "type": "object"
+    },
+    "POST /v1/ports": {
+      "description": "",
+      "properties": {
+        "port": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "Administrative state",
+              "type": "boolean"
+            },
+            "allowed_address_pairs": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "mac_address": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "binding:vnic_type": {
+              "description": "VNIC type",
+              "enum": [
+                "normal",
+                "direct",
+                "macvtap",
+                "baremetal"
+              ],
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "device_id": {
+              "description": "Device UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "device_owner": {
+              "description": "Device owner",
+              "type": "string"
+            },
+            "fixed_ips": {
+              "description": "Fixed IPs",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subnet_id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "mac_address": {
+              "description": "MAC address",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_id": {
+              "description": "Network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_security_enabled": {
+              "description": "Port security",
+              "type": "boolean"
+            },
+            "security_groups": {
+              "description": "",
+              "items": {
+                "description": "Security group UUID",
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "network_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "POST /v1/volume/connectors": {
+      "description": "",
+      "properties": {
+        "connector": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_connector",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "connector"
+      ],
+      "type": "object"
+    },
+    "POST /v1/volume/targets": {
+      "description": "",
+      "properties": {
+        "target": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_target",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/allocations/{id}": {
+      "description": "",
+      "properties": {
+        "allocation": {
+          "description": "",
+          "properties": {
+            "allocations": {
+              "description": "Map of resource provider UUID to resources",
+              "properties": {},
+              "type": "object"
+            },
+            "consumer_generation": {
+              "description": "Consumer generation",
+              "example": 0,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "user_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "allocation"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/chassis/{id}": {
+      "description": "",
+      "properties": {
+        "chassi": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "chassis",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "chassi"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/deploy_templates/{id}": {
+      "description": "",
+      "properties": {
+        "deploy_template": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "deploy_template",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "deploy_template"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/nodes/{id}": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "node"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/nodes/{id}/states/power": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "driver"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "PUT /v1/nodes/{id}/states/provision": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "driver"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "PUT /v1/nodes/{id}/states/raid": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "driver"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "PUT /v1/portgroups/{id}": {
+      "description": "",
+      "properties": {
+        "portgroup": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "portgroup",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "portgroup"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/ports/{id}": {
+      "description": "",
+      "properties": {
+        "port": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "Administrative state",
+              "type": "boolean"
+            },
+            "allowed_address_pairs": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "mac_address": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "binding:vnic_type": {
+              "description": "VNIC type",
+              "enum": [
+                "normal",
+                "direct",
+                "macvtap",
+                "baremetal"
+              ],
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "device_id": {
+              "description": "Device UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "device_owner": {
+              "description": "Device owner",
+              "type": "string"
+            },
+            "fixed_ips": {
+              "description": "Fixed IPs",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subnet_id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "mac_address": {
+              "description": "MAC address",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_id": {
+              "description": "Network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_security_enabled": {
+              "description": "Port security",
+              "type": "boolean"
+            },
+            "security_groups": {
+              "description": "",
+              "items": {
+                "description": "Security group UUID",
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/volume/connectors/{id}": {
+      "description": "",
+      "properties": {
+        "connector": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_connector",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "connector"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/volume/targets/{id}": {
+      "description": "",
+      "properties": {
+        "target": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_target",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "allocation_create": {
+      "description": "",
+      "properties": {
+        "allocation": {
+          "description": "",
+          "properties": {
+            "allocations": {
+              "description": "Map of resource provider UUID to resources",
+              "properties": {},
+              "type": "object"
+            },
+            "consumer_generation": {
+              "description": "Consumer generation",
+              "example": 0,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "user_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "allocations",
+            "project_id",
+            "user_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "allocation"
+      ],
+      "type": "object"
+    },
+    "allocation_patch": {
+      "description": "",
+      "properties": {
+        "allocation": {
+          "description": "",
+          "properties": {
+            "allocations": {
+              "description": "Map of resource provider UUID to resources",
+              "properties": {},
+              "type": "object"
+            },
+            "consumer_generation": {
+              "description": "Consumer generation",
+              "example": 0,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "user_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "allocation"
+      ],
+      "type": "object"
+    },
+    "allocation_update": {
+      "description": "",
+      "properties": {
+        "allocation": {
+          "description": "",
+          "properties": {
+            "allocations": {
+              "description": "Map of resource provider UUID to resources",
+              "properties": {},
+              "type": "object"
+            },
+            "consumer_generation": {
+              "description": "Consumer generation",
+              "example": 0,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "user_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "allocation"
+      ],
+      "type": "object"
+    },
+    "chassis_create": {
+      "description": "",
+      "properties": {
+        "chassi": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "chassis",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "chassi"
+      ],
+      "type": "object"
+    },
+    "chassis_patch": {
+      "description": "",
+      "properties": {
+        "chassi": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "chassis",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "chassi"
+      ],
+      "type": "object"
+    },
+    "chassis_update": {
+      "description": "",
+      "properties": {
+        "chassi": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "chassis",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "chassi"
+      ],
+      "type": "object"
+    },
+    "deploy_template_create": {
+      "description": "",
+      "properties": {
+        "deploy_template": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "deploy_template",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "deploy_template"
+      ],
+      "type": "object"
+    },
+    "deploy_template_patch": {
+      "description": "",
+      "properties": {
+        "deploy_template": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "deploy_template",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "deploy_template"
+      ],
+      "type": "object"
+    },
+    "deploy_template_update": {
+      "description": "",
+      "properties": {
+        "deploy_template": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "deploy_template",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "deploy_template"
+      ],
+      "type": "object"
+    },
+    "node_action": {
+      "description": "",
+      "properties": {
+        "os-start": {
+          "description": "Action os-start body (null object)",
+          "type": "null"
+        }
+      },
+      "required": [
+        "os-start"
+      ],
+      "type": "object"
+    },
+    "node_create": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "driver"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "node"
+      ],
+      "type": "object"
+    },
+    "node_patch": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "node"
+      ],
+      "type": "object"
+    },
+    "node_power_state": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "driver"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "node_provision_state": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "driver"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "node_raid_state": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "driver"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "node_update": {
+      "description": "",
+      "properties": {
+        "node": {
+          "description": "",
+          "properties": {
+            "boot_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "conductor_group": {
+              "description": "",
+              "type": "string"
+            },
+            "deploy_interface": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "driver": {
+              "description": "",
+              "example": "ipmi",
+              "type": "string"
+            },
+            "driver_info": {
+              "description": "",
+              "properties": {
+                "ipmi_address": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ipmi_username": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_interface": {
+              "description": "",
+              "example": "flat",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {
+                "cpus": {
+                  "description": "",
+                  "example": 4,
+                  "type": "integer"
+                },
+                "local_gb": {
+                  "description": "",
+                  "example": 100,
+                  "type": "integer"
+                },
+                "memory_mb": {
+                  "description": "",
+                  "example": 8192,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "resource_class": {
+              "description": "",
+              "example": "baremetal",
+              "type": "string"
+            },
+            "storage_interface": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "node"
+      ],
+      "type": "object"
+    },
+    "port_create": {
+      "description": "",
+      "properties": {
+        "port": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "Administrative state",
+              "type": "boolean"
+            },
+            "allowed_address_pairs": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "mac_address": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "binding:vnic_type": {
+              "description": "VNIC type",
+              "enum": [
+                "normal",
+                "direct",
+                "macvtap",
+                "baremetal"
+              ],
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "device_id": {
+              "description": "Device UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "device_owner": {
+              "description": "Device owner",
+              "type": "string"
+            },
+            "fixed_ips": {
+              "description": "Fixed IPs",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subnet_id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "mac_address": {
+              "description": "MAC address",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_id": {
+              "description": "Network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_security_enabled": {
+              "description": "Port security",
+              "type": "boolean"
+            },
+            "security_groups": {
+              "description": "",
+              "items": {
+                "description": "Security group UUID",
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "network_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "port_patch": {
+      "description": "",
+      "properties": {
+        "port": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "Administrative state",
+              "type": "boolean"
+            },
+            "allowed_address_pairs": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "mac_address": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "binding:vnic_type": {
+              "description": "VNIC type",
+              "enum": [
+                "normal",
+                "direct",
+                "macvtap",
+                "baremetal"
+              ],
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "device_id": {
+              "description": "Device UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "device_owner": {
+              "description": "Device owner",
+              "type": "string"
+            },
+            "fixed_ips": {
+              "description": "Fixed IPs",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subnet_id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "mac_address": {
+              "description": "MAC address",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_id": {
+              "description": "Network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_security_enabled": {
+              "description": "Port security",
+              "type": "boolean"
+            },
+            "security_groups": {
+              "description": "",
+              "items": {
+                "description": "Security group UUID",
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "port_update": {
+      "description": "",
+      "properties": {
+        "port": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "Administrative state",
+              "type": "boolean"
+            },
+            "allowed_address_pairs": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "mac_address": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "binding:vnic_type": {
+              "description": "VNIC type",
+              "enum": [
+                "normal",
+                "direct",
+                "macvtap",
+                "baremetal"
+              ],
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "device_id": {
+              "description": "Device UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "device_owner": {
+              "description": "Device owner",
+              "type": "string"
+            },
+            "fixed_ips": {
+              "description": "Fixed IPs",
+              "items": {
+                "description": "",
+                "properties": {
+                  "ip_address": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subnet_id": {
+                    "description": "",
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "mac_address": {
+              "description": "MAC address",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "network_id": {
+              "description": "Network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_security_enabled": {
+              "description": "Port security",
+              "type": "boolean"
+            },
+            "security_groups": {
+              "description": "",
+              "items": {
+                "description": "Security group UUID",
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "portgroup_create": {
+      "description": "",
+      "properties": {
+        "portgroup": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "portgroup",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "portgroup"
+      ],
+      "type": "object"
+    },
+    "portgroup_patch": {
+      "description": "",
+      "properties": {
+        "portgroup": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "portgroup",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "portgroup"
+      ],
+      "type": "object"
+    },
+    "portgroup_update": {
+      "description": "",
+      "properties": {
+        "portgroup": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "portgroup",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "portgroup"
+      ],
+      "type": "object"
+    },
+    "volume_connector_create": {
+      "description": "",
+      "properties": {
+        "connector": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_connector",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "connector"
+      ],
+      "type": "object"
+    },
+    "volume_connector_patch": {
+      "description": "",
+      "properties": {
+        "connector": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_connector",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "connector"
+      ],
+      "type": "object"
+    },
+    "volume_connector_update": {
+      "description": "",
+      "properties": {
+        "connector": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_connector",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "connector"
+      ],
+      "type": "object"
+    },
+    "volume_target_create": {
+      "description": "",
+      "properties": {
+        "target": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_target",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "volume_target_patch": {
+      "description": "",
+      "properties": {
+        "target": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_target",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "volume_target_update": {
+      "description": "",
+      "properties": {
+        "target": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "volume_target",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "ironic",
+  "source": "generated-from-api-ref-catalog"
+}

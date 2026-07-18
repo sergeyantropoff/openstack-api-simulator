@@ -1,8 +1,9 @@
-"""Enterprise-scale OpenStack demo cloud seed (~1000 servers + full topology)."""
+"""Sized OpenStack demo cloud seed (small / large / big synthetic clusters)."""
 
 from __future__ import annotations
 
 import json
+from dataclasses import asdict, dataclass
 from typing import Any
 from uuid import UUID
 
@@ -12,14 +13,108 @@ from app.openstack.ids import oid
 from app.security.auth import hash_secret
 
 DEMO_PROFILE = "openstack-demo-cloud"
+DEMO_SIZE_DEFAULT = "large"
 
-DEMO_SERVER_COUNT = 1000
-DEMO_VOLUME_COUNT = 600
-DEMO_HYPERVISOR_COUNT = 16
-DEMO_IRONIC_COUNT = 24
-DEMO_LB_COUNT = 12
-DEMO_STACK_COUNT = 30
-DEMO_FIP_COUNT = 120
+
+@dataclass(frozen=True, slots=True)
+class DemoClusterSize:
+    """Proportional inventory for a demo cluster size button."""
+
+    name: str
+    hypervisors: int
+    servers: int
+    volumes: int
+    ironic_nodes: int
+    loadbalancers: int
+    stacks: int
+    floating_ips: int
+    surface_samples: int
+    server_groups: int
+    nested_samples: int
+    pack_per_type: int
+    extra_networks: int
+    extra_security_groups: int
+    keypairs_per_user: int
+    edge_routers: int
+
+
+def _scale(base: int, factor: float, minimum: int) -> int:
+    return max(minimum, int(round(base * factor)))
+
+
+def _cluster(name: str, *, hypervisors: int, servers: int) -> DemoClusterSize:
+    """Derive secondary counts from the large (1000 VM) reference ratios."""
+
+    factor = servers / 1000
+    return DemoClusterSize(
+        name=name,
+        hypervisors=hypervisors,
+        servers=servers,
+        volumes=_scale(600, factor, 20),
+        ironic_nodes=_scale(24, factor, 2),
+        loadbalancers=_scale(12, factor, 2),
+        stacks=_scale(30, factor, 3),
+        floating_ips=_scale(120, factor, 6),
+        surface_samples=_scale(8, factor, 3),
+        server_groups=_scale(16, factor, 3),
+        nested_samples=_scale(24, factor, 8),
+        pack_per_type=_scale(3, factor, 2),
+        # Topology density (large reference: 3 extra nets, 3 SG tiers, 4 keys, 1 edge router).
+        extra_networks=_scale(3, factor, 1),
+        extra_security_groups=_scale(3, factor, 1),
+        keypairs_per_user=_scale(4, factor, 2),
+        edge_routers=_scale(1, factor, 0),
+    )
+
+
+DEMO_CLUSTER_SIZES: dict[str, DemoClusterSize] = {
+    "small": _cluster("small", hypervisors=3, servers=50),
+    "large": _cluster("large", hypervisors=10, servers=1000),
+    "big": _cluster("big", hypervisors=20, servers=2000),
+}
+
+
+def resolve_demo_size(size: str | None) -> DemoClusterSize:
+    key = (size or DEMO_SIZE_DEFAULT).strip().lower()
+    aliases = {
+        "demo": "large",
+        "demo-cloud": "large",
+        "openstack-demo-cloud": "large",
+        "demo-small": "small",
+        "demo-large": "large",
+        "demo-big": "big",
+        "medium": "large",
+    }
+    key = aliases.get(key, key)
+    if key not in DEMO_CLUSTER_SIZES:
+        known = ", ".join(sorted(DEMO_CLUSTER_SIZES))
+        raise ValueError(f"unknown demo size {size!r} (use {known})")
+    return DEMO_CLUSTER_SIZES[key]
+
+
+def demo_profile_name(size: str | DemoClusterSize) -> str:
+    name = size.name if isinstance(size, DemoClusterSize) else resolve_demo_size(size).name
+    return f"{DEMO_PROFILE}:{name}"
+
+
+def is_demo_profile(profile: str | None) -> bool:
+    if not profile:
+        return False
+    return profile == DEMO_PROFILE or profile.startswith(f"{DEMO_PROFILE}:")
+
+
+def list_demo_sizes() -> list[dict[str, Any]]:
+    return [asdict(cfg) for cfg in DEMO_CLUSTER_SIZES.values()]
+
+
+# Backward-compatible aliases → large cluster (default demo).
+DEMO_SERVER_COUNT = DEMO_CLUSTER_SIZES["large"].servers
+DEMO_VOLUME_COUNT = DEMO_CLUSTER_SIZES["large"].volumes
+DEMO_HYPERVISOR_COUNT = DEMO_CLUSTER_SIZES["large"].hypervisors
+DEMO_IRONIC_COUNT = DEMO_CLUSTER_SIZES["large"].ironic_nodes
+DEMO_LB_COUNT = DEMO_CLUSTER_SIZES["large"].loadbalancers
+DEMO_STACK_COUNT = DEMO_CLUSTER_SIZES["large"].stacks
+DEMO_FIP_COUNT = DEMO_CLUSTER_SIZES["large"].floating_ips
 
 AZS = ("az-1", "az-2", "az-3")
 
@@ -104,8 +199,31 @@ async def clear_openstack_state(conn: Connection) -> None:
     )
 
 
-async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> dict[str, Any]:
+async def seed_openstack_demo(
+    conn: Connection,
+    *,
+    size: str = DEMO_SIZE_DEFAULT,
+    password: str = "secret",
+) -> dict[str, Any]:
     """Load a full synthetic OpenStack cloud. Replaces prior OpenStack state."""
+
+    cfg = resolve_demo_size(size)
+    server_count = cfg.servers
+    volume_count = cfg.volumes
+    hypervisor_count = cfg.hypervisors
+    ironic_count = cfg.ironic_nodes
+    lb_count = cfg.loadbalancers
+    stack_count = cfg.stacks
+    fip_count = cfg.floating_ips
+    surface_sample_count = cfg.surface_samples
+    server_group_count = cfg.server_groups
+    nested_sample_count = cfg.nested_samples
+    pack_per_type = cfg.pack_per_type
+    extra_networks = cfg.extra_networks
+    extra_security_groups = cfg.extra_security_groups
+    keypairs_per_user = cfg.keypairs_per_user
+    edge_routers = cfg.edge_routers
+    profile = demo_profile_name(cfg)
 
     await clear_openstack_state(conn)
     pw = hash_secret(password, salt=b"openstack-sim-v1")
@@ -185,10 +303,10 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
             '{"available": true}',
         )
 
-    for i in range(DEMO_HYPERVISOR_COUNT):
+    for i in range(hypervisor_count):
         host = f"compute-{(i // len(AZS)) + 1:02d}.{AZS[i % len(AZS)]}"
         az = AZS[i % len(AZS)]
-        vms_share = DEMO_SERVER_COUNT // DEMO_HYPERVISOR_COUNT
+        vms_share = max(1, server_count // hypervisor_count)
         await conn.execute(
             """INSERT INTO os_hypervisors(
                    id, hypervisor_hostname, state, status, host_ip, vcpus, vcpus_used,
@@ -223,7 +341,7 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
     for i, az in enumerate(AZS):
         hosts = [
             f"compute-{(j // len(AZS)) + 1:02d}.{az}"
-            for j in range(i, DEMO_HYPERVISOR_COUNT, len(AZS))
+            for j in range(i, hypervisor_count, len(AZS))
         ]
         await conn.execute(
             """INSERT INTO os_aggregates(id, name, availability_zone, hosts, metadata)
@@ -377,10 +495,19 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
                 prefix,
             )
 
-    # Extra project topology (realistic inventory: multiple nets / SGs / routers)
+    # Extra project topology — density scales with cluster size.
+    extra_net_suffixes = ("mgmt", "storage", "dmz", "backup", "ci", "gpu")
+    sg_tiers = (
+        ("web", "HTTP/S", 443),
+        ("db", "Database tier", 5432),
+        ("cache", "Cache tier", 6379),
+        ("mq", "Message bus", 5672),
+        ("internal", "Internal RPC", 9696),
+        ("monitoring", "Metrics / scrape", 9100),
+    )
     for pname, pid in project_ids.items():
         base = cidr_base[pname]
-        for extra_i, suffix in enumerate(("mgmt", "storage", "dmz"), start=1):
+        for extra_i, suffix in enumerate(extra_net_suffixes[:extra_networks], start=1):
             net_id = oid(f"net:{pname}-{suffix}")
             subnet_id = oid(f"subnet:{pname}-{suffix}")
             await conn.execute(
@@ -400,11 +527,7 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
                 f"10.{base}.{extra_i * 10}.0/24",
                 f"10.{base}.{extra_i * 10}.1",
             )
-        for sg_name, desc in (
-            ("web", f"HTTP/S for {pname}"),
-            ("db", f"Database tier for {pname}"),
-            ("cache", f"Cache tier for {pname}"),
-        ):
+        for sg_name, desc_prefix, port in sg_tiers[:extra_security_groups]:
             sg_id = oid(f"sg:{pname}-{sg_name}")
             await conn.execute(
                 """INSERT INTO os_security_groups(id, project_id, name, description)
@@ -412,7 +535,7 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
                 sg_id,
                 pid,
                 sg_name,
-                desc,
+                f"{desc_prefix} for {pname}",
             )
             await conn.execute(
                 """INSERT INTO os_security_group_rules(
@@ -422,30 +545,35 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
                 oid(f"sgrule:{pname}:{sg_name}"),
                 sg_id,
                 pid,
-                443 if sg_name == "web" else (5432 if sg_name == "db" else 6379),
-                443 if sg_name == "web" else (5432 if sg_name == "db" else 6379),
+                port,
+                port,
             )
-        # Secondary router (HA / edge)
-        await conn.execute(
-            """INSERT INTO os_routers(id, project_id, name, status, admin_state_up, external_gateway_info)
-               VALUES($1,$2,$3,'ACTIVE',true,$4::jsonb)""",
-            oid(f"router:{pname}-edge"),
-            pid,
-            f"{pname}-edge-router",
-            json.dumps(
-                {
-                    "network_id": str(public_net),
-                    "enable_snat": True,
-                    "external_fixed_ips": [
-                        {"ip_address": f"203.0.113.{base + 1}", "subnet_id": str(public_subnet)}
-                    ],
-                }
-            ),
-        )
+        # Secondary edge routers (0 on tiny clusters, more on big).
+        for edge_i in range(edge_routers):
+            await conn.execute(
+                """INSERT INTO os_routers(id, project_id, name, status, admin_state_up, external_gateway_info)
+                   VALUES($1,$2,$3,'ACTIVE',true,$4::jsonb)""",
+                oid(f"router:{pname}-edge-{edge_i}"),
+                pid,
+                f"{pname}-edge-router-{edge_i}" if edge_routers > 1 else f"{pname}-edge-router",
+                json.dumps(
+                    {
+                        "network_id": str(public_net),
+                        "enable_snat": True,
+                        "external_fixed_ips": [
+                            {
+                                "ip_address": f"203.0.113.{base + 1 + edge_i}",
+                                "subnet_id": str(public_subnet),
+                            }
+                        ],
+                    }
+                ),
+            )
 
-    # Keypairs (several per user — list is user-scoped)
+    # Keypairs (several per user — list is user-scoped; count scales with size)
+    keypair_suffixes = ("key", "deploy", "ci", "bastion", "ops", "batch", "gpu", "lab")
     for uname, uid in user_ids.items():
-        for suffix in ("key", "deploy", "ci", "bastion"):
+        for suffix in keypair_suffixes[:keypairs_per_user]:
             await conn.execute(
                 """INSERT INTO os_keypairs(name, user_id, fingerprint, public_key, type)
                    VALUES($1,$2,$3,$4,'ssh')""",
@@ -459,12 +587,12 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
     tenant_cycle = ("admin", "demo", "production", "staging", "development", "demo")
     hypervisor_names = [
         f"compute-{(i // len(AZS)) + 1:02d}.{AZS[i % len(AZS)]}"
-        for i in range(DEMO_HYPERVISOR_COUNT)
+        for i in range(hypervisor_count)
     ]
 
     server_rows = []
     port_rows = []
-    for i in range(DEMO_SERVER_COUNT):
+    for i in range(server_count):
         pname = tenant_cycle[i % len(tenant_cycle)]
         pid = project_ids[pname]
         net_id, _subnet = project_nets[pname]
@@ -546,17 +674,40 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb)""",
         port_rows,
     )
+    # One create action per server so GET …/os-instance-actions is never empty.
+    action_rows = [
+        (
+            oid(f"nova:instance_action:create:{i}"),
+            row[1],  # project_id
+            f"create-{i}",
+            json.dumps(
+                {
+                    "action": "create",
+                    "instance_uuid": str(row[0]),
+                    "server_id": str(row[0]),
+                    "request_id": f"req-seed-{str(row[0])[:8]}",
+                    "message": None,
+                }
+            ),
+        )
+        for i, row in enumerate(server_rows)
+    ]
+    await conn.executemany(
+        """INSERT INTO os_api_objects(id, service, resource_type, project_id, name, status, data)
+           VALUES($1,'nova','instance_action',$2,$3,'DONE',$4::jsonb)""",
+        action_rows,
+    )
 
     # Volumes
     volume_rows = []
-    for i in range(DEMO_VOLUME_COUNT):
+    for i in range(volume_count):
         pname = tenant_cycle[i % len(tenant_cycle)]
         volume_rows.append(
             (
                 oid(f"volume:demo:{i}"),
                 project_ids[pname],
                 f"vol-{pname}-{i:04d}",
-                "in-use" if i < DEMO_SERVER_COUNT // 2 else "available",
+                "in-use" if i < server_count // 2 else "available",
                 (i % 5 + 1) * 10,
                 "lvmdriver-1" if i % 3 else "ceph",
                 i % 11 == 0,
@@ -571,10 +722,10 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
 
     # Per-server nested rows so any listed server has DB-backed attachments/allocations.
     attachment_rows = []
-    for i in range(DEMO_SERVER_COUNT):
+    for i in range(server_count):
         pname = tenant_cycle[i % len(tenant_cycle)]
         sid = str(oid(f"server:demo:{i}"))
-        vid = str(oid(f"volume:demo:{i % DEMO_VOLUME_COUNT}"))
+        vid = str(oid(f"volume:demo:{i % volume_count}"))
         port_id = str(oid(f"port:demo:{i}"))
         pid = project_ids[pname]
         attachment_rows.append(
@@ -635,7 +786,7 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
     )
 
     # Floating IPs
-    for i in range(DEMO_FIP_COUNT):
+    for i in range(fip_count):
         pname = tenant_cycle[i % len(tenant_cycle)]
         await conn.execute(
             """INSERT INTO os_floating_ips(
@@ -650,7 +801,7 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
         )
 
     # Ironic nodes
-    for i in range(DEMO_IRONIC_COUNT):
+    for i in range(ironic_count):
         await conn.execute(
             """INSERT INTO os_nodes(
                    id, name, driver, provision_state, power_state, resource_class,
@@ -664,7 +815,7 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
         )
 
     # Octavia LBs
-    for i in range(DEMO_LB_COUNT):
+    for i in range(lb_count):
         pname = tenant_cycle[i % len(tenant_cycle)]
         await conn.execute(
             """INSERT INTO os_loadbalancers(
@@ -686,7 +837,7 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
         )
 
     # Heat stacks
-    for i in range(DEMO_STACK_COUNT):
+    for i in range(stack_count):
         pname = tenant_cycle[i % len(tenant_cycle)]
         await conn.execute(
             """INSERT INTO os_stacks(
@@ -724,7 +875,7 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
     # Generic service samples (multiple per service) — keep resource_type aligned
     # with pack operation resource_type so schema list endpoints return rows.
     samples = []
-    for i in range(8):
+    for i in range(surface_sample_count):
         samples.extend(
             [
                 ("barbican", "secret", f"secret-{i}", {"secret_type": "passphrase"}),
@@ -1342,11 +1493,12 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
         )
 
     # Nova server groups (specialized table) — denser in demo project
-    for i in range(16):
-        pname = "demo" if i < 8 else tenant_cycle[i % len(tenant_cycle)]
+    for i in range(server_group_count):
+        pname = "demo" if i < max(1, server_group_count // 2) else tenant_cycle[i % len(tenant_cycle)]
+        span = max(1, min(8, max(1, server_count // 4)))
         members = [
-            str(oid(f"server:demo:{3 + (i % 8) * 6}")),
-            str(oid(f"server:demo:{3 + ((i + 1) % 8) * 6}")),
+            str(oid(f"server:demo:{(3 + (i % span) * 6) % server_count}")),
+            str(oid(f"server:demo:{(3 + ((i + 1) % span) * 6) % server_count}")),
         ]
         await conn.execute(
             """INSERT INTO os_server_groups(id, project_id, name, policies, members)
@@ -1368,14 +1520,15 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
     demo_trunk = str(oid("neutron:trunk:trunk-0"))
     demo_local_ip = str(oid("neutron:local_ip:lip-0"))
     demo_bgpvpn = str(oid("neutron:bgpvpn:bgpvpn-0"))
-    demo_stack_id = str(oid("stack:demo:3"))
-    demo_stack_name = "stack-demo-03"
+    demo_stack_idx = min(3, max(0, stack_count - 1))
+    demo_stack_id = str(oid(f"stack:demo:{demo_stack_idx}"))
+    demo_stack_name = f"stack-demo-{demo_stack_idx:02d}"
     nested_samples: list[tuple[str, str, str, dict[str, Any]]] = []
     # Cover the first listed servers (and a wider spread) so nested GETs hit DB rows.
-    for i in range(24):
-        sidx = i
+    for i in range(nested_sample_count):
+        sidx = i % server_count
         sid = str(oid(f"server:demo:{sidx}"))
-        vid = str(oid(f"volume:demo:{sidx}"))
+        vid = str(oid(f"volume:demo:{sidx % volume_count}"))
         port_id = str(oid(f"port:demo:{sidx}"))
         nested_samples.extend(
             [
@@ -1638,24 +1791,56 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
     for service, rtype, name, data in nested_samples:
         item_id = oid(f"{service}:{rtype}:{name}")
         payload = {"id": str(item_id), "name": name, "status": data.get("status", "ACTIVE"), **data}
+        # Scope nested rows to the parent server's project (tenant_cycle index).
+        owner_pid = demo_pid
+        server_ref = str(data.get("server_id") or data.get("instance_uuid") or "")
+        for idx in range(min(server_count, 64)):
+            if server_ref == str(oid(f"server:demo:{idx}")):
+                owner_pid = project_ids[tenant_cycle[idx % len(tenant_cycle)]]
+                break
         await conn.execute(
             """INSERT INTO os_api_objects(id, service, resource_type, project_id, name, status, data)
                VALUES($1,$2,$3,$4,$5,$6,$7::jsonb)""",
             item_id,
             service,
             rtype,
-            None,  # shared — nested lists visible for any project token
+            owner_pid,
             name,
             str(payload.get("status") or "ACTIVE"),
             json.dumps(payload),
         )
 
     # Quotas as api objects (name=project id so Neutron-style /quotas/{project_id} resolves)
+    quota_factor = max(1.0, server_count / 1000)
     for pname, pid in project_ids.items():
         for svc, rtype, data in (
-            ("nova", "quota_set", {"instances": 200, "cores": 800, "ram": 1_024_000}),
-            ("cinder", "quota_set", {"volumes": 200, "gigabytes": 50_000}),
-            ("neutron", "quota", {"network": 50, "subnet": 100, "port": 500, "floatingip": 50}),
+            (
+                "nova",
+                "quota_set",
+                {
+                    "instances": _scale(200, quota_factor, 40),
+                    "cores": _scale(800, quota_factor, 80),
+                    "ram": _scale(1_024_000, quota_factor, 64_000),
+                },
+            ),
+            (
+                "cinder",
+                "quota_set",
+                {
+                    "volumes": _scale(200, quota_factor, 40),
+                    "gigabytes": _scale(50_000, quota_factor, 5_000),
+                },
+            ),
+            (
+                "neutron",
+                "quota",
+                {
+                    "network": _scale(50, quota_factor, 10),
+                    "subnet": _scale(100, quota_factor, 20),
+                    "port": _scale(500, quota_factor, 80),
+                    "floatingip": _scale(50, quota_factor, 10),
+                },
+            ),
         ):
             await conn.execute(
                 """INSERT INTO os_api_objects(id, service, resource_type, project_id, name, status, data)
@@ -1675,31 +1860,44 @@ async def seed_openstack_demo(conn: Connection, *, password: str = "secret") -> 
     from app.openstack.seed_discovery import seed_discovery_documents
 
     discovery = await seed_discovery_documents(conn)
-    pack_seed = await seed_pack_surface_samples(conn, per_type=3)
+    pack_seed = await seed_pack_surface_samples(conn, per_type=pack_per_type)
     pack_seed = {**pack_seed, **discovery}
 
     await conn.execute(
-        """INSERT INTO os_demo_meta(key, value) VALUES('profile', $1), ('servers', $2), ('password', $3)""",
-        DEMO_PROFILE,
-        str(DEMO_SERVER_COUNT),
+        """INSERT INTO os_demo_meta(key, value)
+           VALUES('profile', $1), ('size', $2), ('servers', $3), ('password', $4)""",
+        profile,
+        cfg.name,
+        str(server_count),
         password,
     )
 
     return {
-        "profile": DEMO_PROFILE,
-        "servers": DEMO_SERVER_COUNT,
+        "profile": profile,
+        "size": cfg.name,
+        "servers": server_count,
         "pack_seed": pack_seed,
-        "volumes": DEMO_VOLUME_COUNT,
-        "hypervisors": DEMO_HYPERVISOR_COUNT,
+        "volumes": volume_count,
+        "hypervisors": hypervisor_count,
+        "ironic_nodes": ironic_count,
+        "loadbalancers": lb_count,
+        "stacks": stack_count,
+        "floating_ips": fip_count,
+        "extra_networks": extra_networks,
+        "extra_security_groups": extra_security_groups,
+        "keypairs_per_user": keypairs_per_user,
+        "edge_routers": edge_routers,
         "projects": list(project_ids.keys()),
         "users": list(user_ids.keys()),
         "password": password,
         "availability_zones": list(AZS),
+        "cluster": asdict(cfg),
     }
 
 
 async def openstack_demo_summary(conn: Connection) -> dict[str, Any]:
     profile = await conn.fetchval("SELECT value FROM os_demo_meta WHERE key='profile'")
+    size = await conn.fetchval("SELECT value FROM os_demo_meta WHERE key='size'")
     servers = await conn.fetchval("SELECT count(*) FROM os_servers")
     volumes = await conn.fetchval("SELECT count(*) FROM os_volumes")
     networks = await conn.fetchval("SELECT count(*) FROM os_networks")
@@ -1712,9 +1910,14 @@ async def openstack_demo_summary(conn: Connection) -> dict[str, Any]:
     stacks = await conn.fetchval("SELECT count(*) FROM os_stacks")
     nodes = await conn.fetchval("SELECT count(*) FROM os_nodes")
     fips = await conn.fetchval("SELECT count(*) FROM os_floating_ips")
+    loaded = is_demo_profile(profile)
+    cfg = DEMO_CLUSTER_SIZES.get(str(size or ""), None)
+    if cfg is None and loaded and isinstance(profile, str) and ":" in profile:
+        cfg = DEMO_CLUSTER_SIZES.get(profile.rsplit(":", 1)[-1])
     return {
-        "loaded": profile == DEMO_PROFILE,
+        "loaded": loaded,
         "profile": profile or "minimal",
+        "size": (cfg.name if cfg else size) or None,
         "servers": int(servers or 0),
         "volumes": int(volumes or 0),
         "networks": int(networks or 0),
@@ -1727,5 +1930,6 @@ async def openstack_demo_summary(conn: Connection) -> dict[str, Any]:
         "stacks": int(stacks or 0),
         "ironic_nodes": int(nodes or 0),
         "floating_ips": int(fips or 0),
-        "target_servers": DEMO_SERVER_COUNT,
+        "target_servers": cfg.servers if cfg else int(servers or 0),
+        "sizes": list_demo_sizes(),
     }

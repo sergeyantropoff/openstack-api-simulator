@@ -38,7 +38,7 @@ def create_lifespan(
         await database.connect()
         app.state.database = database
         if isinstance(database, AsyncpgDatabase):
-            from app.openstack.demo_cloud import DEMO_PROFILE
+            from app.openstack.demo_cloud import is_demo_profile
             from app.openstack.seed import seed_openstack
 
             async with database.pool.acquire() as connection:
@@ -49,7 +49,7 @@ def create_lifespan(
                     )
                 except Exception:
                     profile = None
-                if profile != DEMO_PROFILE:
+                if not is_demo_profile(profile):
                     await seed_openstack(connection)
         workers = tuple(factory(database) for factory in worker_factories)
         worker_tasks = tuple(asyncio.create_task(worker.run()) for worker in workers)

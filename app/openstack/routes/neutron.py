@@ -17,17 +17,20 @@ router = APIRouter(tags=["Neutron"])
 
 
 def _net(row: Any) -> dict[str, Any]:
+    # Lab convention: shared network named "public" is the external provider net.
+    name = str(row["name"] or "")
+    is_external = bool(row["shared"]) and name == "public"
     return {
         "id": str(row["id"]),
-        "name": row["name"],
+        "name": name,
         "status": row["status"],
         "shared": row["shared"],
         "admin_state_up": row["admin_state_up"],
         "tenant_id": str(row["project_id"]),
         "project_id": str(row["project_id"]),
-        "router:external": False,
-        "provider:network_type": "vxlan",
-        "mtu": 1450,
+        "router:external": is_external,
+        "provider:network_type": "flat" if is_external else "vxlan",
+        "mtu": 1500 if is_external else 1450,
     }
 
 

@@ -1,0 +1,944 @@
+{
+  "by_path": {
+    "PATCH /floatingips/{id}": {
+      "description": "",
+      "properties": {
+        "floatingip": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_domain": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_name": {
+              "description": "",
+              "type": "string"
+            },
+            "fixed_ip_address": {
+              "description": "Fixed IP",
+              "type": "string"
+            },
+            "floating_ip_address": {
+              "description": "Floating IP",
+              "type": "string"
+            },
+            "floating_network_id": {
+              "description": "External network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_id": {
+              "description": "Port UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "subnet_id": {
+              "description": "Subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "floatingip"
+      ],
+      "type": "object"
+    },
+    "PATCH /leases/{id}": {
+      "description": "",
+      "properties": {
+        "lease": {
+          "description": "",
+          "properties": {
+            "end_date": {
+              "description": "",
+              "example": "2026-01-02 00:00",
+              "type": "string"
+            },
+            "events": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservations": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "hypervisor_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "max": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "min": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "resource_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resource_type": {
+                    "description": "",
+                    "example": "physical:host",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "start_date": {
+              "description": "",
+              "example": "2026-01-01 00:00",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "lease"
+      ],
+      "type": "object"
+    },
+    "PATCH /os-hosts/{id}": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "POST /floatingips": {
+      "description": "",
+      "properties": {
+        "floatingip": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_domain": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_name": {
+              "description": "",
+              "type": "string"
+            },
+            "fixed_ip_address": {
+              "description": "Fixed IP",
+              "type": "string"
+            },
+            "floating_ip_address": {
+              "description": "Floating IP",
+              "type": "string"
+            },
+            "floating_network_id": {
+              "description": "External network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_id": {
+              "description": "Port UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "subnet_id": {
+              "description": "Subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "floating_network_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "floatingip"
+      ],
+      "type": "object"
+    },
+    "POST /leases": {
+      "description": "",
+      "properties": {
+        "lease": {
+          "description": "",
+          "properties": {
+            "end_date": {
+              "description": "",
+              "example": "2026-01-02 00:00",
+              "type": "string"
+            },
+            "events": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservations": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "hypervisor_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "max": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "min": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "resource_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resource_type": {
+                    "description": "",
+                    "example": "physical:host",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "start_date": {
+              "description": "",
+              "example": "2026-01-01 00:00",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "start_date",
+            "end_date",
+            "reservations"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "lease"
+      ],
+      "type": "object"
+    },
+    "POST /os-hosts": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "PUT /floatingips/{id}": {
+      "description": "",
+      "properties": {
+        "floatingip": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_domain": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_name": {
+              "description": "",
+              "type": "string"
+            },
+            "fixed_ip_address": {
+              "description": "Fixed IP",
+              "type": "string"
+            },
+            "floating_ip_address": {
+              "description": "Floating IP",
+              "type": "string"
+            },
+            "floating_network_id": {
+              "description": "External network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_id": {
+              "description": "Port UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "subnet_id": {
+              "description": "Subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "floatingip"
+      ],
+      "type": "object"
+    },
+    "PUT /leases/{id}": {
+      "description": "",
+      "properties": {
+        "lease": {
+          "description": "",
+          "properties": {
+            "end_date": {
+              "description": "",
+              "example": "2026-01-02 00:00",
+              "type": "string"
+            },
+            "events": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservations": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "hypervisor_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "max": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "min": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "resource_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resource_type": {
+                    "description": "",
+                    "example": "physical:host",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "start_date": {
+              "description": "",
+              "example": "2026-01-01 00:00",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "lease"
+      ],
+      "type": "object"
+    },
+    "PUT /os-hosts/{id}": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "floatingip_create": {
+      "description": "",
+      "properties": {
+        "floatingip": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_domain": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_name": {
+              "description": "",
+              "type": "string"
+            },
+            "fixed_ip_address": {
+              "description": "Fixed IP",
+              "type": "string"
+            },
+            "floating_ip_address": {
+              "description": "Floating IP",
+              "type": "string"
+            },
+            "floating_network_id": {
+              "description": "External network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_id": {
+              "description": "Port UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "subnet_id": {
+              "description": "Subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "floating_network_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "floatingip"
+      ],
+      "type": "object"
+    },
+    "floatingip_patch": {
+      "description": "",
+      "properties": {
+        "floatingip": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_domain": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_name": {
+              "description": "",
+              "type": "string"
+            },
+            "fixed_ip_address": {
+              "description": "Fixed IP",
+              "type": "string"
+            },
+            "floating_ip_address": {
+              "description": "Floating IP",
+              "type": "string"
+            },
+            "floating_network_id": {
+              "description": "External network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_id": {
+              "description": "Port UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "subnet_id": {
+              "description": "Subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "floatingip"
+      ],
+      "type": "object"
+    },
+    "floatingip_update": {
+      "description": "",
+      "properties": {
+        "floatingip": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_domain": {
+              "description": "",
+              "type": "string"
+            },
+            "dns_name": {
+              "description": "",
+              "type": "string"
+            },
+            "fixed_ip_address": {
+              "description": "Fixed IP",
+              "type": "string"
+            },
+            "floating_ip_address": {
+              "description": "Floating IP",
+              "type": "string"
+            },
+            "floating_network_id": {
+              "description": "External network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "port_id": {
+              "description": "Port UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "subnet_id": {
+              "description": "Subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "floatingip"
+      ],
+      "type": "object"
+    },
+    "host_create": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "host_patch": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "host_update": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "lease_create": {
+      "description": "",
+      "properties": {
+        "lease": {
+          "description": "",
+          "properties": {
+            "end_date": {
+              "description": "",
+              "example": "2026-01-02 00:00",
+              "type": "string"
+            },
+            "events": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservations": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "hypervisor_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "max": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "min": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "resource_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resource_type": {
+                    "description": "",
+                    "example": "physical:host",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "start_date": {
+              "description": "",
+              "example": "2026-01-01 00:00",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "start_date",
+            "end_date",
+            "reservations"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "lease"
+      ],
+      "type": "object"
+    },
+    "lease_patch": {
+      "description": "",
+      "properties": {
+        "lease": {
+          "description": "",
+          "properties": {
+            "end_date": {
+              "description": "",
+              "example": "2026-01-02 00:00",
+              "type": "string"
+            },
+            "events": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservations": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "hypervisor_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "max": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "min": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "resource_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resource_type": {
+                    "description": "",
+                    "example": "physical:host",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "start_date": {
+              "description": "",
+              "example": "2026-01-01 00:00",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "lease"
+      ],
+      "type": "object"
+    },
+    "lease_update": {
+      "description": "",
+      "properties": {
+        "lease": {
+          "description": "",
+          "properties": {
+            "end_date": {
+              "description": "",
+              "example": "2026-01-02 00:00",
+              "type": "string"
+            },
+            "events": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservations": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "hypervisor_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "max": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "min": {
+                    "description": "",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "resource_properties": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resource_type": {
+                    "description": "",
+                    "example": "physical:host",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "start_date": {
+              "description": "",
+              "example": "2026-01-01 00:00",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "lease"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "blazar",
+  "source": "generated-from-api-ref-catalog"
+}

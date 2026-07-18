@@ -583,6 +583,126 @@
       padding-top: 2px;
     }
 
+    .demo-size-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .demo-size-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .demo-size-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 14px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background:
+        linear-gradient(165deg, color-mix(in srgb, var(--brand-accent) 8%, var(--surface-raised)) 0%, var(--surface-raised) 55%);
+      min-height: 168px;
+    }
+
+    .demo-size-card.is-active {
+      border-color: color-mix(in srgb, var(--brand-accent) 55%, var(--border));
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand-accent) 25%, transparent);
+    }
+
+    .demo-size-card-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .demo-size-card-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-transform: capitalize;
+    }
+
+    .demo-size-card-chip {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--brand-accent);
+      background: color-mix(in srgb, var(--brand-accent) 12%, transparent);
+      border-radius: 999px;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+
+    .demo-size-card-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 10px;
+      margin: 0;
+    }
+
+    .demo-size-card-metrics div {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .demo-size-card-metrics dt {
+      margin: 0;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    .demo-size-card-metrics dd {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .demo-size-card-note {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.4;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .demo-size-card .btn-demo-load {
+      width: 100%;
+      justify-content: center;
+      margin-top: auto;
+    }
+
+    .demo-toolbar {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 8px;
+      align-items: stretch;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      width: 100%;
+    }
+
+    .demo-toolbar .btn {
+      flex: 1 1 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      text-align: center;
+    }
+
     .btn-demo-load {
       background: var(--brand-accent);
       border-color: var(--brand-accent);
@@ -1380,20 +1500,16 @@
     }
 
     .catalog-option {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      grid-template-rows: auto auto;
-      gap: 2px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
       width: 100%;
-      padding: 8px 10px;
       border: 1px solid var(--border);
       border-left: 3px solid transparent;
       border-radius: 0;
       background: var(--surface-raised);
-      text-align: left;
-      cursor: pointer;
-      font: inherit;
       color: var(--text);
+      overflow: hidden;
     }
 
     .catalog-option:hover { background: var(--surface-hover); }
@@ -1403,6 +1519,60 @@
       border-left-color: var(--accent);
       background: var(--overlay-head-bg);
       box-shadow: none;
+    }
+
+    .catalog-option-main {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 2px 8px;
+      width: 100%;
+      padding: 8px 10px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+    }
+
+    .catalog-option-mv {
+      display: none;
+      padding: 0 10px 8px;
+      border-top: 1px solid transparent;
+    }
+
+    .catalog-option.active .catalog-option-mv {
+      display: block;
+      border-top-color: var(--border);
+      padding-top: 8px;
+    }
+
+    .catalog-option-mv-label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .catalog-mv-select {
+      width: 100%;
+      min-height: 30px;
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      border-radius: 0;
+      background: var(--surface);
+      color: var(--text);
+      font: inherit;
+      font-size: 12px;
+    }
+
+    .catalog-mv-select:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
     }
 
     .catalog-source {
@@ -3402,6 +3572,10 @@
             <span class="label">Catalog</span>
             <span class="value" id="stat-catalog">—</span>
           </div>
+          <div class="help-stat-card">
+            <span class="label">Microversion</span>
+            <span class="value" id="stat-microversion">—</span>
+          </div>
         </div>
         <h4 class="help-section-title">Cloud</h4>
         <div class="help-stat-grid">
@@ -3430,34 +3604,9 @@
             <span class="value" id="stat-quorum">—</span>
           </div>
         </div>
-        <h4 class="help-section-title">OpenStack API pack</h4>
-        <div class="help-stat-grid">
-          <div class="help-stat-card">
-            <span class="label">Series</span>
-            <span class="value" id="stat-os-series">—</span>
-          </div>
-          <div class="help-stat-card">
-            <span class="label">Operations</span>
-            <span class="value" id="stat-os-ops">—</span>
-          </div>
-          <div class="help-stat-card">
-            <span class="label">Services</span>
-            <span class="value" id="stat-os-services">—</span>
-          </div>
-        </div>
-        <label class="field-label" for="os-series-select">Activate series</label>
-        <div class="help-demo-actions" style="margin-top:0.5rem;gap:0.5rem;display:flex;flex-wrap:wrap;align-items:center;">
-          <select id="os-series-select" class="input" style="min-width:10rem;"></select>
-          <button class="btn btn-sm" id="btn-os-series-activate" type="button">Apply pack</button>
-        </div>
-        <label class="field-label" for="os-mv-service" style="margin-top:0.75rem;">Microversion override</label>
-        <div class="help-demo-actions" style="margin-top:0.5rem;gap:0.5rem;display:flex;flex-wrap:wrap;align-items:center;">
-          <select id="os-mv-service" class="input" style="min-width:8rem;"></select>
-          <input id="os-mv-version" class="input" placeholder="e.g. 2.79" style="width:6rem;" />
-          <button class="btn btn-sm" id="btn-os-mv-set" type="button">Set</button>
-          <button class="btn btn-sm" id="btn-os-mv-clear" type="button">Default</button>
-        </div>
-        <p class="help-demo-note" id="os-pack-note" style="margin-top:0.75rem;">Surface-complete contract packs drive schema routes for every API-ref operation.</p>
+        <p class="help-demo-note" style="margin-top:0.25rem;">
+          Change series / microversion in <strong>API catalog</strong>.
+        </p>
       </div>
     </div>
   </aside>
@@ -3606,7 +3755,7 @@
           <button class="btn btn-sm" id="btn-catalog-refresh" type="button">Update to latest</button>
         </div>
         <p class="catalog-apply-note" id="catalog-apply-note">
-          Apply swaps the live OpenStack series pack in memory. Process restart returns to OPENSTACK_SERIES.
+          Select a series card → pick microversion on the card → Apply as runtime.
         </p>
       </div>
     </div>
@@ -3718,6 +3867,7 @@
     const LS_SELECTION = "os-sim-selection";
     const LS_PARAMS = "os-sim-params";
     const LS_THEME = "os-sim-theme";
+    const LS_MICROVERSION = "os-sim-microversion";
     const HISTORY_LIMIT = 100;
     const PARAMS_STORE_LIMIT = 200;
 
@@ -3738,6 +3888,8 @@
       major: 9,
       majors: [],
       runtimeVersion: null,
+      osPack: null,
+      pendingMicroversion: {},
       catalog: null,
       method: null,
       pathValues: {},
@@ -3855,6 +4007,7 @@
       uiModalConfirm: document.getElementById("ui-modal-confirm"),
       statRuntime: document.getElementById("stat-runtime"),
       statCatalog: document.getElementById("stat-catalog"),
+      statMicroversion: document.getElementById("stat-microversion"),
       statClusterName: document.getElementById("stat-cluster-name"),
       statNodes: document.getElementById("stat-nodes"),
       statQemu: document.getElementById("stat-qemu"),
@@ -3862,16 +4015,6 @@
       statStorage: document.getElementById("stat-storage"),
       statQuorum: document.getElementById("stat-quorum"),
       statImpl: document.getElementById("stat-impl"),
-      statOsSeries: document.getElementById("stat-os-series"),
-      statOsOps: document.getElementById("stat-os-ops"),
-      statOsServices: document.getElementById("stat-os-services"),
-      osSeriesSelect: document.getElementById("os-series-select"),
-      btnOsSeriesActivate: document.getElementById("btn-os-series-activate"),
-      osMvService: document.getElementById("os-mv-service"),
-      osMvVersion: document.getElementById("os-mv-version"),
-      btnOsMvSet: document.getElementById("btn-os-mv-set"),
-      btnOsMvClear: document.getElementById("btn-os-mv-clear"),
-      osPackNote: document.getElementById("os-pack-note"),
     };
 
     function setText(el, value) {
@@ -4229,11 +4372,49 @@
       return { pathValues, bodyValues, body };
     }
 
+    function formatParamDisplayValue(value) {
+      if (value == null) return "";
+      // Objects/arrays must become JSON — String({...}) is "[object Object]".
+      if (typeof value === "object") {
+        try {
+          return JSON.stringify(value);
+        } catch {
+          return "";
+        }
+      }
+      const text = String(value);
+      // Drop corrupt leftovers from older String(object) coercion.
+      if (text === "[object Object]" || text === "[object Array]") return "";
+      return text;
+    }
+
+    function coerceBodyFieldValue(raw) {
+      const text = String(raw ?? "").trim();
+      if (!text) return undefined;
+      if (text === "true" || text === "false") return text === "true";
+      if (text === "null") return null;
+      if (/^-?\d+$/.test(text)) return Number(text);
+      if (/^-?\d+\.\d+$/.test(text)) return Number(text);
+      if (
+        (text.startsWith("{") && text.endsWith("}"))
+        || (text.startsWith("[") && text.endsWith("]"))
+      ) {
+        try {
+          return JSON.parse(text);
+        } catch {
+          /* keep as string */
+        }
+      }
+      return text;
+    }
+
     function storedParamValue(store, name) {
       if (!store || typeof store !== "object" || !(name in store)) return null;
       const value = store[name];
       if (value == null) return "";
-      return String(value);
+      // Legacy String(object) leftovers — treat as missing so examples apply.
+      if (value === "[object Object]" || value === "[object Array]") return null;
+      return formatParamDisplayValue(value);
     }
 
     function resolveParamValue(fieldName, endpointStore, example) {
@@ -4241,7 +4422,7 @@
       if (endpointValue != null) return endpointValue;
       const globalValue = storedParamValue(readGlobalParamFields(), fieldName);
       if (globalValue != null) return globalValue;
-      return String(example ?? "");
+      return formatParamDisplayValue(example);
     }
 
     function captureParamInputs() {
@@ -4466,6 +4647,111 @@
       return `<span class="catalog-cache-badge ok">${escapeHtml(formatCacheAge(cached.savedAt))} · ${escapeHtml(cached.source_version)}</span>`;
     }
 
+    function microversionServicesForMajor(major) {
+      const info = majorInfo(major);
+      const fromMajor = info?.microversions;
+      if (Array.isArray(fromMajor) && fromMajor.length) return fromMajor;
+      if (runtimeMajorMatches(major) && Array.isArray(state.osPack?.services)) {
+        return state.osPack.services.filter(
+          (s) => s.default_microversion || s.max_microversion,
+        );
+      }
+      return [];
+    }
+
+    function readStoredMicroversions() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(LS_MICROVERSION) || "{}");
+        return raw && typeof raw === "object" ? raw : {};
+      } catch {
+        return {};
+      }
+    }
+
+    function writeStoredMicroversion(major, value) {
+      try {
+        const store = readStoredMicroversions();
+        store[String(major)] = String(value || "default");
+        localStorage.setItem(LS_MICROVERSION, JSON.stringify(store));
+      } catch {
+        /* ignore quota / private mode */
+      }
+    }
+
+    function microversionLabel(value) {
+      const raw = String(value || "default");
+      if (raw === "default") return "Pack defaults";
+      if (raw === "custom") {
+        const overrides = state.osPack?.microversion_overrides || {};
+        const parts = Object.entries(overrides).map(([svc, ver]) => `${svc} ${ver}`);
+        return parts.length ? parts.join(", ") : "Custom";
+      }
+      return raw.replace(":", " ");
+    }
+
+    function updateEnvironmentMicroversion() {
+      if (!els.statMicroversion) return;
+      const major = runtimeMajorFromVersion(state.runtimeVersion);
+      if (major == null) {
+        setText(els.statMicroversion, "—");
+        return;
+      }
+      setText(els.statMicroversion, microversionLabel(currentMicroversionSelectValue(major)));
+    }
+
+    function currentMicroversionSelectValue(major) {
+      const pending = state.pendingMicroversion?.[major];
+      if (pending != null) return pending;
+      if (runtimeMajorMatches(major)) {
+        const overrides = state.osPack?.microversion_overrides || {};
+        const entries = Object.entries(overrides);
+        if (entries.length === 1) {
+          const [service, version] = entries[0];
+          return `${service}:${version}`;
+        }
+        if (entries.length > 1) return "custom";
+      }
+      const stored = readStoredMicroversions()[String(major)];
+      return stored || "default";
+    }
+
+    function renderMicroversionOptions(major) {
+      const services = microversionServicesForMajor(major);
+      const highlight = ["nova", "cinder", "placement", "manila", "ironic"];
+      const sorted = [...services].sort((a, b) => {
+        const ai = highlight.indexOf(a.name);
+        const bi = highlight.indexOf(b.name);
+        if (ai === -1 && bi === -1) return String(a.name).localeCompare(String(b.name));
+        if (ai === -1) return 1;
+        if (bi === -1) return -1;
+        return ai - bi;
+      });
+      const options = [`<option value="default">Pack defaults</option>`];
+      const selected = currentMicroversionSelectValue(major);
+      if (selected === "custom") {
+        options.push(`<option value="custom" selected>Custom overrides</option>`);
+      }
+      for (const svc of sorted) {
+        const name = String(svc.name || "");
+        if (!name) continue;
+        const def = svc.default_microversion;
+        const max = svc.max_microversion;
+        if (def) {
+          const value = `${name}:${def}`;
+          options.push(
+            `<option value="${escapeHtml(value)}">${escapeHtml(name)} · ${escapeHtml(def)} (default)</option>`,
+          );
+        }
+        if (max && max !== def) {
+          const value = `${name}:${max}`;
+          options.push(
+            `<option value="${escapeHtml(value)}">${escapeHtml(name)} · ${escapeHtml(max)} (max)</option>`,
+          );
+        }
+      }
+      return options.join("");
+    }
+
     function renderCatalogSourceInfo(major = state.major) {
       if (!els.catalogSourceInfo) return;
       const info = majorInfo(major);
@@ -4481,6 +4767,7 @@
         ? `<span class="badge-inline ok">Bundled</span>`
         : `<span class="badge-inline warn">Remote only</span>`;
       els.catalogSourceInfo.hidden = false;
+      const mvLabel = microversionLabel(currentMicroversionSelectValue(major));
       els.catalogSourceInfo.innerHTML = `
         <div class="catalog-source-head">
           <h3 class="catalog-source-title">Catalog source · ${escapeHtml(info.series || ("Series " + info.major))}</h3>
@@ -4492,6 +4779,7 @@
           <dt>Delivery</dt><dd>${bundleLabel}</dd>
           <dt>Source URL</dt><dd><code>${escapeHtml(info.artifact_url)}</code></dd>
           <dt>Runtime</dt><dd>${escapeHtml(state.runtimeVersion || "—")}${runtimeMajorMatches(major) ? ' <span class="badge-inline ok">active</span>' : ""}</dd>
+          <dt>Microversion</dt><dd>${escapeHtml(mvLabel)}</dd>
         </dl>
       `;
       updateApplyButton();
@@ -4525,7 +4813,7 @@
         : `Apply ${seriesLabel(state.major)} as runtime`;
       if (els.catalogApplyNote) {
         els.catalogApplyNote.textContent =
-          "Apply activates the OpenStack series pack in memory (schema remount). Restart returns to the boot series.";
+          "Select a series card → pick microversion on the card → Apply as runtime. Restart returns to the boot series.";
       }
     }
 
@@ -4534,19 +4822,49 @@
       const store = readCatalogStore();
       els.catalogOptions.innerHTML = state.majors.map((m) => {
         const cached = store[String(m.major)];
-        const active = m.major === state.major ? "active" : "";
+        const selected = m.major === state.major;
+        const isRuntime = runtimeMajorMatches(m.major);
         const slug = String(m.latest_version || m.series || m.major)
           .replace(/^openstack-/i, "")
           .toLowerCase();
         const ops = Number(m.operation_count || 0);
-        const meta = cached ? formatCacheAge(cached.savedAt) : "remote download";
+        const mvLabel = microversionLabel(currentMicroversionSelectValue(m.major));
+        const meta = isRuntime
+          ? (mvLabel === "Pack defaults" ? "runtime" : mvLabel)
+          : (cached ? formatCacheAge(cached.savedAt) : "bundled");
         return `
-          <button type="button" class="catalog-option ${active}" data-major="${m.major}">
-            <span class="catalog-option-title">os · ${escapeHtml(slug)}</span>
-            <span class="catalog-option-version">${ops ? `${ops} ops` : escapeHtml(slug)}</span>
-            <span class="catalog-option-meta">${meta}</span>
-          </button>`;
+          <div class="catalog-option ${selected ? "active" : ""}" data-major="${m.major}">
+            <button type="button" class="catalog-option-main" data-major="${m.major}">
+              <span class="catalog-option-title">os · ${escapeHtml(slug)}</span>
+              <span class="catalog-option-version">${ops ? `${ops} ops` : escapeHtml(slug)}</span>
+              <span class="catalog-option-meta">${escapeHtml(meta)}</span>
+            </button>
+            <div class="catalog-option-mv">
+              <label class="catalog-option-mv-label" for="catalog-mv-${m.major}">Microversion</label>
+              <select
+                id="catalog-mv-${m.major}"
+                class="catalog-mv-select input"
+                data-major="${m.major}"
+                ${selected ? "" : "disabled"}
+              >
+                ${renderMicroversionOptions(m.major)}
+              </select>
+            </div>
+          </div>`;
       }).join("");
+
+      const select = els.catalogOptions.querySelector(
+        `.catalog-mv-select[data-major="${state.major}"]`,
+      );
+      if (select) {
+        const value = currentMicroversionSelectValue(state.major);
+        if ([...select.options].some((opt) => opt.value === value)) {
+          select.value = value;
+        } else {
+          select.value = "default";
+        }
+        select.disabled = false;
+      }
 
       renderCatalogSourceInfo(state.major);
     }
@@ -4559,8 +4877,13 @@
       els.catalogDrawer.setAttribute("aria-hidden", open ? "false" : "true");
       els.catalogBackdrop.setAttribute("aria-hidden", open ? "false" : "true");
       if (open) {
-        renderCatalogPanel();
         refreshCatalogCoverage().catch((error) => console.error(error));
+        refreshOpenStackPack()
+          .then(() => renderCatalogPanel())
+          .catch((error) => {
+            console.error(error);
+            renderCatalogPanel();
+          });
       }
     }
 
@@ -4842,6 +5165,15 @@
       }
       if (hasStoredBody) {
         els.body.value = isEmptyRequestBody(storedBody) ? "" : storedBody;
+        updateBodyHighlight();
+      } else if (
+        method.body_example
+        && typeof method.body_example === "object"
+        && !Array.isArray(method.body_example)
+        && Object.keys(method.body_example).length > 0
+      ) {
+        // Prefer full OpenStack-shaped body_example over PARAM field stubs.
+        els.body.value = JSON.stringify(method.body_example, null, 2);
         updateBodyHighlight();
       } else if (canBuildBody) {
         syncBodyFromFields({ syncVisibility: false });
@@ -5206,8 +5538,45 @@
 
     function buildDemoDataHtml(data) {
       const loaded = Boolean(data?.loaded);
+      const activeSize = data?.size || null;
+      const profile = loaded
+        ? (activeSize || String(data?.profile || "").split(":").pop() || "demo")
+        : "minimal";
+      const badgeLabel = loaded ? String(profile) : "Minimal";
+      const sizes = [
+        {
+          id: "small",
+          label: "Small",
+          chip: "lab",
+          hosts: 3,
+          vms: 50,
+          volumes: 30,
+          nets: 11,
+          note: "3 AZ · light nets/SG · 30 volumes · 6 FIPs",
+        },
+        {
+          id: "large",
+          label: "Large",
+          chip: "default",
+          hosts: 10,
+          vms: 1000,
+          volumes: 600,
+          nets: 21,
+          note: "3 AZ · fuller topology · 600 volumes · 120 FIPs",
+        },
+        {
+          id: "big",
+          label: "Big",
+          chip: "heavy",
+          hosts: 20,
+          vms: 2000,
+          volumes: 1200,
+          nets: 36,
+          note: "3 AZ · dense topology · 1200 volumes · 240 FIPs",
+        },
+      ];
       const stats = [
-        ["Profile", data?.profile ?? "—", loaded ? "ok" : ""],
+        ["Profile", profile, loaded ? "ok" : ""],
         ["Servers", data?.servers ?? "—", ""],
         ["Hypervisors", data?.hypervisors ?? "—", ""],
         ["Networks", data?.networks ?? "—", ""],
@@ -5224,13 +5593,11 @@
         <div class="help-demo-panel">
           <div class="help-report-head help-demo-head">
             <h3>OpenStack demo cloud</h3>
-            <p>Load a synthetic full OpenStack cloud into PostgreSQL for client and UI exploration.</p>
-            <span class="help-demo-badge ${loaded ? "loaded" : "empty"}">${loaded ? "Loaded" : "Minimal"}</span>
+            <p>Pick a cluster size — inventory (hosts, VMs, volumes, nets, FIPs, LBs, stacks…) scales together.</p>
+            <span class="help-demo-badge ${loaded ? "loaded" : "empty"}">${escapeHtml(badgeLabel)}</span>
           </div>
           <p class="help-demo-note">
-            ~1000 servers · 16 hypervisors · 3 AZs · 5 projects · networks/ports/FIPs · 600 volumes ·
-            Octavia LBs · Heat stacks · Ironic · Swift · Keystone users (admin/ops/developer…).
-            Password for all users: <code>secret</code>. Loading replaces current OpenStack state.
+            Password for all users: <code>secret</code>. Loading replaces current OpenStack state and invalidates active tokens.
           </p>
           <div class="help-stat-grid">
             ${stats.map(([label, value, tone]) => `
@@ -5240,8 +5607,29 @@
               </div>
             `).join("")}
           </div>
-          <div class="help-demo-actions">
-            <button class="btn btn-sm btn-demo-load" id="btn-demo-load" type="button">Load demo cloud</button>
+          <div class="demo-size-grid" role="group" aria-label="Cluster sizes">
+            ${sizes.map((s) => {
+              const active = activeSize === s.id || profile === s.id;
+              return `
+              <article class="demo-size-card ${active ? "is-active" : ""}" data-size-card="${s.id}">
+                <div class="demo-size-card-head">
+                  <h4 class="demo-size-card-title">${escapeHtml(s.label)}</h4>
+                  <span class="demo-size-card-chip">${escapeHtml(s.chip)}</span>
+                </div>
+                <dl class="demo-size-card-metrics">
+                  <div><dt>Hosts</dt><dd>${s.hosts}</dd></div>
+                  <div><dt>VMs</dt><dd>${s.vms}</dd></div>
+                  <div><dt>Volumes</dt><dd>${s.volumes}</dd></div>
+                  <div><dt>Networks</dt><dd>${s.nets}</dd></div>
+                </dl>
+                <p class="demo-size-card-note">${escapeHtml(s.note)}</p>
+                <button class="btn btn-sm btn-demo-load" data-demo-size="${s.id}" type="button">
+                  Load ${escapeHtml(s.label.toLowerCase())}
+                </button>
+              </article>`;
+            }).join("")}
+          </div>
+          <div class="demo-toolbar">
             <button class="btn btn-sm btn-demo-unload" id="btn-demo-unload" type="button">Reset to minimal</button>
             <button class="btn btn-sm" id="btn-demo-refresh" type="button">Refresh stats</button>
           </div>
@@ -5280,35 +5668,139 @@
       renderDemoState(await res.json());
     }
 
-    async function loadDemoData() {
-      const loadBtn = document.getElementById("btn-demo-load");
-      if (loadBtn) loadBtn.disabled = true;
+    async function reissueSessionAfterSeed() {
+      // Seed truncates os_tokens (+ users). Old Keystone tickets are dead — mint a fresh one
+      // from the credentials still in the auth form / previous session.
+      const wasSignedIn = Boolean(state.ticket || state.username || readStoredAuth()?.username);
+      const stored = readStoredAuth();
+      const username = (
+        state.username || stored?.username || els.username?.value || "admin"
+      ).trim() || "admin";
+      const project = (
+        state.project
+        || stored?.project
+        || document.getElementById("os-project")?.value
+        || "admin"
+      ).trim() || "admin";
+      const password = els.password?.value !== undefined && els.password.value !== ""
+        ? els.password.value
+        : "secret";
+
+      state.ticket = null;
+      state.csrf = null;
+      if (els.username) els.username.value = username;
+      const projectEl = document.getElementById("os-project");
+      if (projectEl) projectEl.value = project;
+
+      if (!wasSignedIn) {
+        setAuth(false);
+        persistAuth();
+        return false;
+      }
+
+      try {
+        const res = await fetch("/v3/auth/tokens", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-OpenStack-Route-Service": "keystone",
+          },
+          body: JSON.stringify({
+            auth: {
+              identity: {
+                methods: ["password"],
+                password: {
+                  user: {
+                    name: username,
+                    domain: { name: "Default" },
+                    password,
+                  },
+                },
+              },
+              scope: {
+                project: { name: project, domain: { name: "Default" } },
+              },
+            },
+          }),
+        });
+        const body = await res.json().catch(() => ({}));
+        const token =
+          res.headers.get("X-Subject-Token")
+          || res.headers.get("x-subject-token")
+          || body?.token?.id
+          || null;
+        if (!res.ok || !token) {
+          throw new Error(
+            (body.error && (body.error.message || body.error.title))
+            || body.detail
+            || `HTTP ${res.status}`,
+          );
+        }
+        state.ticket = token;
+        state.csrf = "";
+        state.username = username;
+        state.project = project;
+        setAuth(true);
+        persistAuth();
+        return true;
+      } catch (error) {
+        console.warn("reissue session after seed", error);
+        state.ticket = null;
+        state.csrf = null;
+        state.username = null;
+        state.project = null;
+        setAuth(false);
+        persistAuth();
+        return false;
+      }
+    }
+
+    async function loadDemoData(size = "large") {
+      const loadBtns = document.querySelectorAll("[data-demo-size]");
+      loadBtns.forEach((btn) => { btn.disabled = true; });
       setLoading(true);
       try {
-        const res = await fetch("/ui/api/demo/load", { method: "POST" });
+        const res = await fetch("/ui/api/demo/load", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ size }),
+        });
         const body = await res.json().catch(() => ({}));
         if (!res.ok) {
-          throw new Error(body.detail || `Load failed: ${res.status}`);
+          const detail = body.detail;
+          const msg = typeof detail === "string"
+            ? detail
+            : (detail != null ? JSON.stringify(detail) : `Load failed: ${res.status}`);
+          throw new Error(msg);
         }
         renderDemoState(body.summary || {});
-        if (state.ticket) syncAuthCookie(state.ticket);
-        refreshOverview();
-        toast("OpenStack demo cloud loaded (~1000 servers)", "ok");
-        if (!state.ticket) {
+        const signedIn = await reissueSessionAfterSeed();
+        try {
+          await refreshOverview();
+        } catch (error) {
+          console.warn("overview refresh after demo load", error);
+        }
+        const seed = body.seed || body.summary || {};
+        toast(
+          `Cluster ${seed.size || size} loaded (${seed.hypervisors ?? seed.hosts ?? "?"} hosts · ${seed.servers ?? "?"} VMs)`,
+          "ok",
+        );
+        if (!signedIn) {
           toast("Sign in (admin / secret, project admin) to call OpenStack APIs", "warn");
         }
       } finally {
-        if (loadBtn) loadBtn.disabled = false;
+        loadBtns.forEach((btn) => { btn.disabled = false; });
         setLoading(false);
       }
     }
 
     async function unloadDemoData() {
       const confirmed = await showConfirm({
-        title: "Remove demo data?",
-        message: "This wipes simulator DB state (demo data and anything created via the API), then reloads a minimal cluster.",
-        confirmLabel: "Remove demo data",
-        cancelLabel: "Keep demo data",
+        title: "Reset to minimal?",
+        message: "This wipes current OpenStack state (demo cluster and anything created via the API), then loads the minimal lab cluster.",
+        confirmLabel: "Reset to minimal",
+        cancelLabel: "Cancel",
         tone: "danger",
       });
       if (!confirmed) return;
@@ -5319,11 +5811,19 @@
         const res = await fetch("/ui/api/demo/unload", { method: "POST" });
         const body = await res.json().catch(() => ({}));
         if (!res.ok) {
-          throw new Error(body.detail || `Unload failed: ${res.status}`);
+          throw new Error(body.detail || `Reset failed: ${res.status}`);
         }
         renderDemoState(body.summary || {});
-        refreshOverview();
-        toast("Demo data removed", "info");
+        const signedIn = await reissueSessionAfterSeed();
+        try {
+          await refreshOverview();
+        } catch (error) {
+          console.warn("overview refresh after reset", error);
+        }
+        toast("Minimal cluster loaded", "info");
+        if (!signedIn) {
+          toast("Sign in again if you need API access", "warn");
+        }
       } finally {
         if (unloadBtn) unloadBtn.disabled = false;
         setLoading(false);
@@ -5671,17 +6171,21 @@
       if (!els.dataPanel || els.dataPanel.dataset.demoBound) return;
       els.dataPanel.dataset.demoBound = "1";
       els.dataPanel.addEventListener("click", (event) => {
-        const target = event.target.closest("#btn-demo-load, #btn-demo-unload, #btn-demo-refresh");
-        if (!target) return;
-        if (target.id === "btn-demo-load") {
-          loadDemoData().catch((error) => {
+        const sizeBtn = event.target.closest("[data-demo-size]");
+        if (sizeBtn) {
+          const size = sizeBtn.getAttribute("data-demo-size") || "large";
+          loadDemoData(size).catch((error) => {
             showError(String(error));
             toast("Failed to load demo data", "error");
           });
-        } else if (target.id === "btn-demo-unload") {
+          return;
+        }
+        const target = event.target.closest("#btn-demo-unload, #btn-demo-refresh");
+        if (!target) return;
+        if (target.id === "btn-demo-unload") {
           unloadDemoData().catch((error) => {
             showError(String(error));
-            toast("Failed to remove demo data", "error");
+            toast("Failed to reset to minimal", "error");
           });
         } else if (target.id === "btn-demo-refresh") {
           renderDataPanel().catch((error) => showError(String(error)));
@@ -6074,17 +6578,82 @@
       });
     }
 
+    async function commitMicroversionChoice(major, rawValue, { quiet = false } = {}) {
+      const value = String(rawValue || "default");
+      if (value === "custom") return;
+      if (value === "default") {
+        const services = microversionServicesForMajor(major);
+        for (const svc of services) {
+          const name = String(svc.name || "");
+          if (!name) continue;
+          await fetch("/ui/api/openstack/microversions", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ service: name, version: "default" }),
+          });
+        }
+        if (!quiet) toast(`Pack defaults · ${seriesLabel(major)}`, "ok");
+        return;
+      }
+      const [service, version] = value.split(":");
+      if (!service || !version) {
+        if (!quiet) toast("Invalid microversion choice", "warn");
+        return;
+      }
+      // Keep the card select single-choice: clear other service overrides.
+      for (const svc of microversionServicesForMajor(major)) {
+        const name = String(svc.name || "");
+        if (!name || name === service) continue;
+        await fetch("/ui/api/openstack/microversions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ service: name, version: "default" }),
+        });
+      }
+      const res = await fetch("/ui/api/openstack/microversions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ service, version }),
+      });
+      if (!res.ok) {
+        if (!quiet) toast(`Microversion set failed: ${res.status}`, "error");
+        throw new Error(`Microversion set failed: ${res.status}`);
+      }
+      if (!quiet) toast(`${service} → ${version}`, "ok");
+    }
+
+    async function applyMicroversionChoice(major, rawValue) {
+      const value = String(rawValue || "default");
+      state.pendingMicroversion = { ...(state.pendingMicroversion || {}), [major]: value };
+      writeStoredMicroversion(major, value);
+      updateEnvironmentMicroversion();
+      if (!runtimeMajorMatches(major)) {
+        toast("Microversion saved — Apply as runtime to activate", "debug");
+        updateApplyButton();
+        return;
+      }
+      await commitMicroversionChoice(major, value);
+      delete state.pendingMicroversion[major];
+      await refreshOpenStackPack({ skipMvSync: true });
+      updateEnvironmentMicroversion();
+      updateApplyButton();
+    }
+
     function bindCatalogOptions() {
       if (!els.catalogOptions || els.catalogOptions.dataset.bound) return;
       els.catalogOptions.dataset.bound = "1";
       els.catalogOptions.addEventListener("click", async (event) => {
-        const btn = event.target.closest(".catalog-option[data-major]");
+        if (event.target.closest(".catalog-mv-select, .catalog-option-mv")) return;
+        const btn = event.target.closest(".catalog-option-main[data-major], .catalog-option[data-major]");
         if (!btn) return;
         event.preventDefault();
         event.stopPropagation();
         const major = Number(btn.dataset.major);
         renderCatalogSourceInfo(major);
-        if (major === state.major) return;
+        if (major === state.major) {
+          renderCatalogPanel();
+          return;
+        }
         try {
           await loadCatalog({ major, preserveSelection: false, silent: true });
           toggleCatalogDrawer(true);
@@ -6092,10 +6661,29 @@
           showError(String(error));
         }
       });
+      els.catalogOptions.addEventListener("change", async (event) => {
+        const select = event.target.closest(".catalog-mv-select[data-major]");
+        if (!select) return;
+        event.stopPropagation();
+        const major = Number(select.dataset.major);
+        select.disabled = true;
+        try {
+          if (major !== state.major) {
+            await loadCatalog({ major, preserveSelection: false, silent: true });
+          }
+          await applyMicroversionChoice(major, select.value);
+        } catch (error) {
+          showError(String(error));
+        } finally {
+          select.disabled = false;
+          renderCatalogPanel();
+        }
+      });
       els.catalogOptions.addEventListener("mouseover", (event) => {
-        const btn = event.target.closest(".catalog-option[data-major]");
-        if (!btn) return;
-        renderCatalogSourceInfo(Number(btn.dataset.major));
+        if (event.target.closest(".catalog-mv-select, .catalog-option-mv")) return;
+        const card = event.target.closest(".catalog-option[data-major]");
+        if (!card) return;
+        renderCatalogSourceInfo(Number(card.dataset.major));
       });
     }
 
@@ -6333,12 +6921,12 @@
       }
       container.innerHTML = fields.map((f) => {
         const stored = kind === "path" ? state.pathValues[f.name] : state.bodyValues[f.name];
-        const val = stored ?? f.example ?? "";
+        const val = formatParamDisplayValue(stored ?? f.example ?? "");
         const desc = f.description ? `<div style="font-size:11px;color:var(--muted);margin-top:2px">${f.description}</div>` : "";
         return `<tr>
           <td><code>${f.name}</code>${desc}</td>
           <td>${formatParamTypeBadges(f)}</td>
-          <td><input data-field="${f.name}" data-kind="${kind}" value="${String(val).replaceAll('"', "&quot;")}"></td>
+          <td><input data-field="${f.name}" data-kind="${kind}" value="${val.replaceAll("&", "&amp;").replaceAll('"', "&quot;")}"></td>
         </tr>`;
       }).join("");
       container.querySelectorAll("input[data-field]").forEach((input) => {
@@ -6470,8 +7058,9 @@
             const parsed = JSON.parse(body || "{}");
             if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
               for (const field of bodyFields) {
-                if (Object.prototype.hasOwnProperty.call(parsed, field.name)) {
-                  state.bodyValues[field.name] = String(parsed[field.name] ?? "");
+                const nested = getByPath(parsed, field.name);
+                if (nested !== undefined && nested !== null) {
+                  state.bodyValues[field.name] = formatParamDisplayValue(nested);
                 }
               }
             }
@@ -6544,32 +7133,83 @@
       return target === "cluster" ? buildClusterUrl(apiPath) : buildEmulatorUrl(apiPath);
     }
 
+    function deepCloneJson(value) {
+      if (value == null) return value;
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function getByPath(root, path) {
+      if (!path) return root;
+      const parts = String(path).split(".");
+      let cur = root;
+      for (const part of parts) {
+        if (cur == null || typeof cur !== "object") return undefined;
+        cur = cur[part];
+      }
+      return cur;
+    }
+
+    function setByPath(root, path, value) {
+      const parts = String(path).split(".");
+      let cur = root;
+      for (let i = 0; i < parts.length - 1; i += 1) {
+        const part = parts[i];
+        const next = parts[i + 1];
+        const wantArray = /^\d+$/.test(next);
+        if (cur[part] == null || typeof cur[part] !== "object") {
+          cur[part] = wantArray ? [] : {};
+        }
+        cur = cur[part];
+      }
+      cur[parts[parts.length - 1]] = value;
+    }
+
+    function deleteByPath(root, path) {
+      const parts = String(path).split(".");
+      let cur = root;
+      for (let i = 0; i < parts.length - 1; i += 1) {
+        if (cur == null || typeof cur !== "object") return;
+        cur = cur[parts[i]];
+      }
+      if (cur && typeof cur === "object") delete cur[parts[parts.length - 1]];
+    }
+
     function syncBodyFromFields({ syncVisibility = true } = {}) {
       if (!state.method) return;
       const inputs = [...(els.bodyFields?.querySelectorAll("input[data-field]") || [])];
-      const body = {};
+      const example = state.method.body_example;
+      // Start from full OpenStack-shaped example; PARAM edits merge in (oVirt-style).
+      const root = deepCloneJson(
+        example && typeof example === "object" && !Array.isArray(example) ? example : {},
+      ) || {};
+      let touched = false;
       inputs.forEach((input) => {
         const name = input.dataset.field;
+        if (!name) return;
         const raw = input.value.trim();
-        if (!raw) return;
-        if (raw === "true" || raw === "false") body[name] = raw === "true";
-        else if (/^-?\d+$/.test(raw)) body[name] = Number(raw);
-        else if (/^-?\d+\.\d+$/.test(raw)) body[name] = Number(raw);
-        else body[name] = raw;
-      });
-      // If PARAM fields are empty, fall back to method body_example so the editor
-      // updates when switching verbs / endpoints.
-      if (!Object.keys(body).length) {
-        const example = state.method.body_example;
-        if (example && typeof example === "object" && !Array.isArray(example)) {
-          for (const [key, value] of Object.entries(example)) {
-            if (value === undefined || value === null || value === "") continue;
-            body[key] = value;
-          }
+        const existing = getByPath(root, name);
+        // Empty input with no prior leaf (or null action stub) — leave example as-is.
+        if (!raw && (existing === undefined || existing === null)) return;
+        touched = true;
+        if (!raw) {
+          deleteByPath(root, name);
+          return;
         }
+        const coerced = coerceBodyFieldValue(raw);
+        if (coerced === undefined) {
+          deleteByPath(root, name);
+          return;
+        }
+        setByPath(root, name, coerced);
+      });
+      // Empty PARAM inputs → keep full body_example.
+      if (!touched && example && typeof example === "object" && !Array.isArray(example)) {
+        els.body.value = Object.keys(example).length ? JSON.stringify(example, null, 2) : "";
+        updateBodyHighlight();
+        if (syncVisibility) updateBodyPaneVisibility(state.method);
+        return;
       }
-      // Keep empty object out of the editor — do not show `{}`.
-      els.body.value = Object.keys(body).length ? JSON.stringify(body, null, 2) : "";
+      els.body.value = Object.keys(root).length ? JSON.stringify(root, null, 2) : "";
       updateBodyHighlight();
       if (syncVisibility) {
         updateBodyPaneVisibility(state.method);
@@ -6758,6 +7398,7 @@
       const series =
         majorInfo(major)?.latest_version
         || ({ 6: "yoga", 7: "antelope", 8: "caracal", 9: "dalmatian" })[major];
+      const pendingMv = currentMicroversionSelectValue(major);
       els.btnContractApply.disabled = true;
       setLoading(true);
       try {
@@ -6780,14 +7421,20 @@
           || (payload.series ? `openstack-${payload.series}` : null)
           || (series ? `openstack-${series}` : state.runtimeVersion);
         setText(els.statRuntime, state.runtimeVersion || "—");
+        await commitMicroversionChoice(major, pendingMv, { quiet: true });
+        writeStoredMicroversion(major, pendingMv);
+        delete state.pendingMicroversion[major];
         await loadVersions();
         await loadCatalog({ major, preserveSelection: true, silent: true });
         await refreshOverview();
-        await refreshOpenStackPack();
-        toast(`Runtime switched to ${state.runtimeVersion || seriesLabel(major)}`, "ok");
+        await refreshOpenStackPack({ skipMvSync: true });
+        updateEnvironmentMicroversion();
+        const mvNote = pendingMv && pendingMv !== "default" ? ` · ${microversionLabel(pendingMv)}` : "";
+        toast(`Runtime switched to ${state.runtimeVersion || seriesLabel(major)}${mvNote}`, "ok");
       } finally {
         setLoading(false);
         updateApplyButton();
+        renderCatalogPanel();
       }
     }
 
@@ -6805,82 +7452,65 @@
       applyMethodDetails(payload);
     }
 
-    async function refreshOpenStackPack() {
+    async function syncStoredMicroversionToRuntime() {
+      const major = runtimeMajorFromVersion(state.runtimeVersion);
+      if (major == null) {
+        updateEnvironmentMicroversion();
+        return;
+      }
+      const overrides = state.osPack?.microversion_overrides || {};
+      const entries = Object.entries(overrides);
+      if (entries.length === 1) {
+        writeStoredMicroversion(major, `${entries[0][0]}:${entries[0][1]}`);
+        updateEnvironmentMicroversion();
+        return;
+      }
+      if (entries.length > 1) {
+        writeStoredMicroversion(major, "custom");
+        updateEnvironmentMicroversion();
+        return;
+      }
+      const stored = readStoredMicroversions()[String(major)];
+      if (!stored || stored === "default" || stored === "custom") {
+        writeStoredMicroversion(major, "default");
+        updateEnvironmentMicroversion();
+        return;
+      }
+      try {
+        await commitMicroversionChoice(major, stored, { quiet: true });
+        await refreshOpenStackPack({ skipMvSync: true });
+      } catch (error) {
+        console.warn("Failed to restore microversion preference:", error);
+      }
+      updateEnvironmentMicroversion();
+    }
+
+    async function refreshOpenStackPack({ skipMvSync = false } = {}) {
       try {
         const res = await fetch("/ui/api/openstack/contracts");
         if (!res.ok) return;
         const data = await res.json();
         const active = data.active || {};
-        setText(els.statOsSeries, active.series || "—");
-        setText(els.statOsOps, String(active.operation_count ?? data.schema_ops_mounted ?? "—"));
-        setText(els.statOsServices, String(active.service_count ?? "—"));
-        if (els.osSeriesSelect) {
-          const available = data.available || [];
-          els.osSeriesSelect.innerHTML = available.map((s) =>
-            `<option value="${escapeHtml(s.series)}" ${s.series === active.series ? "selected" : ""}>${escapeHtml(s.series)} (${s.operation_count} ops)</option>`
-          ).join("");
+        state.osPack = active;
+        if (active.series) {
+          state.runtimeVersion = `openstack-${active.series}`;
         }
-        if (els.osMvService) {
-          const services = (active.services || []).filter((s) => s.max_microversion);
-          els.osMvService.innerHTML = services.map((s) =>
-            `<option value="${escapeHtml(s.name)}">${escapeHtml(s.name)} ${escapeHtml(s.active_microversion || s.default_microversion || "")}</option>`
-          ).join("");
+        if (els.statCatalog && active.series) {
+          setText(els.statCatalog, `${active.series} · ${active.operation_count ?? "?"} ops`);
         }
-        if (els.osPackNote) {
-          els.osPackNote.textContent = `Pack ${active.series || "—"} · ${active.operation_count || 0} operations · checksum ${(active.checksum || "").slice(0, 12)}…`;
+        if (!skipMvSync) {
+          await syncStoredMicroversionToRuntime();
+        } else {
+          updateEnvironmentMicroversion();
+        }
+        if (els.catalogDrawer?.classList.contains("open")) {
+          renderCatalogPanel();
+        } else {
+          renderCatalogSourceInfo(state.major);
         }
       } catch (e) {
         console.error(e);
       }
-    }
-
-    function bindOpenStackPackActions() {
-      els.btnOsSeriesActivate?.addEventListener("click", async () => {
-        const series = els.osSeriesSelect?.value;
-        if (!series) return;
-        const res = await fetch("/ui/api/openstack/contracts/activate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ series }),
-        });
-        const payload = await res.json().catch(() => ({}));
-        if (!res.ok) {
-          toast(payload.detail || `Activate failed: ${res.status}`, "error");
-          return;
-        }
-        toast(`OpenStack pack: ${payload.series} (${payload.operation_count} ops)`, "ok");
-        await refreshOpenStackPack();
-      });
-      els.btnOsMvSet?.addEventListener("click", async () => {
-        const service = els.osMvService?.value;
-        const version = els.osMvVersion?.value?.trim();
-        if (!service || !version) {
-          toast("Pick a service and microversion", "warn");
-          return;
-        }
-        const res = await fetch("/ui/api/openstack/microversions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ service, version }),
-        });
-        if (!res.ok) {
-          toast(`Microversion set failed: ${res.status}`, "error");
-          return;
-        }
-        toast(`${service} → ${version}`, "ok");
-        await refreshOpenStackPack();
-      });
-      els.btnOsMvClear?.addEventListener("click", async () => {
-        const service = els.osMvService?.value;
-        if (!service) return;
-        await fetch("/ui/api/openstack/microversions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ service, version: "default" }),
-        });
-        toast(`${service} microversion reset`, "ok");
-        await refreshOpenStackPack();
-      });
     }
 
     async function refreshOverview() {
@@ -6893,6 +7523,7 @@
         await refreshClusterStats();
         await refreshCatalogCoverage();
         await refreshOpenStackPack();
+        updateEnvironmentMicroversion();
       } catch (e) { console.error(e); }
     }
 
@@ -7184,7 +7815,6 @@
     bindCatalogOptions();
     bindHelpNav();
     bindDataPanelActions();
-    bindOpenStackPackActions();
     bindModal();
     bindTooltips();
     bindEndpointTree();

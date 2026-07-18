@@ -244,12 +244,13 @@ async def download_image_file(
         size = int((data or {}).get("size") or 0)
     else:
         size = int(row["size"] or 0)
-    # Always return at least one byte so clients / coverage see a real payload.
+    # Lab payload is capped; Content-Length must match the bytes we actually send
+    # (advertising the virtual image size breaks urllib/clients with IncompleteRead).
     content = b"\0" * min(size, 64) if size else b"probe-image"
     return Response(
         content=content,
         media_type="application/octet-stream",
-        headers={"Content-Length": str(len(content) if not size else size)},
+        headers={"Content-Length": str(len(content))},
     )
 
 

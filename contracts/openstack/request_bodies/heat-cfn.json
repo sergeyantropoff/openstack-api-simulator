@@ -1,0 +1,356 @@
+{
+  "by_path": {
+    "PATCH /stacks/{id}": {
+      "description": "",
+      "properties": {
+        "Parameters": {
+          "description": "",
+          "type": "string"
+        },
+        "StackName": {
+          "description": "",
+          "example": "example",
+          "type": "string"
+        },
+        "TemplateBody": {
+          "description": "",
+          "example": "{\"AWSTemplateFormatVersion\":\"2010-09-09\"}",
+          "type": "string"
+        },
+        "TimeoutInMinutes": {
+          "description": "",
+          "example": 60,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "StackName",
+        "TemplateBody"
+      ],
+      "type": "object"
+    },
+    "POST /": {
+      "description": "",
+      "properties": {
+        "stack": {
+          "description": "",
+          "properties": {
+            "disable_rollback": {
+              "default": true,
+              "description": "Disable rollback",
+              "type": "boolean"
+            },
+            "environment": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "files": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "parameters": {
+              "description": "Stack parameters",
+              "properties": {},
+              "type": "object"
+            },
+            "stack_name": {
+              "description": "Stack name",
+              "example": "example",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "template": {
+              "description": "",
+              "properties": {
+                "description": {
+                  "description": "",
+                  "type": "string"
+                },
+                "heat_template_version": {
+                  "description": "",
+                  "example": "2015-04-30",
+                  "type": "string"
+                },
+                "parameters": {
+                  "description": "",
+                  "properties": {},
+                  "type": "object"
+                },
+                "resources": {
+                  "description": "",
+                  "properties": {},
+                  "type": "object"
+                }
+              },
+              "required": [
+                "heat_template_version"
+              ],
+              "type": "object"
+            },
+            "template_url": {
+              "description": "Template URL",
+              "format": "uri",
+              "type": "string"
+            },
+            "timeout_mins": {
+              "description": "Timeout minutes",
+              "example": 60,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "stack_name",
+            "template"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "POST /stacks": {
+      "description": "",
+      "properties": {
+        "Parameters": {
+          "description": "",
+          "type": "string"
+        },
+        "StackName": {
+          "description": "",
+          "example": "example",
+          "type": "string"
+        },
+        "TemplateBody": {
+          "description": "",
+          "example": "{\"AWSTemplateFormatVersion\":\"2010-09-09\"}",
+          "type": "string"
+        },
+        "TimeoutInMinutes": {
+          "description": "",
+          "example": 60,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "StackName",
+        "TemplateBody"
+      ],
+      "type": "object"
+    },
+    "PUT /stacks/{id}": {
+      "description": "",
+      "properties": {
+        "Parameters": {
+          "description": "",
+          "type": "string"
+        },
+        "StackName": {
+          "description": "",
+          "example": "example",
+          "type": "string"
+        },
+        "TemplateBody": {
+          "description": "",
+          "example": "{\"AWSTemplateFormatVersion\":\"2010-09-09\"}",
+          "type": "string"
+        },
+        "TimeoutInMinutes": {
+          "description": "",
+          "example": 60,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "StackName",
+        "TemplateBody"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "heat_cfn_query": {
+      "description": "",
+      "properties": {
+        "stack": {
+          "description": "",
+          "properties": {
+            "disable_rollback": {
+              "default": true,
+              "description": "Disable rollback",
+              "type": "boolean"
+            },
+            "environment": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "files": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "parameters": {
+              "description": "Stack parameters",
+              "properties": {},
+              "type": "object"
+            },
+            "stack_name": {
+              "description": "Stack name",
+              "example": "example",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "template": {
+              "description": "",
+              "properties": {
+                "description": {
+                  "description": "",
+                  "type": "string"
+                },
+                "heat_template_version": {
+                  "description": "",
+                  "example": "2015-04-30",
+                  "type": "string"
+                },
+                "parameters": {
+                  "description": "",
+                  "properties": {},
+                  "type": "object"
+                },
+                "resources": {
+                  "description": "",
+                  "properties": {},
+                  "type": "object"
+                }
+              },
+              "required": [
+                "heat_template_version"
+              ],
+              "type": "object"
+            },
+            "template_url": {
+              "description": "Template URL",
+              "format": "uri",
+              "type": "string"
+            },
+            "timeout_mins": {
+              "description": "Timeout minutes",
+              "example": 60,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "stack_name",
+            "template"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "stack_create": {
+      "description": "",
+      "properties": {
+        "Parameters": {
+          "description": "",
+          "type": "string"
+        },
+        "StackName": {
+          "description": "",
+          "example": "example",
+          "type": "string"
+        },
+        "TemplateBody": {
+          "description": "",
+          "example": "{\"AWSTemplateFormatVersion\":\"2010-09-09\"}",
+          "type": "string"
+        },
+        "TimeoutInMinutes": {
+          "description": "",
+          "example": 60,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "StackName",
+        "TemplateBody"
+      ],
+      "type": "object"
+    },
+    "stack_patch": {
+      "description": "",
+      "properties": {
+        "Parameters": {
+          "description": "",
+          "type": "string"
+        },
+        "StackName": {
+          "description": "",
+          "example": "example",
+          "type": "string"
+        },
+        "TemplateBody": {
+          "description": "",
+          "example": "{\"AWSTemplateFormatVersion\":\"2010-09-09\"}",
+          "type": "string"
+        },
+        "TimeoutInMinutes": {
+          "description": "",
+          "example": 60,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "StackName",
+        "TemplateBody"
+      ],
+      "type": "object"
+    },
+    "stack_update": {
+      "description": "",
+      "properties": {
+        "Parameters": {
+          "description": "",
+          "type": "string"
+        },
+        "StackName": {
+          "description": "",
+          "example": "example",
+          "type": "string"
+        },
+        "TemplateBody": {
+          "description": "",
+          "example": "{\"AWSTemplateFormatVersion\":\"2010-09-09\"}",
+          "type": "string"
+        },
+        "TimeoutInMinutes": {
+          "description": "",
+          "example": 60,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "StackName",
+        "TemplateBody"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "heat-cfn",
+  "source": "generated-from-api-ref-catalog"
+}

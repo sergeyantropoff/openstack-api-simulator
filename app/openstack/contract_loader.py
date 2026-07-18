@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from app.openstack.opspec import OperationSpec, SeriesManifest, ServicePack
+from app.openstack.request_bodies import attach_request_schemas, clear_request_body_cache
 
 _CONTRACTS_ROOT = Path(__file__).resolve().parents[2] / "contracts" / "openstack"
 
@@ -43,6 +44,17 @@ def list_series() -> list[dict[str, Any]]:
         if not man.is_file():
             continue
         data = json.loads(man.read_text())
+        microversions = [
+            {
+                "name": str(svc.get("name") or ""),
+                "default_microversion": svc.get("default_microversion"),
+                "max_microversion": svc.get("max_microversion"),
+            }
+            for svc in data.get("services") or []
+            if isinstance(svc, dict)
+            and svc.get("name")
+            and (svc.get("default_microversion") or svc.get("max_microversion"))
+        ]
         result.append(
             {
                 "series": data.get("series", path.name),
@@ -51,6 +63,7 @@ def list_series() -> list[dict[str, Any]]:
                 "service_count": data.get("service_count", 0),
                 "checksum": data.get("checksum", ""),
                 "generated_at": data.get("generated_at", ""),
+                "microversions": microversions,
             }
         )
     return result
@@ -92,6 +105,7 @@ def load_series_pack(series: str) -> dict[str, ServicePack]:
         data = json.loads(api.read_text())
         name = str(data["service"])
         ops = [_op_from_dict(name, raw) for raw in data.get("operations") or []]
+        ops = attach_request_schemas(name, ops)
         packs[name] = ServicePack(
             name=name,
             typ=str(data.get("type") or name),
@@ -129,9 +143,13 @@ class ContractRuntime:
 
     def reload(self, series: str | None = None) -> dict[str, Any]:
         with self._lock:
+            clear_request_body_cache()
             target = (series or self.series).lower()
+            series_changed = target != self.series
             self.packs = load_series_pack(target)
             self.series = target
+            if series_changed:
+                self.microversion_overrides.clear()
             man = load_manifest(target)
             return {
                 "series": man.series,

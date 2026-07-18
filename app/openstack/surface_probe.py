@@ -14,10 +14,13 @@ import urllib.request
 from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Any
+from urllib.parse import urlparse
 from uuid import uuid4
 
 from app.openstack.contract_loader import load_series_pack
 from app.openstack.opspec import OperationSpec, ServicePack
+from app.openstack.singular import singular as _singular
+from app.openstack.surface import all_service_ports
 
 _PATH_PARAM = re.compile(r"\{([^{}]+)\}")
 
@@ -25,6 +28,59 @@ _PATH_PARAM = re.compile(r"\{([^{}]+)\}")
 ACCEPTABLE = frozenset({200, 201, 202, 204, 300, 400, 401, 403, 404, 405, 409, 410, 412, 415, 422})
 # Lifecycle success for exercised CRUD steps.
 SUCCESS = frozenset({200, 201, 202, 204})
+
+# OpenStack-API-Version type tokens (service name → header type).
+_MV_TYPE = {
+    "nova": "compute",
+    "cinder": "volume",
+    "placement": "placement",
+    "manila": "share",
+    "ironic": "baremetal",
+}
+
+
+def gateway_hostname(host: str) -> tuple[str, str]:
+    """Return (scheme, hostname) from a Keystone/gateway base URL."""
+
+    parsed = urlparse(host if "://" in host else f"http://{host}")
+    return parsed.scheme or "http", parsed.hostname or "127.0.0.1"
+
+
+def service_base_url(host: str, service: str, *, port: int | None = None) -> str:
+    """Build ``scheme://hostname:<service-port>`` for real OpenStack ports.
+
+    ``host`` is the Keystone/gateway URL (may use up-local :15000). Service calls
+    always use the catalog port from ``docs/ports.md`` / ``ServicePack.port``.
+    """
+
+    scheme, hostname = gateway_hostname(host)
+    ports = all_service_ports()
+    svc_port = port if port is not None else ports.get(service)
+    if svc_port is None:
+        # Fall back to the host as-is (route-service header still applied).
+        return host.rstrip("/")
+    return f"{scheme}://{hostname}:{svc_port}"
+
+
+def microversion_headers(pack: ServicePack, op: OperationSpec) -> dict[str, str]:
+    """Headers when the pack declares a microversion for this service/op."""
+
+    ver = op.microversion_min or pack.default_microversion
+    if not ver:
+        return {}
+    typ = _MV_TYPE.get(pack.name) or (pack.typ if pack.typ and pack.typ != pack.name else pack.name)
+    headers = {"OpenStack-API-Version": f"{typ} {ver}"}
+    if pack.name == "nova":
+        headers["X-OpenStack-Nova-API-Version"] = ver
+    return headers
+
+
+def count_declared_ops(packs: dict[str, ServicePack]) -> tuple[int, int]:
+    """Return (pack_ops, synthetic_head_ops) for coverage arithmetic."""
+
+    pack_ops = sum(len(p.operations) for p in packs.values())
+    head_ops = sum(1 for p in packs.values() for op in p.operations if op.method == "GET")
+    return pack_ops, head_ops
 
 
 @dataclass
@@ -121,16 +177,6 @@ def fill_path(template: str, ctx: dict[str, str] | None = None) -> str:
         return _example_param(name)
 
     return _PATH_PARAM.sub(repl, template)
-
-
-def _singular(key: str) -> str:
-    if key.endswith("ies"):
-        return key[:-3] + "y"
-    if key.endswith("ses"):
-        return key[:-2]
-    if key.endswith("s") and not key.endswith("ss"):
-        return key[:-1]
-    return key
 
 
 def _body_for(
@@ -259,27 +305,31 @@ def http_request(
     token: str | None = None,
     service: str | None = None,
     data: dict[str, Any] | None = None,
+    headers: dict[str, str] | None = None,
     timeout: float = 20.0,
 ) -> tuple[int, Any]:
     body = None if data is None else json.dumps(data).encode()
-    headers = {"Accept": "application/json"}
+    hdrs = {"Accept": "application/json"}
     if data is not None:
-        headers["Content-Type"] = "application/json"
+        hdrs["Content-Type"] = "application/json"
     if token:
-        headers["X-Auth-Token"] = token
+        hdrs["X-Auth-Token"] = token
     if service:
-        headers["X-OpenStack-Route-Service"] = service
-    req = urllib.request.Request(url, data=body, headers=headers, method=method)
+        # Fallback when the client cannot reach the real service port.
+        hdrs["X-OpenStack-Route-Service"] = service
+    if headers:
+        hdrs.update(headers)
+    req = urllib.request.Request(url, data=body, headers=hdrs, method=method)
     try:
         with urllib.request.urlopen(req, timeout=timeout) as res:
-            raw = res.read().decode()
+            raw = res.read().decode() if method.upper() != "HEAD" else ""
             try:
                 parsed: Any = json.loads(raw) if raw else None
             except json.JSONDecodeError:
                 parsed = raw
             return res.status, parsed
     except urllib.error.HTTPError as exc:
-        raw = exc.read().decode()
+        raw = exc.read().decode() if method.upper() != "HEAD" else ""
         try:
             parsed = json.loads(raw) if raw else None
         except json.JSONDecodeError:
@@ -434,6 +484,7 @@ def probe_operation(
     ctx: dict[str, str] | None = None,
     project_id: str | None = None,
     mode: str = "probe",
+    method_override: str | None = None,
 ) -> tuple[ProbeResult, Any]:
     path_ctx = dict(ctx or {})
     if project_id:
@@ -442,25 +493,70 @@ def probe_operation(
         path_ctx.setdefault("tenant_id", project_id)
         path_ctx.setdefault("account", project_id)
     path = fill_path(op.path, path_ctx)
-    url = f"{host.rstrip('/')}{path}"
-    data = _body_for(op, ctx=path_ctx, project_id=project_id)
-    status, payload = http_request(op.method, url, token=token, service=pack.name, data=data)
+    base = service_base_url(host, pack.name, port=pack.port)
+    url = f"{base}{path}"
+    method = (method_override or op.method).upper()
+    data = None if method in {"GET", "HEAD", "DELETE"} else _body_for(op, ctx=path_ctx, project_id=project_id)
+    mv = microversion_headers(pack, op)
+    status, payload = http_request(
+        method,
+        url,
+        token=token,
+        service=pack.name,
+        data=data,
+        headers=mv or None,
+    )
     detail = ""
-    check = SUCCESS if mode == "lifecycle" else ACCEPTABLE
+    # Synthetic HEAD: accept the same codes as probe (no body expected).
+    if method == "HEAD":
+        check = ACCEPTABLE
+        result_mode = "head"
+    else:
+        check = SUCCESS if mode == "lifecycle" else ACCEPTABLE
+        result_mode = mode
     if status not in check:
         detail = json.dumps(payload)[:300] if not isinstance(payload, str) else str(payload)[:300]
     result = ProbeResult(
         service=pack.name,
-        method=op.method,
+        method=method,
         path=op.path,
-        operation_id=op.operation_id,
+        operation_id=op.operation_id if method != "HEAD" else f"{op.operation_id}__head",
         status=status,
         detail=detail,
-        mode=mode,
+        mode=result_mode,
         payload=payload,
         collection_key=op.collection_key,
     )
     return result, payload
+
+
+def _append_synthetic_heads(
+    report: ProbeReport,
+    packs: dict[str, ServicePack],
+    *,
+    host: str,
+    token: str,
+    project_id: str,
+    ctx: dict[str, str],
+) -> None:
+    """Issue HEAD for every pack GET path (contract matrix Layer A)."""
+
+    for name in sorted(packs):
+        pack = packs[name]
+        for op in pack.operations:
+            if op.method != "GET":
+                continue
+            result, _ = probe_operation(
+                host,
+                pack,
+                op,
+                token=token,
+                ctx=ctx,
+                project_id=project_id,
+                mode="probe",
+                method_override="HEAD",
+            )
+            report.results.append(result)
 
 
 def _seed_context(
@@ -490,11 +586,33 @@ def _seed_context(
         ("ironic", "/v1/nodes", "nodes", "node"),
         ("ironic", "/v1/drivers", "drivers", "driver"),
         ("octavia", "/v2/lbaas/loadbalancers", "loadbalancers", "loadbalancer"),
-        ("swift", f"/v1/{project_id}", None, "account"),
+        ("swift", f"/v1/AUTH_{project_id}", None, "account"),
     ]
     for service, path, key, alias in seeds:
-        st, body = http_request("GET", f"{host.rstrip('/')}{path}", token=token, service=service)
-        if st >= 400 or not isinstance(body, dict):
+        url = f"{service_base_url(host, service)}{path}"
+        st, body = http_request("GET", url, token=token, service=service)
+        if st >= 400:
+            continue
+        # Swift account listing is a JSON array, not an envelope object.
+        if service == "swift" and isinstance(body, list) and body:
+            ctx["account"] = f"AUTH_{project_id}"
+            first = body[0] if isinstance(body[0], dict) else {}
+            if first.get("name"):
+                ctx["container"] = str(first["name"])
+                # Seed object name from the first container listing when present.
+                ost, objs = http_request(
+                    "GET",
+                    f"{service_base_url(host, 'swift')}/v1/{ctx['account']}/{ctx['container']}",
+                    token=token,
+                    service="swift",
+                )
+                if ost < 400 and isinstance(objs, list) and objs:
+                    oname = objs[0].get("name") if isinstance(objs[0], dict) else None
+                    if oname:
+                        ctx["object"] = str(oname)
+                        ctx["object_name"] = str(oname)
+            continue
+        if not isinstance(body, dict):
             continue
         ids = _extract_ids(body, key)
         if ids:
@@ -527,7 +645,7 @@ def _ensure_swift_resources(host: str, token: str, project_id: str, ctx: dict[st
     account = ctx.get("account") or project_id
     container = ctx.get("container") or f"probe-c-{uuid4().hex[:8]}"
     obj = ctx.get("object") or ctx.get("object_name") or f"probe-o-{uuid4().hex[:8]}.txt"
-    base = host.rstrip("/")
+    base = service_base_url(host, "swift")
     st, _ = http_request(
         "PUT", f"{base}/v1/{account}/{container}", token=token, service="swift", data={}
     )
@@ -766,6 +884,34 @@ def probe_series_lifecycle(
                     local["_item_id"] = rid
                     local["id"] = rid
                     local["server_id"] = rid
+            # Swift: empty the container before DELETE so the API returns 204
+            # (409 Conflict for a non-empty container is correct OpenStack behaviour).
+            if (
+                op.method == "DELETE"
+                and pack.name == "swift"
+                and op.resource_type == "container"
+            ):
+                acct = local.get("account") or project_id
+                cname = local.get("container") or local.get("id")
+                if acct and cname:
+                    base = service_base_url(host, "swift", port=pack.port)
+                    st_list, objs = http_request(
+                        "GET",
+                        f"{base}/v1/{acct}/{cname}",
+                        token=token,
+                        service="swift",
+                    )
+                    if st_list in SUCCESS and isinstance(objs, list):
+                        for obj in objs:
+                            name = obj.get("name") if isinstance(obj, dict) else None
+                            if name:
+                                http_request(
+                                    "DELETE",
+                                    f"{base}/v1/{acct}/{cname}/{name}",
+                                    token=token,
+                                    service="swift",
+                                )
+
             result, payload = probe_operation(
                 host, pack, op, token=token, ctx=local, project_id=project_id, mode="lifecycle"
             )
@@ -819,6 +965,9 @@ def probe_series_lifecycle(
             report.results.append(result)
             done.add((op.method, op.path))
 
+    _append_synthetic_heads(
+        report, packs, host=host, token=token, project_id=project_id, ctx=base_ctx
+    )
     return report
 
 
@@ -852,6 +1001,27 @@ def probe_series(
                 host, pack, op, token=token, ctx=ctx, project_id=project_id, mode="probe"
             )
             report.results.append(result)
+    if not collections_only:
+        _append_synthetic_heads(
+            report, packs, host=host, token=token, project_id=project_id, ctx=ctx
+        )
+    else:
+        # Smoke: HEAD only for the collection GET paths we probed.
+        for pack in packs.values():
+            for op in pack.operations:
+                if op.method != "GET" or "{" in op.path:
+                    continue
+                result, _ = probe_operation(
+                    host,
+                    pack,
+                    op,
+                    token=token,
+                    ctx=ctx,
+                    project_id=project_id,
+                    mode="probe",
+                    method_override="HEAD",
+                )
+                report.results.append(result)
     return report
 
 

@@ -2,8 +2,16 @@
 
 # Pulumi OpenStack tests (`pulumi-tests`)
 
-Coverage lab that **maximises `pulumi_openstack`**, then probes remaining pack
-operations over HTTP with **non-empty body checks** and **full method coverage**.
+**100% coverage = HTTP contract matrix** (every series-pack operation + synthetic
+`HEAD` on each GET path), not the number of `pulumi_openstack` resources.
+
+Layer A (gate): pack ops × yoga→dalmatian on **real service ports**
+([docs/ports.md](../docs/ports.md)), microversions when the pack declares them,
+non-empty success bodies for entity/collection envelopes, `probed == declared + HEAD`,
+`critical=0`.
+
+Layer B (smoke): `pulumi_openstack` lifecycle — maximises provider surface; does
+**not** define 100%.
 
 ## Quick start
 
@@ -14,8 +22,8 @@ make pulumi-tests
 # or
 cd pulumi-tests
 make up && make build
-make test-pulumi-smoke   # fast: collection GET only
-make test-pulumi         # full: all pack ops × all HTTP methods
+make test-pulumi-smoke   # fast: collection GET + HEAD
+make test-pulumi         # full Layer A matrix × all series
 open reports/pulumi-report.html
 ```
 
@@ -23,28 +31,33 @@ open reports/pulumi-report.html
 
 | Target | Mode | What is exercised |
 |---|---|---|
-| `make test-pulumi-smoke` | Smoke (`TEST_SMOKE=1`) | `pulumi_openstack` + **collection GET** nonempty checks (fast) |
-| `make pulumi-tests` / `make test-pulumi` | Full lifecycle | `pulumi_openstack` + **every pack operation × GET/POST/PUT/PATCH/DELETE**, completeness assert (`total == pack size`), nonempty bodies on succeeded responses (DELETE/204 may be empty) |
+| `make test-pulumi-smoke` | Smoke (`TEST_SMOKE=1`) | Layer B + **collection GET + HEAD** nonempty checks (fast) |
+| `make pulumi-tests` / `make test-pulumi` | Full matrix | Layer B + **every pack op × GET/POST/PUT/PATCH/DELETE** + **synthetic HEAD per GET**, completeness (`total == declared + HEAD`), nonempty bodies on succeeded responses (DELETE/204/HEAD may be empty) |
 
-Pack sizes (ops): yoga ~1060 → antelope ~1108 → caracal ~1196 → **dalmatian ~1357**.
+Pack sizes (ops, without HEAD): yoga ~1060 → antelope ~1108 → caracal ~1196 → **dalmatian ~1357**.
 
 ## What runs (per series: yoga → dalmatian)
 
 1. Activate OpenStack series pack
-2. **`pulumi up`** `programs/os_coverage` via Automation API — creates/looks up
-   resources with `pulumi_openstack` (identity, images, compute, networking,
-   blockstorage, objectstorage, dns, orchestration)
-3. Assert **every stack export is non-empty**
-4. HTTP-probe pack operations (smoke: collection GET; full: all methods lifecycle)
-5. Assert coverage completeness + nonempty JSON on successful body responses
+2. **`pulumi up`** `programs/os_coverage` (Layer B — provider smoke)
+3. Assert stack exports are non-empty (Layer B)
+4. HTTP contract matrix on **catalog ports** (Keystone token → Nova `:8774`, Neutron `:9696`, …)
+5. Assert `probed == declared + HEAD`, `critical=0`, nonempty JSON on success bodies
 6. `pulumi destroy`
-7. Write `pulumi-report.html` + `pulumi-junit.xml`
+7. Write `pulumi-report.html` + `pulumi-junit.xml` + verb histogram (incl. HEAD)
 
 ## Reports
 
 | File | Contents |
 |---|---|
-| `reports/pulumi-report.html` | HTML summary (expected vs actual + method breakdown) |
+| `reports/pulumi-report.html` | HTML summary (expected vs actual + method breakdown incl. HEAD) |
 | `reports/pulumi-junit.xml` | JUnit |
 | `reports/series-<name>.json` | Per-series pulumi + HTTP details |
-| `reports/summary.json` | Aggregates |
+| `reports/summary.json` | Aggregates (`http_total` / `http_expected`, `http_critical`) |
+
+## Approximate (not blockers)
+
+Nova create may skip a long `BUILD` window; many Nova actions only flip server
+status; Placement mutations and Octavia listeners/pools are largely schema /
+`os_api_objects`; Neutron `router:external` is derived from the shared `public`
+network name.

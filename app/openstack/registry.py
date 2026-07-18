@@ -190,11 +190,16 @@ def register_openstack_contract_routes(
             full_path = f"/_os/{pack.name}{path}"
             name = f"{_ROUTE_NAME_PREFIX}{pack.name}:{op.method}:{op.path}"
             endpoint = _make_contract_endpoint(pack, op, handlers, dispatch_fn)
+            # FastAPI only auto-adds HEAD for @app.get(); contract routes use
+            # add_api_route — register HEAD beside every GET for the matrix.
+            methods = [op.method]
+            if op.method.upper() == "GET":
+                methods.append("HEAD")
 
             app.add_api_route(
                 full_path,
                 endpoint,
-                methods=[op.method],
+                methods=methods,
                 name=name,
                 include_in_schema=True,
                 tags=[service_openapi_tag(pack.name)],

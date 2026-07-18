@@ -8,7 +8,6 @@ from uuid import uuid4
 
 from asyncpg import Connection
 from fastapi import APIRouter, Depends, Request, Response
-from fastapi.responses import PlainTextResponse
 
 from app.openstack.auth import TokenContext
 from app.openstack.deps import get_conn, require_token
@@ -70,6 +69,36 @@ async def create_container(
         container,
     )
     return Response(status_code=201)
+
+
+@router.delete("/v1/{account}/{container}", status_code=204)
+async def delete_container(
+    account: str,
+    container: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_token)],
+) -> Response:
+    _ = account
+    acct = _account(ctx)
+    objects = await conn.fetchval(
+        "SELECT count(*) FROM os_swift_objects WHERE account=$1 AND container=$2",
+        acct,
+        container,
+    )
+    if int(objects or 0) > 0:
+        raise OpenStackError(
+            "Conflict",
+            "Container is not empty",
+            status_code=409,
+        )
+    result = await conn.execute(
+        "DELETE FROM os_swift_containers WHERE account=$1 AND name=$2",
+        acct,
+        container,
+    )
+    if result.endswith("0"):
+        raise OpenStackError("NotFound", "Container not found", status_code=404)
+    return Response(status_code=204)
 
 
 @router.get("/v1/{account}/{container}")

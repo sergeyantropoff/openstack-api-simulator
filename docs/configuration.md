@@ -53,7 +53,4 @@ Specialized routers (Keystone, Nova, Neutron, …) remain stateful for happy-pat
 
 ## Web UI overrides
 
-Environment drawer → **OpenStack API pack**:
-
-- Activate series (hot remount)
-- Per-service microversion override
+API catalog drawer: select series card → microversion on the card → **Apply as runtime**.

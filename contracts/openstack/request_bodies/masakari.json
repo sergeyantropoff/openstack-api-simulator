@@ -1,0 +1,834 @@
+{
+  "by_path": {
+    "PATCH /v1/notifications/{id}": {
+      "description": "",
+      "properties": {
+        "notification": {
+          "description": "",
+          "properties": {
+            "generated_time": {
+              "description": "",
+              "example": "2026-01-01T00:00:00Z",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "",
+              "example": "compute-1",
+              "type": "string"
+            },
+            "payload": {
+              "description": "",
+              "properties": {
+                "event": {
+                  "description": "",
+                  "type": "string"
+                },
+                "instance_uuid": {
+                  "description": "",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "vir_domain_event": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "source_host_uuid": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "VM",
+                "PROCESS",
+                "COMPUTE_HOST"
+              ],
+              "example": "VM",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "notification"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1/segments/{id}": {
+      "description": "",
+      "properties": {
+        "segment": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "recovery_method": {
+              "description": "",
+              "enum": [
+                "auto",
+                "reserved_host",
+                "auto_priority",
+                "rh_priority"
+              ],
+              "example": "auto",
+              "type": "string"
+            },
+            "service_type": {
+              "description": "",
+              "enum": [
+                "compute"
+              ],
+              "example": "compute",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "segment"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1/segments/{segment_id}/hosts/{id}": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "POST /v1/notifications": {
+      "description": "",
+      "properties": {
+        "notification": {
+          "description": "",
+          "properties": {
+            "generated_time": {
+              "description": "",
+              "example": "2026-01-01T00:00:00Z",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "",
+              "example": "compute-1",
+              "type": "string"
+            },
+            "payload": {
+              "description": "",
+              "properties": {
+                "event": {
+                  "description": "",
+                  "type": "string"
+                },
+                "instance_uuid": {
+                  "description": "",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "vir_domain_event": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "source_host_uuid": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "VM",
+                "PROCESS",
+                "COMPUTE_HOST"
+              ],
+              "example": "VM",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "hostname",
+            "generated_time",
+            "payload"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "notification"
+      ],
+      "type": "object"
+    },
+    "POST /v1/segments": {
+      "description": "",
+      "properties": {
+        "segment": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "recovery_method": {
+              "description": "",
+              "enum": [
+                "auto",
+                "reserved_host",
+                "auto_priority",
+                "rh_priority"
+              ],
+              "example": "auto",
+              "type": "string"
+            },
+            "service_type": {
+              "description": "",
+              "enum": [
+                "compute"
+              ],
+              "example": "compute",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "recovery_method",
+            "service_type"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "segment"
+      ],
+      "type": "object"
+    },
+    "POST /v1/segments/{segment_id}/hosts": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/notifications/{id}": {
+      "description": "",
+      "properties": {
+        "notification": {
+          "description": "",
+          "properties": {
+            "generated_time": {
+              "description": "",
+              "example": "2026-01-01T00:00:00Z",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "",
+              "example": "compute-1",
+              "type": "string"
+            },
+            "payload": {
+              "description": "",
+              "properties": {
+                "event": {
+                  "description": "",
+                  "type": "string"
+                },
+                "instance_uuid": {
+                  "description": "",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "vir_domain_event": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "source_host_uuid": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "VM",
+                "PROCESS",
+                "COMPUTE_HOST"
+              ],
+              "example": "VM",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "notification"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/segments/{id}": {
+      "description": "",
+      "properties": {
+        "segment": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "recovery_method": {
+              "description": "",
+              "enum": [
+                "auto",
+                "reserved_host",
+                "auto_priority",
+                "rh_priority"
+              ],
+              "example": "auto",
+              "type": "string"
+            },
+            "service_type": {
+              "description": "",
+              "enum": [
+                "compute"
+              ],
+              "example": "compute",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "segment"
+      ],
+      "type": "object"
+    },
+    "PUT /v1/segments/{segment_id}/hosts/{id}": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "host_create": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "host_patch": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "host_update": {
+      "description": "",
+      "properties": {
+        "host": {
+          "description": "",
+          "properties": {
+            "extra_capabilities": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "reservable": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "type": "object"
+    },
+    "notification_create": {
+      "description": "",
+      "properties": {
+        "notification": {
+          "description": "",
+          "properties": {
+            "generated_time": {
+              "description": "",
+              "example": "2026-01-01T00:00:00Z",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "",
+              "example": "compute-1",
+              "type": "string"
+            },
+            "payload": {
+              "description": "",
+              "properties": {
+                "event": {
+                  "description": "",
+                  "type": "string"
+                },
+                "instance_uuid": {
+                  "description": "",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "vir_domain_event": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "source_host_uuid": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "VM",
+                "PROCESS",
+                "COMPUTE_HOST"
+              ],
+              "example": "VM",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "hostname",
+            "generated_time",
+            "payload"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "notification"
+      ],
+      "type": "object"
+    },
+    "notification_patch": {
+      "description": "",
+      "properties": {
+        "notification": {
+          "description": "",
+          "properties": {
+            "generated_time": {
+              "description": "",
+              "example": "2026-01-01T00:00:00Z",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "",
+              "example": "compute-1",
+              "type": "string"
+            },
+            "payload": {
+              "description": "",
+              "properties": {
+                "event": {
+                  "description": "",
+                  "type": "string"
+                },
+                "instance_uuid": {
+                  "description": "",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "vir_domain_event": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "source_host_uuid": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "VM",
+                "PROCESS",
+                "COMPUTE_HOST"
+              ],
+              "example": "VM",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "notification"
+      ],
+      "type": "object"
+    },
+    "notification_update": {
+      "description": "",
+      "properties": {
+        "notification": {
+          "description": "",
+          "properties": {
+            "generated_time": {
+              "description": "",
+              "example": "2026-01-01T00:00:00Z",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "",
+              "example": "compute-1",
+              "type": "string"
+            },
+            "payload": {
+              "description": "",
+              "properties": {
+                "event": {
+                  "description": "",
+                  "type": "string"
+                },
+                "instance_uuid": {
+                  "description": "",
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "vir_domain_event": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "source_host_uuid": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "VM",
+                "PROCESS",
+                "COMPUTE_HOST"
+              ],
+              "example": "VM",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "notification"
+      ],
+      "type": "object"
+    },
+    "segment_create": {
+      "description": "",
+      "properties": {
+        "segment": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "recovery_method": {
+              "description": "",
+              "enum": [
+                "auto",
+                "reserved_host",
+                "auto_priority",
+                "rh_priority"
+              ],
+              "example": "auto",
+              "type": "string"
+            },
+            "service_type": {
+              "description": "",
+              "enum": [
+                "compute"
+              ],
+              "example": "compute",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "recovery_method",
+            "service_type"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "segment"
+      ],
+      "type": "object"
+    },
+    "segment_patch": {
+      "description": "",
+      "properties": {
+        "segment": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "recovery_method": {
+              "description": "",
+              "enum": [
+                "auto",
+                "reserved_host",
+                "auto_priority",
+                "rh_priority"
+              ],
+              "example": "auto",
+              "type": "string"
+            },
+            "service_type": {
+              "description": "",
+              "enum": [
+                "compute"
+              ],
+              "example": "compute",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "segment"
+      ],
+      "type": "object"
+    },
+    "segment_update": {
+      "description": "",
+      "properties": {
+        "segment": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "recovery_method": {
+              "description": "",
+              "enum": [
+                "auto",
+                "reserved_host",
+                "auto_priority",
+                "rh_priority"
+              ],
+              "example": "auto",
+              "type": "string"
+            },
+            "service_type": {
+              "description": "",
+              "enum": [
+                "compute"
+              ],
+              "example": "compute",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "segment"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "masakari",
+  "source": "generated-from-api-ref-catalog"
+}

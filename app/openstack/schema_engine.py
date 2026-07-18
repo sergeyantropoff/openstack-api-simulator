@@ -17,18 +17,9 @@ from app.openstack.auth import TokenContext, extract_token, validate_token
 from app.openstack.contract_loader import ensure_loaded, get_runtime
 from app.openstack.errors import OpenStackError
 from app.openstack.opspec import OperationSpec, ServicePack
+from app.openstack.singular import singular as _singular
 
 _PATH_PARAM = re.compile(r"\{([^{}]+)\}")
-
-
-def _singular(collection_key: str) -> str:
-    if collection_key.endswith("ies"):
-        return collection_key[:-3] + "y"
-    if collection_key.endswith("ses"):
-        return collection_key[:-2]
-    if collection_key.endswith("s") and not collection_key.endswith("ss"):
-        return collection_key[:-1]
-    return collection_key
 
 
 def _fastapi_path(path: str) -> str:
@@ -44,9 +35,7 @@ def _parent_scope(path: str, path_params: dict[str, str]) -> dict[str, str]:
         match = re.search(r"/([^/]+)/\{id\}(?:/|$)", path)
         if match:
             segment = match.group(1)
-            singular = (
-                segment[:-1] if segment.endswith("s") and not segment.endswith("ss") else segment
-            )
+            singular = _singular(segment)
             parent.setdefault(f"{singular}_id", path_params["id"])
             parent.setdefault(singular, path_params["id"])
             parent.setdefault("parent_id", path_params["id"])

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 from asyncpg import Connection
 
 from app.openstack.ids import oid
@@ -149,6 +151,22 @@ async def seed_openstack(conn: Connection, *, password: str = "secret") -> dict[
         '{"demo-net":[{"OS-EXT-IPS-MAC:mac_addr":"fa:16:3e:00:00:01","version":4,"addr":"10.0.0.12","OS-EXT-IPS:type":"fixed"}]}',
         '{"env":"lab","_tags":["lab","env","demo"]}',
     )
+    await conn.execute(
+        """INSERT INTO os_api_objects(id, service, resource_type, project_id, name, status, data)
+           VALUES($1,'nova','instance_action',$2,'create','DONE',$3::jsonb)
+           ON CONFLICT (id) DO NOTHING""",
+        oid("nova:instance_action:demo-1"),
+        demo_project,
+        json.dumps(
+            {
+                "action": "create",
+                "instance_uuid": str(server),
+                "server_id": str(server),
+                "request_id": f"req-seed-{str(server)[:8]}",
+                "message": None,
+            }
+        ),
+    )
 
     await seed_openstack_extras(conn)
 
@@ -226,12 +244,85 @@ async def seed_openstack_extras(conn: Connection) -> None:
             prefix,
         )
 
+    # Shared external provider network for floating IPs / router gateways.
+    public_net = oid("net:public")
+    await conn.execute(
+        """INSERT INTO os_networks(id, project_id, name, status, shared, admin_state_up)
+           VALUES($1,$2,'public','ACTIVE',true,true) ON CONFLICT (id) DO NOTHING""",
+        public_net,
+        admin_project,
+    )
+    public_subnet = oid("subnet:public")
+    await conn.execute(
+        """INSERT INTO os_subnets(id, network_id, project_id, name, cidr, ip_version, gateway_ip)
+           VALUES($1,$2,$3,'public-subnet','203.0.113.0/24',4,'203.0.113.1')
+           ON CONFLICT (id) DO NOTHING""",
+        public_subnet,
+        public_net,
+        admin_project,
+    )
     await conn.execute(
         """INSERT INTO os_routers(id, project_id, name, status, admin_state_up, external_gateway_info)
-           VALUES($1,$2,'demo-router','ACTIVE',true,NULL) ON CONFLICT (id) DO NOTHING""",
+           VALUES($1,$2,'demo-router','ACTIVE',true,$3::jsonb) ON CONFLICT (id) DO NOTHING""",
         oid("router:demo"),
         demo_project,
+        json.dumps(
+            {
+                "network_id": str(public_net),
+                "enable_snat": True,
+                "external_fixed_ips": [
+                    {"ip_address": "203.0.113.2", "subnet_id": str(public_subnet)}
+                ],
+            }
+        ),
     )
+    await conn.execute(
+        """INSERT INTO os_floating_ips(
+               id, project_id, floating_ip_address, floating_network_id, port_id, status)
+           VALUES($1,$2,'203.0.113.50',$3,NULL,'DOWN') ON CONFLICT (id) DO NOTHING""",
+        oid("fip:demo"),
+        demo_project,
+        public_net,
+    )
+
+    demo_net = oid("net:demo-net")
+    demo_subnet = oid("subnet:demo-subnet")
+    demo_server = oid("server:demo-1")
+    await conn.execute(
+        """INSERT INTO os_ports(
+               id, network_id, project_id, name, status, mac_address,
+               device_id, device_owner, fixed_ips)
+           VALUES(
+               $1,$2,$3,'demo-port','ACTIVE','fa:16:3e:00:00:aa',
+               $4,'compute:nova',
+               $5::jsonb
+           ) ON CONFLICT (id) DO NOTHING""",
+        oid("port:demo"),
+        demo_net,
+        demo_project,
+        str(demo_server),
+        json.dumps([{"subnet_id": str(demo_subnet), "ip_address": "10.0.0.12"}]),
+    )
+    await conn.execute(
+        """INSERT INTO os_server_groups(id, project_id, name, policies, members)
+           VALUES($1,$2,'demo-sg',$3::jsonb,'[]'::jsonb) ON CONFLICT (id) DO NOTHING""",
+        oid("sgroup:demo"),
+        demo_project,
+        json.dumps(["soft-anti-affinity"]),
+    )
+    try:
+        await conn.execute(
+            """INSERT INTO os_aggregates(id, name, availability_zone, hosts, metadata)
+               VALUES(1,'agg-nova','nova','["compute-1"]'::jsonb,'{}'::jsonb)
+               ON CONFLICT (id) DO NOTHING"""
+        )
+        await conn.execute(
+            """INSERT INTO os_compute_services("binary", host, zone, status, state)
+               VALUES('nova-compute','compute-1','nova','enabled','up')"""
+        )
+    except Exception:
+        # Topology tables from migration 011 may be absent in partial installs.
+        pass
 
     await conn.execute(
         """INSERT INTO os_nodes(id, name, driver, provision_state, power_state, resource_class, properties, driver_info, ports)

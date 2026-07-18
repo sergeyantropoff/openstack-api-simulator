@@ -29,6 +29,8 @@ class OperationSpec:
     action_name: str | None = None
     response_fixture: dict[str, Any] | None = None
     notes: str = ""
+    # Full JSON Schema for the HTTP request body (merged from request_bodies/).
+    request_schema: dict[str, Any] | None = None
 
     def path_params(self) -> list[str]:
         import re

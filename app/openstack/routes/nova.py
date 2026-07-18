@@ -409,8 +409,8 @@ async def server_action(
         "unrescue": "ACTIVE",
         "os-stop": "SHUTOFF",
         "osStop": "SHUTOFF",
-        "shelve": "SHUTOFF",
-        "shelveOffload": "SHUTOFF",
+        "shelve": "SHELVED",
+        "shelveOffload": "SHELVED_OFFLOADED",
         "pause": "PAUSED",
         "suspend": "SUSPENDED",
         "rescue": "RESCUE",
@@ -905,6 +905,18 @@ async def availability_zones(
     }
 
 
+def _aggregate_dict(row: Any) -> dict[str, object]:
+    hosts = row["hosts"]
+    metadata = row["metadata"]
+    return {
+        "id": row["id"],
+        "name": row["name"],
+        "availability_zone": row["availability_zone"],
+        "hosts": hosts if not isinstance(hosts, str) else json.loads(hosts),
+        "metadata": metadata if not isinstance(metadata, str) else json.loads(metadata),
+    }
+
+
 @router.get("/v2.1/os-aggregates")
 async def list_aggregates(
     conn: Annotated[Connection, Depends(get_conn)],
@@ -914,20 +926,24 @@ async def list_aggregates(
         rows = await conn.fetch("SELECT * FROM os_aggregates ORDER BY id")
     except Exception:
         rows = []
-    return {
-        "aggregates": [
-            {
-                "id": r["id"],
-                "name": r["name"],
-                "availability_zone": r["availability_zone"],
-                "hosts": r["hosts"] if not isinstance(r["hosts"], str) else json.loads(r["hosts"]),
-                "metadata": r["metadata"]
-                if not isinstance(r["metadata"], str)
-                else json.loads(r["metadata"]),
-            }
-            for r in rows
-        ]
-    }
+    return {"aggregates": [_aggregate_dict(r) for r in rows]}
+
+
+@router.get("/v2.1/os-aggregates/{aggregate_id}")
+async def show_aggregate(
+    aggregate_id: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    _ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    row = await conn.fetchrow(
+        """SELECT * FROM os_aggregates
+           WHERE id::text=$1 OR name=$1
+           LIMIT 1""",
+        aggregate_id,
+    )
+    if row is None:
+        raise OpenStackError("NotFound", f"aggregate {aggregate_id} not found", status_code=404)
+    return {"aggregate": _aggregate_dict(row)}
 
 
 @router.get("/v2.1/os-services")
@@ -1137,7 +1153,8 @@ async def instance_actions(
 ) -> dict[str, object]:
     rows = await conn.fetch(
         """SELECT id, name, data FROM os_api_objects
-           WHERE service='nova' AND resource_type='instance_action' AND project_id=$1
+           WHERE service='nova' AND resource_type='instance_action'
+             AND (project_id=$1 OR project_id IS NULL)
              AND (data->>'server_id'=$2 OR data->>'instance_uuid'=$2)
            ORDER BY created_at DESC
            LIMIT 20""",
@@ -1170,7 +1187,8 @@ async def show_instance_action(
 ) -> dict[str, object]:
     row = await conn.fetchrow(
         """SELECT id, name, data FROM os_api_objects
-           WHERE service='nova' AND resource_type='instance_action' AND project_id=$1
+           WHERE service='nova' AND resource_type='instance_action'
+             AND (project_id=$1 OR project_id IS NULL)
              AND (id::text=$2 OR data->>'request_id'=$2 OR name=$2)
            ORDER BY created_at DESC
            LIMIT 1""",
@@ -1181,7 +1199,8 @@ async def show_instance_action(
         # Prefer an existing action for this server; otherwise persist the requested id.
         row = await conn.fetchrow(
             """SELECT id, name, data FROM os_api_objects
-               WHERE service='nova' AND resource_type='instance_action' AND project_id=$1
+               WHERE service='nova' AND resource_type='instance_action'
+                 AND (project_id=$1 OR project_id IS NULL)
                  AND (data->>'server_id'=$2 OR data->>'instance_uuid'=$2)
                ORDER BY created_at DESC LIMIT 1""",
             ctx.project_id,
@@ -1243,7 +1262,8 @@ async def _load_server_metadata(
         return metadata, public
     api = await conn.fetchrow(
         """SELECT data FROM os_api_objects
-           WHERE service='nova' AND resource_type='server_metadata' AND project_id=$1
+           WHERE service='nova' AND resource_type='server_metadata'
+             AND (project_id=$1 OR project_id IS NULL)
              AND (data->>'server_id'=$2 OR id::text=$2)
            ORDER BY created_at LIMIT 1""",
         project_id,
@@ -1557,6 +1577,36 @@ async def server_security_groups(
     }
 
 
+@router.get("/v2.1/servers/{server_id}/os-security-groups/{security_group_id}")
+async def show_server_security_group(
+    server_id: str,
+    security_group_id: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    _ = server_id
+    row = await conn.fetchrow(
+        """SELECT * FROM os_security_groups
+           WHERE project_id=$1 AND (id::text=$2 OR name=$2)
+           LIMIT 1""",
+        ctx.project_id,
+        security_group_id,
+    )
+    if row is None:
+        raise OpenStackError(
+            "NotFound",
+            f"security_group {security_group_id} not found",
+            status_code=404,
+        )
+    return {
+        "security_group": {
+            "id": str(row["id"]),
+            "name": row["name"],
+            "description": row["description"],
+        }
+    }
+
+
 @router.get("/v2.1/servers/{server_id}/topology")
 async def server_topology(
     server_id: str,
@@ -1648,7 +1698,8 @@ async def volume_attachments(
 ) -> dict[str, object]:
     rows = await conn.fetch(
         """SELECT * FROM os_api_objects
-           WHERE service='nova' AND resource_type='volume_attachment' AND project_id=$1
+           WHERE service='nova' AND resource_type='volume_attachment'
+             AND (project_id=$1 OR project_id IS NULL)
              AND (data->>'server_id'=$2 OR data->>'serverId'=$2)
            ORDER BY created_at""",
         ctx.project_id,

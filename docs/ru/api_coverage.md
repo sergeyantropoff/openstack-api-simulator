@@ -19,7 +19,7 @@
 | Yoga | 6 | 1060 |
 
 Более старые серии опускают пути, добавленные позже (`tools/os_api_inventory/series_deltas.py`),
-и используют более низкие потолки microversion. Примените пакет в Environment drawer для hot-swap.
+и используют более низкие потолки microversion. Примените пакет в API catalog drawer для hot-swap.
 
 Surface-complete означает, что каждая операция пакета смонтирована schema-движком
 (специализированные роутеры по-прежнему выигрывают на пересекающихся stateful-путях).

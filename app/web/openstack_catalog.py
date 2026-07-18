@@ -12,6 +12,7 @@ from app.openstack.contract_loader import (
     major_for_series,
     series_for_major,
 )
+from app.openstack.request_examples import body_fields_from_example, schema_example
 
 _PATH_PARAM = re.compile(r"\{([^{}]+)\}")
 
@@ -87,25 +88,24 @@ def openstack_method_payload(
                     for name in path_params
                 ]
                 body_fields: list[dict[str, Any]] = []
-                if op.method in {"POST", "PUT", "PATCH"} and op.kind in {
-                    "collection",
-                    "item",
-                    "action",
-                    "custom",
-                }:
-                    key = op.item_key or op.collection_key or "resource"
-                    body_fields.append(
-                        {
-                            "name": key,
-                            "type": "object",
-                            "description": "Request body envelope",
-                            "optional": op.kind == "action",
-                            "enum": [],
-                            "example": {key: {"name": "example"}}
-                            if op.kind != "action"
-                            else {op.action_name or "os-start": None},
-                        }
-                    )
+                body_example: dict[str, Any] = {}
+                if op.method in {"POST", "PUT", "PATCH"}:
+                    if op.request_schema:
+                        example = schema_example(op.request_schema)
+                        body_example = example if isinstance(example, dict) else {}
+                        # PARAM drawer: nested leaves from body_example (oVirt-style).
+                        body_fields = body_fields_from_example(body_example)
+                    else:
+                        # Schemas are required for write ops; keep a minimal
+                        # envelope only as a last-resort safety net.
+                        key = op.item_key or op.collection_key or "resource"
+                        if op.kind == "action":
+                            action = op.action_name or "os-start"
+                            body_example = {action: None}
+                            body_fields = body_fields_from_example(body_example)
+                        else:
+                            body_example = {key: {"name": "example"}}
+                            body_fields = body_fields_from_example(body_example)
                 return {
                     "major": major,
                     "series": series,
@@ -138,6 +138,7 @@ def openstack_method_payload(
                     if op.method == "GET" and op.kind in {"collection", "detail"}
                     else [],
                     "body_fields": body_fields,
+                    "body_example": body_example,
                     "returns": {"type": "object"},
                     "permissions": [],
                     "service": pack.name,
@@ -160,6 +161,7 @@ def openstack_series_majors(runtime_version: str | None = None) -> dict[str, obj
                 "artifact_url": f"contracts/openstack/{item['series']}",
                 "bundled": True,
                 "operation_count": item["operation_count"],
+                "microversions": item.get("microversions") or [],
             }
             for item in sorted(series, key=lambda row: row["major"])
         ],

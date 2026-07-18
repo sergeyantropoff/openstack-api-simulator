@@ -12,9 +12,13 @@ PUSH_LATEST ?= 1
 
 COMPOSE_RELEASE ?= $(COMPOSE) -f docker-compose.release.yml
 HELM_CHART ?= ./helm/openstack-api-simulator
+OVERRIDE_EXAMPLE ?= docker-compose.override.example.yml
+OVERRIDE_FILE ?= docker-compose.override.yml
+COMPOSE_LOCAL ?= $(COMPOSE) -f docker-compose.yml -f $(OVERRIDE_FILE)
 
-.PHONY: help install format lint typecheck test test-unit test-integration test-contract test-compatibility test-surface evidence coverage run dev up down restart logs docker-build docker-up docker-down docker-logs docker-restart db-up db-down db-migrate db-reset api-import api-diff seed seed-demo smoke clean ci ci-all shell release release-build release-up release-down release-seed helm-deps helm-template \
-	test-pulumi-smoke test-pulumi pulumi-tests test-smoke-all-lab test-all-lab clean-test-resources
+.PHONY: help install format lint typecheck test test-unit test-integration test-contract test-compatibility test-surface evidence coverage run dev up up-local down down-local restart logs docker-build docker-up docker-down docker-logs docker-restart db-up db-down db-migrate db-reset api-import api-diff seed seed-demo smoke clean ci ci-all shell push release release-build release-up release-down release-seed helm-deps helm-template \
+	test-pulumi-smoke test-pulumi pulumi-tests test-smoke-all-lab test-all-lab clean-test-resources \
+	request-bodies-generate request-bodies-import request-bodies-coverage
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "}; /^[a-zA-Z0-9_-]+:.*## / {printf "%-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -72,8 +76,26 @@ up: ## Start PostgreSQL, simulator, and TLS gateway
 	@test -f .env || cp .env.example .env
 	$(COMPOSE) up -d --build --wait
 
+up-local: ## Start stack with gitignored port overrides (Keystone/console on :15000)
+	@test -f .env || cp .env.example .env
+	@if [ ! -f "$(OVERRIDE_FILE)" ]; then \
+		cp "$(OVERRIDE_EXAMPLE)" "$(OVERRIDE_FILE)"; \
+		echo "Created $(OVERRIDE_FILE) from $(OVERRIDE_EXAMPLE) (gitignored)."; \
+	else \
+		echo "Using existing $(OVERRIDE_FILE) (gitignored)."; \
+	fi
+	$(COMPOSE_LOCAL) up -d --build --wait
+	@echo "Local console: http://127.0.0.1:15000/"
+
 down: ## Stop local services
 	$(COMPOSE) down
+
+down-local: ## Stop stack started with make up-local
+	@if [ -f "$(OVERRIDE_FILE)" ]; then \
+		$(COMPOSE_LOCAL) down; \
+	else \
+		$(COMPOSE) -f docker-compose.yml -f $(OVERRIDE_EXAMPLE) down; \
+	fi
 
 restart: ## Rebuild and restart the stack
 	@test -f .env || cp .env.example .env
@@ -122,13 +144,22 @@ api-import: ## Import an API snapshot
 api-diff: ## Compare API snapshots
 	$(COMPOSE) run --rm --no-deps $(SERVICE_DEV) openstack-api-contract diff $(ARGS)
 
+request-bodies-generate: ## Regenerate contracts/openstack/request_bodies from api-ref catalog
+	$(COMPOSE) run --rm --no-deps $(SERVICE_DEV) python tools/os_api_inventory/generate_request_bodies.py
+
+request-bodies-import: ## Merge Tier-1 request schemas from gtema/openstack-openapi
+	$(COMPOSE) run --rm --no-deps $(SERVICE_DEV) sh -c 'pip install -q pyyaml && python tools/os_api_inventory/import_openapi_bodies.py'
+
+request-bodies-coverage: ## Fail if any write op lacks a request_schema
+	$(COMPOSE) run --rm --no-deps $(SERVICE_DEV) python tools/os_api_inventory/generate_request_bodies.py --coverage
+
 seed: ## Seed minimal OpenStack lab data
 	@test -f .env || cp .env.example .env
 	SEED_PROFILE="$${PROFILE:-minimal}" $(COMPOSE) run --rm --entrypoint python $(SERVICE_SIM) -m app.openstack.seed_cli --profile "$${PROFILE:-minimal}"
 
-seed-demo: ## Seed full OpenStack demo cloud (~1000 servers)
+seed-demo: ## Seed demo cloud (SIZE=small|large|big, default large = 1000 VMs)
 	@test -f .env || cp .env.example .env
-	$(COMPOSE) run --rm --entrypoint python $(SERVICE_SIM) -m app.openstack.seed_cli --profile demo
+	$(COMPOSE) run --rm --entrypoint python $(SERVICE_SIM) -m app.openstack.seed_cli --profile "demo-$${SIZE:-large}"
 
 smoke: ## Keystone → multi-service OpenStack smoke
 	@test -f .env || cp .env.example .env
@@ -137,6 +168,26 @@ smoke: ## Keystone → multi-service OpenStack smoke
 
 shell: ## Open an interactive shell in the development container
 	$(COMPOSE) run --rm --no-deps $(SERVICE_DEV) bash
+
+push: ## git add ., ask for commit message, push to origin + antropoff
+	@git add .
+	@if git diff --cached --quiet; then \
+		echo "Nothing to commit (working tree clean after git add .)."; \
+	else \
+		if [ -n "$(MSG)" ]; then \
+			msg="$(MSG)"; \
+		else \
+			printf "Commit message: "; \
+			IFS= read -r msg < /dev/tty; \
+		fi; \
+		if [ -z "$$msg" ]; then \
+			echo "Empty commit message; aborting." >&2; \
+			exit 1; \
+		fi; \
+		git commit -m "$$msg"; \
+	fi
+	git push origin HEAD
+	git push antropoff HEAD
 
 clean: ## Remove generated local artifacts
 	rm -rf .coverage coverage.xml htmlcov .mypy_cache .pytest_cache .ruff_cache

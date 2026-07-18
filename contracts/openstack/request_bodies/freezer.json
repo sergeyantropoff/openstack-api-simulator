@@ -1,0 +1,2728 @@
+{
+  "by_path": {
+    "PATCH /v2/actions/{id}": {
+      "description": "",
+      "properties": {
+        "action": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "example": "os-start",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/backups/{id}": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/clients/{id}": {
+      "description": "",
+      "properties": {
+        "client": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "client",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "client"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/jobs/{id}": {
+      "description": "",
+      "properties": {
+        "job": {
+          "description": "",
+          "properties": {
+            "client_id": {
+              "description": "",
+              "example": "example-client",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "job_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "freezer_action": {
+                    "description": "",
+                    "properties": {
+                      "action": {
+                        "description": "",
+                        "enum": [
+                          "backup",
+                          "restore"
+                        ],
+                        "example": "backup",
+                        "type": "string"
+                      },
+                      "container": {
+                        "description": "",
+                        "example": "freezer_backup",
+                        "type": "string"
+                      },
+                      "mode": {
+                        "description": "",
+                        "example": "fs",
+                        "type": "string"
+                      },
+                      "path_to_backup": {
+                        "description": "",
+                        "example": "/home",
+                        "type": "string"
+                      },
+                      "storage": {
+                        "description": "",
+                        "example": "swift",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "max_retries": {
+                    "description": "",
+                    "example": 3,
+                    "type": "integer"
+                  },
+                  "max_retries_interval": {
+                    "description": "",
+                    "example": 60,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "job_schedule": {
+              "description": "",
+              "properties": {
+                "schedule_interval": {
+                  "description": "",
+                  "example": "1 day",
+                  "type": "string"
+                },
+                "schedule_start_date": {
+                  "description": "",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "",
+                  "example": "scheduled",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "job"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/sessions/{id}": {
+      "description": "",
+      "properties": {
+        "session": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "session",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "session"
+      ],
+      "type": "object"
+    },
+    "POST /v2/actions": {
+      "description": "",
+      "properties": {
+        "action": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "example": "os-start",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "action"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "type": "object"
+    },
+    "POST /v2/backups": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "volume_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "POST /v2/clients": {
+      "description": "",
+      "properties": {
+        "client": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "client",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "client"
+      ],
+      "type": "object"
+    },
+    "POST /v2/jobs": {
+      "description": "",
+      "properties": {
+        "job": {
+          "description": "",
+          "properties": {
+            "client_id": {
+              "description": "",
+              "example": "example-client",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "job_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "freezer_action": {
+                    "description": "",
+                    "properties": {
+                      "action": {
+                        "description": "",
+                        "enum": [
+                          "backup",
+                          "restore"
+                        ],
+                        "example": "backup",
+                        "type": "string"
+                      },
+                      "container": {
+                        "description": "",
+                        "example": "freezer_backup",
+                        "type": "string"
+                      },
+                      "mode": {
+                        "description": "",
+                        "example": "fs",
+                        "type": "string"
+                      },
+                      "path_to_backup": {
+                        "description": "",
+                        "example": "/home",
+                        "type": "string"
+                      },
+                      "storage": {
+                        "description": "",
+                        "example": "swift",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "max_retries": {
+                    "description": "",
+                    "example": 3,
+                    "type": "integer"
+                  },
+                  "max_retries_interval": {
+                    "description": "",
+                    "example": 60,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "job_schedule": {
+              "description": "",
+              "properties": {
+                "schedule_interval": {
+                  "description": "",
+                  "example": "1 day",
+                  "type": "string"
+                },
+                "schedule_start_date": {
+                  "description": "",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "",
+                  "example": "scheduled",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "job_actions",
+            "client_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "job"
+      ],
+      "type": "object"
+    },
+    "POST /v2/sessions": {
+      "description": "",
+      "properties": {
+        "session": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "session",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "session"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/actions/{id}": {
+      "description": "",
+      "properties": {
+        "action": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "example": "os-start",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/backups/{id}": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/clients/{id}": {
+      "description": "",
+      "properties": {
+        "client": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "client",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "client"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/jobs/{id}": {
+      "description": "",
+      "properties": {
+        "job": {
+          "description": "",
+          "properties": {
+            "client_id": {
+              "description": "",
+              "example": "example-client",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "job_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "freezer_action": {
+                    "description": "",
+                    "properties": {
+                      "action": {
+                        "description": "",
+                        "enum": [
+                          "backup",
+                          "restore"
+                        ],
+                        "example": "backup",
+                        "type": "string"
+                      },
+                      "container": {
+                        "description": "",
+                        "example": "freezer_backup",
+                        "type": "string"
+                      },
+                      "mode": {
+                        "description": "",
+                        "example": "fs",
+                        "type": "string"
+                      },
+                      "path_to_backup": {
+                        "description": "",
+                        "example": "/home",
+                        "type": "string"
+                      },
+                      "storage": {
+                        "description": "",
+                        "example": "swift",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "max_retries": {
+                    "description": "",
+                    "example": 3,
+                    "type": "integer"
+                  },
+                  "max_retries_interval": {
+                    "description": "",
+                    "example": 60,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "job_schedule": {
+              "description": "",
+              "properties": {
+                "schedule_interval": {
+                  "description": "",
+                  "example": "1 day",
+                  "type": "string"
+                },
+                "schedule_start_date": {
+                  "description": "",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "",
+                  "example": "scheduled",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "job"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/sessions/{id}": {
+      "description": "",
+      "properties": {
+        "session": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "session",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "session"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "action_create": {
+      "description": "",
+      "properties": {
+        "action": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "example": "os-start",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "action"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "type": "object"
+    },
+    "action_patch": {
+      "description": "",
+      "properties": {
+        "action": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "example": "os-start",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "type": "object"
+    },
+    "action_update": {
+      "description": "",
+      "properties": {
+        "action": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "example": "os-start",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "type": "object"
+    },
+    "backup_create": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "volume_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "backup_patch": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "backup_update": {
+      "description": "",
+      "properties": {
+        "backup": {
+          "description": "",
+          "properties": {
+            "container": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "incremental": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "snapshot_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "volume_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "backup"
+      ],
+      "type": "object"
+    },
+    "client_create": {
+      "description": "",
+      "properties": {
+        "client": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "client",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "client"
+      ],
+      "type": "object"
+    },
+    "client_patch": {
+      "description": "",
+      "properties": {
+        "client": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "client",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "client"
+      ],
+      "type": "object"
+    },
+    "client_update": {
+      "description": "",
+      "properties": {
+        "client": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "client",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "client"
+      ],
+      "type": "object"
+    },
+    "job_create": {
+      "description": "",
+      "properties": {
+        "job": {
+          "description": "",
+          "properties": {
+            "client_id": {
+              "description": "",
+              "example": "example-client",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "job_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "freezer_action": {
+                    "description": "",
+                    "properties": {
+                      "action": {
+                        "description": "",
+                        "enum": [
+                          "backup",
+                          "restore"
+                        ],
+                        "example": "backup",
+                        "type": "string"
+                      },
+                      "container": {
+                        "description": "",
+                        "example": "freezer_backup",
+                        "type": "string"
+                      },
+                      "mode": {
+                        "description": "",
+                        "example": "fs",
+                        "type": "string"
+                      },
+                      "path_to_backup": {
+                        "description": "",
+                        "example": "/home",
+                        "type": "string"
+                      },
+                      "storage": {
+                        "description": "",
+                        "example": "swift",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "max_retries": {
+                    "description": "",
+                    "example": 3,
+                    "type": "integer"
+                  },
+                  "max_retries_interval": {
+                    "description": "",
+                    "example": 60,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "job_schedule": {
+              "description": "",
+              "properties": {
+                "schedule_interval": {
+                  "description": "",
+                  "example": "1 day",
+                  "type": "string"
+                },
+                "schedule_start_date": {
+                  "description": "",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "",
+                  "example": "scheduled",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "job_actions",
+            "client_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "job"
+      ],
+      "type": "object"
+    },
+    "job_patch": {
+      "description": "",
+      "properties": {
+        "job": {
+          "description": "",
+          "properties": {
+            "client_id": {
+              "description": "",
+              "example": "example-client",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "job_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "freezer_action": {
+                    "description": "",
+                    "properties": {
+                      "action": {
+                        "description": "",
+                        "enum": [
+                          "backup",
+                          "restore"
+                        ],
+                        "example": "backup",
+                        "type": "string"
+                      },
+                      "container": {
+                        "description": "",
+                        "example": "freezer_backup",
+                        "type": "string"
+                      },
+                      "mode": {
+                        "description": "",
+                        "example": "fs",
+                        "type": "string"
+                      },
+                      "path_to_backup": {
+                        "description": "",
+                        "example": "/home",
+                        "type": "string"
+                      },
+                      "storage": {
+                        "description": "",
+                        "example": "swift",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "max_retries": {
+                    "description": "",
+                    "example": 3,
+                    "type": "integer"
+                  },
+                  "max_retries_interval": {
+                    "description": "",
+                    "example": 60,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "job_schedule": {
+              "description": "",
+              "properties": {
+                "schedule_interval": {
+                  "description": "",
+                  "example": "1 day",
+                  "type": "string"
+                },
+                "schedule_start_date": {
+                  "description": "",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "",
+                  "example": "scheduled",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "job"
+      ],
+      "type": "object"
+    },
+    "job_update": {
+      "description": "",
+      "properties": {
+        "job": {
+          "description": "",
+          "properties": {
+            "client_id": {
+              "description": "",
+              "example": "example-client",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "job_actions": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "freezer_action": {
+                    "description": "",
+                    "properties": {
+                      "action": {
+                        "description": "",
+                        "enum": [
+                          "backup",
+                          "restore"
+                        ],
+                        "example": "backup",
+                        "type": "string"
+                      },
+                      "container": {
+                        "description": "",
+                        "example": "freezer_backup",
+                        "type": "string"
+                      },
+                      "mode": {
+                        "description": "",
+                        "example": "fs",
+                        "type": "string"
+                      },
+                      "path_to_backup": {
+                        "description": "",
+                        "example": "/home",
+                        "type": "string"
+                      },
+                      "storage": {
+                        "description": "",
+                        "example": "swift",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "max_retries": {
+                    "description": "",
+                    "example": 3,
+                    "type": "integer"
+                  },
+                  "max_retries_interval": {
+                    "description": "",
+                    "example": 60,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "job_schedule": {
+              "description": "",
+              "properties": {
+                "schedule_interval": {
+                  "description": "",
+                  "example": "1 day",
+                  "type": "string"
+                },
+                "schedule_start_date": {
+                  "description": "",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "",
+                  "example": "scheduled",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "job"
+      ],
+      "type": "object"
+    },
+    "session_create": {
+      "description": "",
+      "properties": {
+        "session": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "session",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "session"
+      ],
+      "type": "object"
+    },
+    "session_patch": {
+      "description": "",
+      "properties": {
+        "session": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "session",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "session"
+      ],
+      "type": "object"
+    },
+    "session_update": {
+      "description": "",
+      "properties": {
+        "session": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "session",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "session"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "freezer",
+  "source": "generated-from-api-ref-catalog"
+}

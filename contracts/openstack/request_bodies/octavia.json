@@ -1,0 +1,6910 @@
+{
+  "by_path": {
+    "PATCH /v2/lbaas/flavorprofiles/{id}": {
+      "description": "",
+      "properties": {
+        "flavorprofile": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "flavorprofile",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavorprofile"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/flavors/{id}": {
+      "description": "",
+      "properties": {
+        "flavor": {
+          "description": "",
+          "properties": {
+            "OS-FLV-EXT-DATA:ephemeral": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "disk": {
+              "description": "Root disk GiB",
+              "example": 1,
+              "type": "integer"
+            },
+            "id": {
+              "description": "",
+              "example": "auto",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "os-flavor-access:is_public": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "ram": {
+              "description": "RAM MiB",
+              "example": 512,
+              "type": "integer"
+            },
+            "rxtx_factor": {
+              "example": 1.0,
+              "type": "number"
+            },
+            "swap": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "vcpus": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavor"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/healthmonitors/{id}": {
+      "description": "",
+      "properties": {
+        "healthmonitor": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "delay": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "expected_codes": {
+              "description": "",
+              "example": "200",
+              "type": "string"
+            },
+            "http_method": {
+              "description": "",
+              "example": "GET",
+              "type": "string"
+            },
+            "max_retries": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "PING",
+                "TCP",
+                "TLS-HELLO",
+                "UDP-CONNECT"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "url_path": {
+              "description": "",
+              "example": "/",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "healthmonitor"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/l7policies/{id}": {
+      "description": "",
+      "properties": {
+        "l7policy": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "enum": [
+                "REJECT",
+                "REDIRECT_TO_URL",
+                "REDIRECT_TO_POOL",
+                "REDIRECT_PREFIX"
+              ],
+              "example": "REJECT",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "position": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "redirect_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "redirect_url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "l7policy"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/l7policies/{l7policy_id}/rules/{id}": {
+      "description": "",
+      "properties": {
+        "rule": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "l7rule",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "rule"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/listeners/{id}": {
+      "description": "",
+      "properties": {
+        "listener": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "connection_limit": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "default_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "insert_headers": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "TERMINATED_HTTPS"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "listener"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/loadbalancers/{id}": {
+      "description": "",
+      "properties": {
+        "loadbalancer": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavor_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "listeners": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pools": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Provider",
+              "example": "amphora",
+              "type": "string"
+            },
+            "vip_address": {
+              "description": "VIP address",
+              "type": "string"
+            },
+            "vip_network_id": {
+              "description": "VIP network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vip_subnet_id": {
+              "description": "VIP subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "loadbalancer"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/pools/{id}": {
+      "description": "",
+      "properties": {
+        "pool": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "lb_algorithm": {
+              "description": "",
+              "enum": [
+                "ROUND_ROBIN",
+                "LEAST_CONNECTIONS",
+                "SOURCE_IP"
+              ],
+              "example": "ROUND_ROBIN",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "PROXY"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "session_persistence": {
+              "description": "",
+              "properties": {
+                "cookie_name": {
+                  "description": "",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "pool"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/pools/{pool_id}/members/{id}": {
+      "description": "",
+      "properties": {
+        "member": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "Member IP",
+              "example": "10.0.0.10",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "backup": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "monitor_address": {
+              "description": "",
+              "type": "string"
+            },
+            "monitor_port": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "subnet_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "weight": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "member"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/providers/{id}": {
+      "description": "",
+      "properties": {
+        "provider": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "provider",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/lbaas/quotas/{id}": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    },
+    "PATCH /v2/octavia/amphorae/{id}": {
+      "description": "",
+      "properties": {
+        "amphorae": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "amphora",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "amphorae"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/flavorprofiles": {
+      "description": "",
+      "properties": {
+        "flavorprofile": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "flavorprofile",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavorprofile"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/flavors": {
+      "description": "",
+      "properties": {
+        "flavor": {
+          "description": "",
+          "properties": {
+            "OS-FLV-EXT-DATA:ephemeral": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "disk": {
+              "description": "Root disk GiB",
+              "example": 1,
+              "type": "integer"
+            },
+            "id": {
+              "description": "",
+              "example": "auto",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "os-flavor-access:is_public": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "ram": {
+              "description": "RAM MiB",
+              "example": 512,
+              "type": "integer"
+            },
+            "rxtx_factor": {
+              "example": 1.0,
+              "type": "number"
+            },
+            "swap": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "vcpus": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "ram",
+            "vcpus",
+            "disk"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavor"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/healthmonitors": {
+      "description": "",
+      "properties": {
+        "healthmonitor": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "delay": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "expected_codes": {
+              "description": "",
+              "example": "200",
+              "type": "string"
+            },
+            "http_method": {
+              "description": "",
+              "example": "GET",
+              "type": "string"
+            },
+            "max_retries": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "PING",
+                "TCP",
+                "TLS-HELLO",
+                "UDP-CONNECT"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "url_path": {
+              "description": "",
+              "example": "/",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "delay",
+            "timeout",
+            "max_retries",
+            "pool_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "healthmonitor"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/l7policies": {
+      "description": "",
+      "properties": {
+        "l7policy": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "enum": [
+                "REJECT",
+                "REDIRECT_TO_URL",
+                "REDIRECT_TO_POOL",
+                "REDIRECT_PREFIX"
+              ],
+              "example": "REJECT",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "position": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "redirect_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "redirect_url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "required": [
+            "listener_id",
+            "action"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "l7policy"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/l7policies/{l7policy_id}/rules": {
+      "description": "",
+      "properties": {
+        "rule": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "l7rule",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "rule"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/listeners": {
+      "description": "",
+      "properties": {
+        "listener": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "connection_limit": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "default_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "insert_headers": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "TERMINATED_HTTPS"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "loadbalancer_id",
+            "protocol",
+            "protocol_port"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "listener"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/loadbalancers": {
+      "description": "",
+      "properties": {
+        "loadbalancer": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavor_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "listeners": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pools": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Provider",
+              "example": "amphora",
+              "type": "string"
+            },
+            "vip_address": {
+              "description": "VIP address",
+              "type": "string"
+            },
+            "vip_network_id": {
+              "description": "VIP network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vip_subnet_id": {
+              "description": "VIP subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "vip_subnet_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "loadbalancer"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/pools": {
+      "description": "",
+      "properties": {
+        "pool": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "lb_algorithm": {
+              "description": "",
+              "enum": [
+                "ROUND_ROBIN",
+                "LEAST_CONNECTIONS",
+                "SOURCE_IP"
+              ],
+              "example": "ROUND_ROBIN",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "PROXY"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "session_persistence": {
+              "description": "",
+              "properties": {
+                "cookie_name": {
+                  "description": "",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "lb_algorithm",
+            "protocol"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "pool"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/pools/{pool_id}/members": {
+      "description": "",
+      "properties": {
+        "member": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "Member IP",
+              "example": "10.0.0.10",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "backup": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "monitor_address": {
+              "description": "",
+              "type": "string"
+            },
+            "monitor_port": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "subnet_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "weight": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "address",
+            "protocol_port"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "member"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/providers": {
+      "description": "",
+      "properties": {
+        "provider": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "provider",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "type": "object"
+    },
+    "POST /v2/lbaas/quotas": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    },
+    "POST /v2/octavia/amphorae": {
+      "description": "",
+      "properties": {
+        "amphorae": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "amphora",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "amphorae"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/flavorprofiles/{id}": {
+      "description": "",
+      "properties": {
+        "flavorprofile": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "flavorprofile",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavorprofile"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/flavors/{id}": {
+      "description": "",
+      "properties": {
+        "flavor": {
+          "description": "",
+          "properties": {
+            "OS-FLV-EXT-DATA:ephemeral": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "disk": {
+              "description": "Root disk GiB",
+              "example": 1,
+              "type": "integer"
+            },
+            "id": {
+              "description": "",
+              "example": "auto",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "os-flavor-access:is_public": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "ram": {
+              "description": "RAM MiB",
+              "example": 512,
+              "type": "integer"
+            },
+            "rxtx_factor": {
+              "example": 1.0,
+              "type": "number"
+            },
+            "swap": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "vcpus": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavor"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/healthmonitors/{id}": {
+      "description": "",
+      "properties": {
+        "healthmonitor": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "delay": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "expected_codes": {
+              "description": "",
+              "example": "200",
+              "type": "string"
+            },
+            "http_method": {
+              "description": "",
+              "example": "GET",
+              "type": "string"
+            },
+            "max_retries": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "PING",
+                "TCP",
+                "TLS-HELLO",
+                "UDP-CONNECT"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "url_path": {
+              "description": "",
+              "example": "/",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "healthmonitor"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/l7policies/{id}": {
+      "description": "",
+      "properties": {
+        "l7policy": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "enum": [
+                "REJECT",
+                "REDIRECT_TO_URL",
+                "REDIRECT_TO_POOL",
+                "REDIRECT_PREFIX"
+              ],
+              "example": "REJECT",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "position": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "redirect_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "redirect_url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "l7policy"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/l7policies/{l7policy_id}/rules/{id}": {
+      "description": "",
+      "properties": {
+        "rule": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "l7rule",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "rule"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/listeners/{id}": {
+      "description": "",
+      "properties": {
+        "listener": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "connection_limit": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "default_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "insert_headers": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "TERMINATED_HTTPS"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "listener"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/loadbalancers/{id}": {
+      "description": "",
+      "properties": {
+        "loadbalancer": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavor_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "listeners": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pools": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Provider",
+              "example": "amphora",
+              "type": "string"
+            },
+            "vip_address": {
+              "description": "VIP address",
+              "type": "string"
+            },
+            "vip_network_id": {
+              "description": "VIP network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vip_subnet_id": {
+              "description": "VIP subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "loadbalancer"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/loadbalancers/{id}/failover": {
+      "description": "",
+      "properties": {
+        "os-start": {
+          "description": "Action os-start body (null object)",
+          "type": "null"
+        }
+      },
+      "required": [
+        "os-start"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/pools/{id}": {
+      "description": "",
+      "properties": {
+        "pool": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "lb_algorithm": {
+              "description": "",
+              "enum": [
+                "ROUND_ROBIN",
+                "LEAST_CONNECTIONS",
+                "SOURCE_IP"
+              ],
+              "example": "ROUND_ROBIN",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "PROXY"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "session_persistence": {
+              "description": "",
+              "properties": {
+                "cookie_name": {
+                  "description": "",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "pool"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/pools/{pool_id}/members/{id}": {
+      "description": "",
+      "properties": {
+        "member": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "Member IP",
+              "example": "10.0.0.10",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "backup": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "monitor_address": {
+              "description": "",
+              "type": "string"
+            },
+            "monitor_port": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "subnet_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "weight": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "member"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/providers/{id}": {
+      "description": "",
+      "properties": {
+        "provider": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "provider",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/lbaas/quotas/{id}": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    },
+    "PUT /v2/octavia/amphorae/{id}": {
+      "description": "",
+      "properties": {
+        "amphorae": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "amphora",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "amphorae"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "amphora_create": {
+      "description": "",
+      "properties": {
+        "amphorae": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "amphora",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "amphorae"
+      ],
+      "type": "object"
+    },
+    "amphora_patch": {
+      "description": "",
+      "properties": {
+        "amphorae": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "amphora",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "amphorae"
+      ],
+      "type": "object"
+    },
+    "amphora_update": {
+      "description": "",
+      "properties": {
+        "amphorae": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "amphora",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "amphorae"
+      ],
+      "type": "object"
+    },
+    "flavor_create": {
+      "description": "",
+      "properties": {
+        "flavor": {
+          "description": "",
+          "properties": {
+            "OS-FLV-EXT-DATA:ephemeral": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "disk": {
+              "description": "Root disk GiB",
+              "example": 1,
+              "type": "integer"
+            },
+            "id": {
+              "description": "",
+              "example": "auto",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "os-flavor-access:is_public": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "ram": {
+              "description": "RAM MiB",
+              "example": 512,
+              "type": "integer"
+            },
+            "rxtx_factor": {
+              "example": 1.0,
+              "type": "number"
+            },
+            "swap": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "vcpus": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "ram",
+            "vcpus",
+            "disk"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavor"
+      ],
+      "type": "object"
+    },
+    "flavor_patch": {
+      "description": "",
+      "properties": {
+        "flavor": {
+          "description": "",
+          "properties": {
+            "OS-FLV-EXT-DATA:ephemeral": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "disk": {
+              "description": "Root disk GiB",
+              "example": 1,
+              "type": "integer"
+            },
+            "id": {
+              "description": "",
+              "example": "auto",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "os-flavor-access:is_public": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "ram": {
+              "description": "RAM MiB",
+              "example": 512,
+              "type": "integer"
+            },
+            "rxtx_factor": {
+              "example": 1.0,
+              "type": "number"
+            },
+            "swap": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "vcpus": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavor"
+      ],
+      "type": "object"
+    },
+    "flavor_update": {
+      "description": "",
+      "properties": {
+        "flavor": {
+          "description": "",
+          "properties": {
+            "OS-FLV-EXT-DATA:ephemeral": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "disk": {
+              "description": "Root disk GiB",
+              "example": 1,
+              "type": "integer"
+            },
+            "id": {
+              "description": "",
+              "example": "auto",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "example": "example",
+              "type": "string"
+            },
+            "os-flavor-access:is_public": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "ram": {
+              "description": "RAM MiB",
+              "example": 512,
+              "type": "integer"
+            },
+            "rxtx_factor": {
+              "example": 1.0,
+              "type": "number"
+            },
+            "swap": {
+              "description": "",
+              "example": 0,
+              "type": "integer"
+            },
+            "vcpus": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavor"
+      ],
+      "type": "object"
+    },
+    "flavorprofile_create": {
+      "description": "",
+      "properties": {
+        "flavorprofile": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "flavorprofile",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavorprofile"
+      ],
+      "type": "object"
+    },
+    "flavorprofile_patch": {
+      "description": "",
+      "properties": {
+        "flavorprofile": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "flavorprofile",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavorprofile"
+      ],
+      "type": "object"
+    },
+    "flavorprofile_update": {
+      "description": "",
+      "properties": {
+        "flavorprofile": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "flavorprofile",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "flavorprofile"
+      ],
+      "type": "object"
+    },
+    "healthmonitor_create": {
+      "description": "",
+      "properties": {
+        "healthmonitor": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "delay": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "expected_codes": {
+              "description": "",
+              "example": "200",
+              "type": "string"
+            },
+            "http_method": {
+              "description": "",
+              "example": "GET",
+              "type": "string"
+            },
+            "max_retries": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "PING",
+                "TCP",
+                "TLS-HELLO",
+                "UDP-CONNECT"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "url_path": {
+              "description": "",
+              "example": "/",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "delay",
+            "timeout",
+            "max_retries",
+            "pool_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "healthmonitor"
+      ],
+      "type": "object"
+    },
+    "healthmonitor_patch": {
+      "description": "",
+      "properties": {
+        "healthmonitor": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "delay": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "expected_codes": {
+              "description": "",
+              "example": "200",
+              "type": "string"
+            },
+            "http_method": {
+              "description": "",
+              "example": "GET",
+              "type": "string"
+            },
+            "max_retries": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "PING",
+                "TCP",
+                "TLS-HELLO",
+                "UDP-CONNECT"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "url_path": {
+              "description": "",
+              "example": "/",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "healthmonitor"
+      ],
+      "type": "object"
+    },
+    "healthmonitor_update": {
+      "description": "",
+      "properties": {
+        "healthmonitor": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "delay": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "expected_codes": {
+              "description": "",
+              "example": "200",
+              "type": "string"
+            },
+            "http_method": {
+              "description": "",
+              "example": "GET",
+              "type": "string"
+            },
+            "max_retries": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "",
+              "example": 3,
+              "type": "integer"
+            },
+            "type": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "PING",
+                "TCP",
+                "TLS-HELLO",
+                "UDP-CONNECT"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "url_path": {
+              "description": "",
+              "example": "/",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "healthmonitor"
+      ],
+      "type": "object"
+    },
+    "l7policy_create": {
+      "description": "",
+      "properties": {
+        "l7policy": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "enum": [
+                "REJECT",
+                "REDIRECT_TO_URL",
+                "REDIRECT_TO_POOL",
+                "REDIRECT_PREFIX"
+              ],
+              "example": "REJECT",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "position": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "redirect_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "redirect_url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "required": [
+            "listener_id",
+            "action"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "l7policy"
+      ],
+      "type": "object"
+    },
+    "l7policy_patch": {
+      "description": "",
+      "properties": {
+        "l7policy": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "enum": [
+                "REJECT",
+                "REDIRECT_TO_URL",
+                "REDIRECT_TO_POOL",
+                "REDIRECT_PREFIX"
+              ],
+              "example": "REJECT",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "position": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "redirect_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "redirect_url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "l7policy"
+      ],
+      "type": "object"
+    },
+    "l7policy_update": {
+      "description": "",
+      "properties": {
+        "l7policy": {
+          "description": "",
+          "properties": {
+            "action": {
+              "description": "",
+              "enum": [
+                "REJECT",
+                "REDIRECT_TO_URL",
+                "REDIRECT_TO_POOL",
+                "REDIRECT_PREFIX"
+              ],
+              "example": "REJECT",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "position": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "redirect_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "redirect_url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "l7policy"
+      ],
+      "type": "object"
+    },
+    "l7rule_create": {
+      "description": "",
+      "properties": {
+        "rule": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "l7rule",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "rule"
+      ],
+      "type": "object"
+    },
+    "l7rule_patch": {
+      "description": "",
+      "properties": {
+        "rule": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "l7rule",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "rule"
+      ],
+      "type": "object"
+    },
+    "l7rule_update": {
+      "description": "",
+      "properties": {
+        "rule": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "l7rule",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "rule"
+      ],
+      "type": "object"
+    },
+    "listener_create": {
+      "description": "",
+      "properties": {
+        "listener": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "connection_limit": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "default_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "insert_headers": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "TERMINATED_HTTPS"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "loadbalancer_id",
+            "protocol",
+            "protocol_port"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "listener"
+      ],
+      "type": "object"
+    },
+    "listener_patch": {
+      "description": "",
+      "properties": {
+        "listener": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "connection_limit": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "default_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "insert_headers": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "TERMINATED_HTTPS"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "listener"
+      ],
+      "type": "object"
+    },
+    "listener_update": {
+      "description": "",
+      "properties": {
+        "listener": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "connection_limit": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "default_pool_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "insert_headers": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "TERMINATED_HTTPS"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "listener"
+      ],
+      "type": "object"
+    },
+    "loadbalancer_create": {
+      "description": "",
+      "properties": {
+        "loadbalancer": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavor_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "listeners": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pools": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Provider",
+              "example": "amphora",
+              "type": "string"
+            },
+            "vip_address": {
+              "description": "VIP address",
+              "type": "string"
+            },
+            "vip_network_id": {
+              "description": "VIP network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vip_subnet_id": {
+              "description": "VIP subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "vip_subnet_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "loadbalancer"
+      ],
+      "type": "object"
+    },
+    "loadbalancer_failover": {
+      "description": "",
+      "properties": {
+        "os-start": {
+          "description": "Action os-start body (null object)",
+          "type": "null"
+        }
+      },
+      "required": [
+        "os-start"
+      ],
+      "type": "object"
+    },
+    "loadbalancer_patch": {
+      "description": "",
+      "properties": {
+        "loadbalancer": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavor_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "listeners": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pools": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Provider",
+              "example": "amphora",
+              "type": "string"
+            },
+            "vip_address": {
+              "description": "VIP address",
+              "type": "string"
+            },
+            "vip_network_id": {
+              "description": "VIP network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vip_subnet_id": {
+              "description": "VIP subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "loadbalancer"
+      ],
+      "type": "object"
+    },
+    "loadbalancer_update": {
+      "description": "",
+      "properties": {
+        "loadbalancer": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "flavor_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "listeners": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "pools": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Provider",
+              "example": "amphora",
+              "type": "string"
+            },
+            "vip_address": {
+              "description": "VIP address",
+              "type": "string"
+            },
+            "vip_network_id": {
+              "description": "VIP network UUID",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vip_subnet_id": {
+              "description": "VIP subnet UUID",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "loadbalancer"
+      ],
+      "type": "object"
+    },
+    "member_create": {
+      "description": "",
+      "properties": {
+        "member": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "Member IP",
+              "example": "10.0.0.10",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "backup": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "monitor_address": {
+              "description": "",
+              "type": "string"
+            },
+            "monitor_port": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "subnet_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "weight": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "address",
+            "protocol_port"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "member"
+      ],
+      "type": "object"
+    },
+    "member_patch": {
+      "description": "",
+      "properties": {
+        "member": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "Member IP",
+              "example": "10.0.0.10",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "backup": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "monitor_address": {
+              "description": "",
+              "type": "string"
+            },
+            "monitor_port": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "subnet_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "weight": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "member"
+      ],
+      "type": "object"
+    },
+    "member_update": {
+      "description": "",
+      "properties": {
+        "member": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "Member IP",
+              "example": "10.0.0.10",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "backup": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "monitor_address": {
+              "description": "",
+              "type": "string"
+            },
+            "monitor_port": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol_port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "subnet_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "weight": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "member"
+      ],
+      "type": "object"
+    },
+    "pool_create": {
+      "description": "",
+      "properties": {
+        "pool": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "lb_algorithm": {
+              "description": "",
+              "enum": [
+                "ROUND_ROBIN",
+                "LEAST_CONNECTIONS",
+                "SOURCE_IP"
+              ],
+              "example": "ROUND_ROBIN",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "PROXY"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "session_persistence": {
+              "description": "",
+              "properties": {
+                "cookie_name": {
+                  "description": "",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "lb_algorithm",
+            "protocol"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "pool"
+      ],
+      "type": "object"
+    },
+    "pool_patch": {
+      "description": "",
+      "properties": {
+        "pool": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "lb_algorithm": {
+              "description": "",
+              "enum": [
+                "ROUND_ROBIN",
+                "LEAST_CONNECTIONS",
+                "SOURCE_IP"
+              ],
+              "example": "ROUND_ROBIN",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "PROXY"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "session_persistence": {
+              "description": "",
+              "properties": {
+                "cookie_name": {
+                  "description": "",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "pool"
+      ],
+      "type": "object"
+    },
+    "pool_update": {
+      "description": "",
+      "properties": {
+        "pool": {
+          "description": "",
+          "properties": {
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "lb_algorithm": {
+              "description": "",
+              "enum": [
+                "ROUND_ROBIN",
+                "LEAST_CONNECTIONS",
+                "SOURCE_IP"
+              ],
+              "example": "ROUND_ROBIN",
+              "type": "string"
+            },
+            "listener_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "loadbalancer_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "",
+              "enum": [
+                "HTTP",
+                "HTTPS",
+                "TCP",
+                "UDP",
+                "PROXY"
+              ],
+              "example": "HTTP",
+              "type": "string"
+            },
+            "session_persistence": {
+              "description": "",
+              "properties": {
+                "cookie_name": {
+                  "description": "",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "pool"
+      ],
+      "type": "object"
+    },
+    "provider_create": {
+      "description": "",
+      "properties": {
+        "provider": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "provider",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "type": "object"
+    },
+    "provider_patch": {
+      "description": "",
+      "properties": {
+        "provider": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "provider",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "type": "object"
+    },
+    "provider_update": {
+      "description": "",
+      "properties": {
+        "provider": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "provider",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "type": "object"
+    },
+    "quota_create": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    },
+    "quota_patch": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    },
+    "quota_update": {
+      "description": "",
+      "properties": {
+        "quota": {
+          "description": "",
+          "properties": {
+            "cores": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "fixed_ips": {
+              "description": "",
+              "example": -1,
+              "type": "integer"
+            },
+            "floating_ips": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "force": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "gigabytes": {
+              "description": "",
+              "example": 1000,
+              "type": "integer"
+            },
+            "injected_file_content_bytes": {
+              "description": "",
+              "example": 10240,
+              "type": "integer"
+            },
+            "injected_files": {
+              "description": "",
+              "example": 5,
+              "type": "integer"
+            },
+            "instances": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "key_pairs": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "metadata_items": {
+              "description": "",
+              "example": 128,
+              "type": "integer"
+            },
+            "networks": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "ports": {
+              "description": "",
+              "example": 500,
+              "type": "integer"
+            },
+            "ram": {
+              "description": "",
+              "example": 51200,
+              "type": "integer"
+            },
+            "routers": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "security_group_rules": {
+              "description": "",
+              "example": 20,
+              "type": "integer"
+            },
+            "security_groups": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "snapshots": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            },
+            "subnets": {
+              "description": "",
+              "example": 100,
+              "type": "integer"
+            },
+            "volumes": {
+              "description": "",
+              "example": 10,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "quota"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "octavia",
+  "source": "generated-from-api-ref-catalog"
+}

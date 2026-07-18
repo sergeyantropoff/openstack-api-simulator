@@ -12,7 +12,9 @@ SERIES_ORDER = ("yoga", "antelope", "caracal", "dalmatian")
 
 
 def _methods_line(methods: dict[str, Any]) -> str:
-    return " ".join(f"{m}={methods.get(m, 0)}" for m in ("GET", "POST", "PUT", "PATCH", "DELETE"))
+    return " ".join(
+        f"{m}={methods.get(m, 0)}" for m in ("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD")
+    )
 
 
 def render_html(summary: dict[str, Any], series_reports: list[dict[str, Any]]) -> str:
@@ -33,8 +35,8 @@ def render_html(summary: dict[str, Any], series_reports: list[dict[str, Any]]) -
               </div>
               <div class="stats">
                 <span class="ok">http ok={http.get("ok_count", 0)}</span>
-                <span class="fail">http fail={http.get("fail_count", 0)} nonempty_fail={http.get("nonempty_fail_count", 0)}</span>
-                <span>http total={http.get("total", 0)}/{http.get("expected_ops", "?")}</span>
+                <span class="fail">http fail={http.get("fail_count", 0)} nonempty_fail={http.get("nonempty_fail_count", 0)} critical={http.get("critical", 0)}</span>
+                <span>http total={http.get("total", 0)}/{http.get("expected_ops", "?")} (declared={http.get("declared_ops", "?")}+HEAD={http.get("head_ops", "?")})</span>
               </div>
               <div class="stats muted">
                 methods: {html.escape(_methods_line(http.get("methods") or {}))}
@@ -92,7 +94,7 @@ def render_html(summary: dict[str, Any], series_reports: list[dict[str, Any]]) -
 <body>
   <header>
     <h1>Pulumi OpenStack API coverage</h1>
-    <p class="muted">Generated {html.escape(generated)} · pulumi_openstack primary + HTTP pack probe with non-empty checks</p>
+    <p class="muted">Generated {html.escape(generated)} · <strong>100% = HTTP contract matrix</strong> (pack ops + synthetic HEAD), not pulumi_openstack resource count. Layer B provider lifecycle is smoke only.</p>
   </header>
   <main>
     <div class="summary">

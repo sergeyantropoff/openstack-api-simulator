@@ -95,8 +95,12 @@ curl -sH "X-Auth-Token: $TOKEN" http://127.0.0.1:9696/v2.0/networks
 
 ## 6. Откройте Web UI
 
-[http://localhost:5000/](http://localhost:5000/) — консоль, Environment drawer
-(серия OpenStack pack + microversions), Data drawer (загрузка/выгрузка demo cloud).
+[http://localhost:5000/](http://localhost:5000/) — консоль, API catalog
+(серия OpenStack pack), Data drawer (загрузка/выгрузка demo cloud).
+
+![Web-консоль](../images/web-ui/console-main.png)
+
+Обзор drawers и параметров запроса: [Web UI](web-ui.md).
 
 ## 7. Smoke / conformance
 

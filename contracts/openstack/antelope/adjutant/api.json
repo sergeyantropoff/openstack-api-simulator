@@ -268,7 +268,7 @@
       "collection_key": "status",
       "create_status": 201,
       "introduced_in": "yoga",
-      "item_key": "statu",
+      "item_key": "status",
       "kind": "collection",
       "method": "POST",
       "operation_id": "status_create",
@@ -282,7 +282,7 @@
     {
       "collection_key": "status",
       "introduced_in": "yoga",
-      "item_key": "statu",
+      "item_key": "status",
       "kind": "item",
       "method": "GET",
       "operation_id": "status_show",
@@ -296,7 +296,7 @@
     {
       "collection_key": "status",
       "introduced_in": "yoga",
-      "item_key": "statu",
+      "item_key": "status",
       "kind": "item",
       "method": "PUT",
       "operation_id": "status_update",
@@ -310,7 +310,7 @@
     {
       "collection_key": "status",
       "introduced_in": "yoga",
-      "item_key": "statu",
+      "item_key": "status",
       "kind": "item",
       "method": "PATCH",
       "operation_id": "status_patch",

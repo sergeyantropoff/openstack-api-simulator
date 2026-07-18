@@ -60,9 +60,9 @@ def _crud(
 ) -> list[dict[str, Any]]:
     """Expand a resource into list/detail/create/show/update/delete + actions/nested."""
 
-    singular = key[:-1] if key.endswith("s") and not key.endswith("ss") else key
-    if key.endswith("ies"):
-        singular = key[:-3] + "y"
+    from app.openstack.singular import singular as _singularize
+
+    singular = _singularize(key)
     ops: list[dict[str, Any]] = [
         {
             "operation_id": f"{resource}_list",

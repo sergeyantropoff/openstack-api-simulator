@@ -14,19 +14,10 @@ from fastapi.responses import JSONResponse
 from app.openstack.auth import TokenContext
 from app.openstack.deps import get_conn, require_project_token, require_token
 from app.openstack.errors import OpenStackError
+from app.openstack.singular import singular as _singular
 from app.openstack.surface import SERVICES, ServiceSpec
 
 _PATH_PARAM = re.compile(r"\{([^{}]+)\}")
-
-
-def _singular(collection_key: str) -> str:
-    if collection_key.endswith("ies"):
-        return collection_key[:-3] + "y"
-    if collection_key.endswith("ses"):
-        return collection_key[:-2]
-    if collection_key.endswith("s") and not collection_key.endswith("ss"):
-        return collection_key[:-1]
-    return collection_key
 
 
 def _wrap_list(collection_key: str, items: list[dict[str, Any]]) -> dict[str, Any]:

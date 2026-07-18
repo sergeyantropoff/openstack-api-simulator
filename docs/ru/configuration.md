@@ -53,7 +53,4 @@
 
 ## Переопределения Web UI
 
-Environment drawer → **OpenStack API pack**:
-
-- Активация серии (hot remount)
-- Переопределение microversion по сервисам
+API catalog drawer: карточка серии → microversion в карточке → **Apply as runtime**.

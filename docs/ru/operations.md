@@ -69,6 +69,21 @@ PYTHONPATH=tools python3 tools/os_api_inventory/generate_packs.py
 PYTHONPATH=tools python3 tools/os_api_inventory/coverage_report.py
 ```
 
+## Схемы Request body (консоль)
+
+Для `POST`/`PUT`/`PATCH` консоль показывает полные JSON Schema поля.
+Схемы лежат в `contracts/openstack/request_bodies/<service>.json` и
+подмешиваются к операциям пака при загрузке (общие для всех серий).
+
+```bash
+make request-bodies-generate   # пересобрать из api-ref каталога
+make request-bodies-import     # наложить Tier-1 из openstack-openapi
+make request-bodies-coverage   # проверить, что у всех write-op есть схема
+```
+
+Tier-1: nova, neutron, keystone, glance, cinder, octavia, swift, placement.
+Остальные сервисы — курируемый генератор каталога.
+
 ## Резервное копирование состояния лаборатории
 
 PostgreSQL — источник истины. Используйте `pg_dump` / снимки volume.

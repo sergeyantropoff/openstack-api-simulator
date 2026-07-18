@@ -233,10 +233,20 @@ def main() -> int:
                 "total": 0,
                 "expected_ops": 0,
                 "coverage_incomplete": False,
-                "methods": {"GET": 0, "POST": 0, "PUT": 0, "PATCH": 0, "DELETE": 0},
+                "methods": {
+                    "GET": 0,
+                    "POST": 0,
+                    "PUT": 0,
+                    "PATCH": 0,
+                    "DELETE": 0,
+                    "HEAD": 0,
+                },
                 "ok_count": 0,
                 "fail_count": 0,
                 "nonempty_fail_count": 0,
+                "critical": 0,
+                "declared_ops": 0,
+                "head_ops": 0,
                 "results": [],
                 "failures": [],
             }
@@ -245,12 +255,15 @@ def main() -> int:
             http = run_http_coverage(series, collections_only=collections_only)
             methods = http.get("methods") or {}
             methods_s = " ".join(
-                f"{m}={methods.get(m, 0)}" for m in ("GET", "POST", "PUT", "PATCH", "DELETE")
+                f"{m}={methods.get(m, 0)}"
+                for m in ("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD")
             )
             print(
                 f"{series}: http ok={http.get('ok_count')} fail={http.get('fail_count')} "
                 f"nonempty_fail={http.get('nonempty_fail_count')} "
+                f"critical={http.get('critical')} "
                 f"total={http.get('total')}/{http.get('expected_ops')} "
+                f"(declared={http.get('declared_ops')}+HEAD={http.get('head_ops')}) "
                 f"coverage_incomplete={http.get('coverage_incomplete')} "
                 f"methods[{methods_s}]"
             )
@@ -273,10 +286,16 @@ def main() -> int:
             int(r["http"].get("fail_count", 0)) + int(r["http"].get("nonempty_fail_count", 0))
             for r in series_reports
         ),
+        "http_critical": sum(int(r["http"].get("critical", 0)) for r in series_reports),
+        "http_declared": sum(int(r["http"].get("declared_ops", 0)) for r in series_reports),
+        "http_head": sum(int(r["http"].get("head_ops", 0)) for r in series_reports),
+        "http_total": sum(int(r["http"].get("total", 0)) for r in series_reports),
+        "http_expected": sum(int(r["http"].get("expected_ops", 0)) for r in series_reports),
         "coverage_incomplete": sum(
             1 for r in series_reports if r["http"].get("coverage_incomplete")
         ),
         "collections_only": collections_only,
+        "definition": "100% = HTTP contract matrix (pack ops + synthetic HEAD), not pulumi_openstack resource count",
     }
     html_path = write_html(REPORT_DIR, summary, series_reports)
     (REPORT_DIR / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
@@ -285,7 +304,10 @@ def main() -> int:
     print(json.dumps(summary, indent=2))
 
     failed = (
-        summary["pulumi_fail"] > 0 or summary["http_fail"] > 0 or summary["coverage_incomplete"] > 0
+        summary["pulumi_fail"] > 0
+        or summary["http_fail"] > 0
+        or summary["coverage_incomplete"] > 0
+        or summary["http_critical"] > 0
     )
     return 1 if failed else 0
 

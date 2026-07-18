@@ -1,0 +1,2748 @@
+{
+  "by_path": {
+    "PATCH /v1.0/vims/{id}": {
+      "description": "",
+      "properties": {
+        "vim": {
+          "description": "",
+          "properties": {
+            "auth_cred": {
+              "description": "",
+              "properties": {
+                "cert_verify": {
+                  "description": "TLS verify",
+                  "example": "True",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "Password",
+                  "example": "secret",
+                  "type": "string"
+                },
+                "user_domain_name": {
+                  "description": "User domain",
+                  "example": "Default",
+                  "type": "string"
+                },
+                "username": {
+                  "description": "Username",
+                  "example": "admin",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password",
+                "user_domain_name"
+              ],
+              "type": "object"
+            },
+            "auth_url": {
+              "description": "Identity endpoint",
+              "example": "http://127.0.0.1:5000/v3",
+              "format": "uri",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "is_default": {
+              "default": false,
+              "description": "Default VIM",
+              "type": "boolean"
+            },
+            "name": {
+              "description": "VIM name",
+              "example": "example",
+              "type": "string"
+            },
+            "type": {
+              "description": "VIM type",
+              "enum": [
+                "openstack",
+                "kubernetes"
+              ],
+              "example": "openstack",
+              "type": "string"
+            },
+            "vim_project": {
+              "description": "",
+              "properties": {
+                "name": {
+                  "description": "Project name",
+                  "example": "admin",
+                  "type": "string"
+                },
+                "project_domain_name": {
+                  "description": "Project domain",
+                  "example": "Default",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "project_domain_name"
+              ],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vim"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1.0/vnfds/{id}": {
+      "description": "",
+      "properties": {
+        "vnfd": {
+          "description": "",
+          "properties": {
+            "attributes": {
+              "description": "",
+              "properties": {
+                "vnfd": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "service_types": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "service_type": {
+                    "description": "",
+                    "example": "vnfd",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnfd"
+      ],
+      "type": "object"
+    },
+    "PATCH /v1.0/vnfs/{id}": {
+      "description": "",
+      "properties": {
+        "vnf": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "vim_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vnfd_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf"
+      ],
+      "type": "object"
+    },
+    "PATCH /vnflcm/v1/vnf_instances/{id}": {
+      "description": "",
+      "properties": {
+        "vnf_instance": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_instance",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_instance"
+      ],
+      "type": "object"
+    },
+    "PATCH /vnfpkgm/v1/vnf_packages/{id}": {
+      "description": "",
+      "properties": {
+        "vnf_package": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_package",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_package"
+      ],
+      "type": "object"
+    },
+    "POST /v1.0/vims": {
+      "description": "",
+      "properties": {
+        "vim": {
+          "description": "",
+          "properties": {
+            "auth_cred": {
+              "description": "",
+              "properties": {
+                "cert_verify": {
+                  "description": "TLS verify",
+                  "example": "True",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "Password",
+                  "example": "secret",
+                  "type": "string"
+                },
+                "user_domain_name": {
+                  "description": "User domain",
+                  "example": "Default",
+                  "type": "string"
+                },
+                "username": {
+                  "description": "Username",
+                  "example": "admin",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password",
+                "user_domain_name"
+              ],
+              "type": "object"
+            },
+            "auth_url": {
+              "description": "Identity endpoint",
+              "example": "http://127.0.0.1:5000/v3",
+              "format": "uri",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "is_default": {
+              "default": false,
+              "description": "Default VIM",
+              "type": "boolean"
+            },
+            "name": {
+              "description": "VIM name",
+              "example": "example",
+              "type": "string"
+            },
+            "type": {
+              "description": "VIM type",
+              "enum": [
+                "openstack",
+                "kubernetes"
+              ],
+              "example": "openstack",
+              "type": "string"
+            },
+            "vim_project": {
+              "description": "",
+              "properties": {
+                "name": {
+                  "description": "Project name",
+                  "example": "admin",
+                  "type": "string"
+                },
+                "project_domain_name": {
+                  "description": "Project domain",
+                  "example": "Default",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "project_domain_name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "type",
+            "auth_url",
+            "auth_cred",
+            "vim_project",
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vim"
+      ],
+      "type": "object"
+    },
+    "POST /v1.0/vnfds": {
+      "description": "",
+      "properties": {
+        "vnfd": {
+          "description": "",
+          "properties": {
+            "attributes": {
+              "description": "",
+              "properties": {
+                "vnfd": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "service_types": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "service_type": {
+                    "description": "",
+                    "example": "vnfd",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnfd"
+      ],
+      "type": "object"
+    },
+    "POST /v1.0/vnfs": {
+      "description": "",
+      "properties": {
+        "vnf": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "vim_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vnfd_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "vnfd_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf"
+      ],
+      "type": "object"
+    },
+    "POST /vnflcm/v1/vnf_instances": {
+      "description": "",
+      "properties": {
+        "vnf_instance": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_instance",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_instance"
+      ],
+      "type": "object"
+    },
+    "POST /vnfpkgm/v1/vnf_packages": {
+      "description": "",
+      "properties": {
+        "vnf_package": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_package",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_package"
+      ],
+      "type": "object"
+    },
+    "PUT /v1.0/vims/{id}": {
+      "description": "",
+      "properties": {
+        "vim": {
+          "description": "",
+          "properties": {
+            "auth_cred": {
+              "description": "",
+              "properties": {
+                "cert_verify": {
+                  "description": "TLS verify",
+                  "example": "True",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "Password",
+                  "example": "secret",
+                  "type": "string"
+                },
+                "user_domain_name": {
+                  "description": "User domain",
+                  "example": "Default",
+                  "type": "string"
+                },
+                "username": {
+                  "description": "Username",
+                  "example": "admin",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password",
+                "user_domain_name"
+              ],
+              "type": "object"
+            },
+            "auth_url": {
+              "description": "Identity endpoint",
+              "example": "http://127.0.0.1:5000/v3",
+              "format": "uri",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "is_default": {
+              "default": false,
+              "description": "Default VIM",
+              "type": "boolean"
+            },
+            "name": {
+              "description": "VIM name",
+              "example": "example",
+              "type": "string"
+            },
+            "type": {
+              "description": "VIM type",
+              "enum": [
+                "openstack",
+                "kubernetes"
+              ],
+              "example": "openstack",
+              "type": "string"
+            },
+            "vim_project": {
+              "description": "",
+              "properties": {
+                "name": {
+                  "description": "Project name",
+                  "example": "admin",
+                  "type": "string"
+                },
+                "project_domain_name": {
+                  "description": "Project domain",
+                  "example": "Default",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "project_domain_name"
+              ],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vim"
+      ],
+      "type": "object"
+    },
+    "PUT /v1.0/vnfds/{id}": {
+      "description": "",
+      "properties": {
+        "vnfd": {
+          "description": "",
+          "properties": {
+            "attributes": {
+              "description": "",
+              "properties": {
+                "vnfd": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "service_types": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "service_type": {
+                    "description": "",
+                    "example": "vnfd",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnfd"
+      ],
+      "type": "object"
+    },
+    "PUT /v1.0/vnfs/{id}": {
+      "description": "",
+      "properties": {
+        "vnf": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "vim_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vnfd_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf"
+      ],
+      "type": "object"
+    },
+    "PUT /vnflcm/v1/vnf_instances/{id}": {
+      "description": "",
+      "properties": {
+        "vnf_instance": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_instance",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_instance"
+      ],
+      "type": "object"
+    },
+    "PUT /vnfpkgm/v1/vnf_packages/{id}": {
+      "description": "",
+      "properties": {
+        "vnf_package": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_package",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_package"
+      ],
+      "type": "object"
+    }
+  },
+  "operations": {
+    "vim_create": {
+      "description": "",
+      "properties": {
+        "vim": {
+          "description": "",
+          "properties": {
+            "auth_cred": {
+              "description": "",
+              "properties": {
+                "cert_verify": {
+                  "description": "TLS verify",
+                  "example": "True",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "Password",
+                  "example": "secret",
+                  "type": "string"
+                },
+                "user_domain_name": {
+                  "description": "User domain",
+                  "example": "Default",
+                  "type": "string"
+                },
+                "username": {
+                  "description": "Username",
+                  "example": "admin",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password",
+                "user_domain_name"
+              ],
+              "type": "object"
+            },
+            "auth_url": {
+              "description": "Identity endpoint",
+              "example": "http://127.0.0.1:5000/v3",
+              "format": "uri",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "is_default": {
+              "default": false,
+              "description": "Default VIM",
+              "type": "boolean"
+            },
+            "name": {
+              "description": "VIM name",
+              "example": "example",
+              "type": "string"
+            },
+            "type": {
+              "description": "VIM type",
+              "enum": [
+                "openstack",
+                "kubernetes"
+              ],
+              "example": "openstack",
+              "type": "string"
+            },
+            "vim_project": {
+              "description": "",
+              "properties": {
+                "name": {
+                  "description": "Project name",
+                  "example": "admin",
+                  "type": "string"
+                },
+                "project_domain_name": {
+                  "description": "Project domain",
+                  "example": "Default",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "project_domain_name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "type",
+            "auth_url",
+            "auth_cred",
+            "vim_project",
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vim"
+      ],
+      "type": "object"
+    },
+    "vim_patch": {
+      "description": "",
+      "properties": {
+        "vim": {
+          "description": "",
+          "properties": {
+            "auth_cred": {
+              "description": "",
+              "properties": {
+                "cert_verify": {
+                  "description": "TLS verify",
+                  "example": "True",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "Password",
+                  "example": "secret",
+                  "type": "string"
+                },
+                "user_domain_name": {
+                  "description": "User domain",
+                  "example": "Default",
+                  "type": "string"
+                },
+                "username": {
+                  "description": "Username",
+                  "example": "admin",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password",
+                "user_domain_name"
+              ],
+              "type": "object"
+            },
+            "auth_url": {
+              "description": "Identity endpoint",
+              "example": "http://127.0.0.1:5000/v3",
+              "format": "uri",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "is_default": {
+              "default": false,
+              "description": "Default VIM",
+              "type": "boolean"
+            },
+            "name": {
+              "description": "VIM name",
+              "example": "example",
+              "type": "string"
+            },
+            "type": {
+              "description": "VIM type",
+              "enum": [
+                "openstack",
+                "kubernetes"
+              ],
+              "example": "openstack",
+              "type": "string"
+            },
+            "vim_project": {
+              "description": "",
+              "properties": {
+                "name": {
+                  "description": "Project name",
+                  "example": "admin",
+                  "type": "string"
+                },
+                "project_domain_name": {
+                  "description": "Project domain",
+                  "example": "Default",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "project_domain_name"
+              ],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vim"
+      ],
+      "type": "object"
+    },
+    "vim_update": {
+      "description": "",
+      "properties": {
+        "vim": {
+          "description": "",
+          "properties": {
+            "auth_cred": {
+              "description": "",
+              "properties": {
+                "cert_verify": {
+                  "description": "TLS verify",
+                  "example": "True",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "Password",
+                  "example": "secret",
+                  "type": "string"
+                },
+                "user_domain_name": {
+                  "description": "User domain",
+                  "example": "Default",
+                  "type": "string"
+                },
+                "username": {
+                  "description": "Username",
+                  "example": "admin",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password",
+                "user_domain_name"
+              ],
+              "type": "object"
+            },
+            "auth_url": {
+              "description": "Identity endpoint",
+              "example": "http://127.0.0.1:5000/v3",
+              "format": "uri",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "is_default": {
+              "default": false,
+              "description": "Default VIM",
+              "type": "boolean"
+            },
+            "name": {
+              "description": "VIM name",
+              "example": "example",
+              "type": "string"
+            },
+            "type": {
+              "description": "VIM type",
+              "enum": [
+                "openstack",
+                "kubernetes"
+              ],
+              "example": "openstack",
+              "type": "string"
+            },
+            "vim_project": {
+              "description": "",
+              "properties": {
+                "name": {
+                  "description": "Project name",
+                  "example": "admin",
+                  "type": "string"
+                },
+                "project_domain_name": {
+                  "description": "Project domain",
+                  "example": "Default",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "project_domain_name"
+              ],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vim"
+      ],
+      "type": "object"
+    },
+    "vnf_create": {
+      "description": "",
+      "properties": {
+        "vnf": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "vim_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vnfd_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "vnfd_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf"
+      ],
+      "type": "object"
+    },
+    "vnf_instance_create": {
+      "description": "",
+      "properties": {
+        "vnf_instance": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_instance",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_instance"
+      ],
+      "type": "object"
+    },
+    "vnf_instance_patch": {
+      "description": "",
+      "properties": {
+        "vnf_instance": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_instance",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_instance"
+      ],
+      "type": "object"
+    },
+    "vnf_instance_update": {
+      "description": "",
+      "properties": {
+        "vnf_instance": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_instance",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_instance"
+      ],
+      "type": "object"
+    },
+    "vnf_package_create": {
+      "description": "",
+      "properties": {
+        "vnf_package": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_package",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_package"
+      ],
+      "type": "object"
+    },
+    "vnf_package_patch": {
+      "description": "",
+      "properties": {
+        "vnf_package": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_package",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_package"
+      ],
+      "type": "object"
+    },
+    "vnf_package_update": {
+      "description": "",
+      "properties": {
+        "vnf_package": {
+          "description": "",
+          "properties": {
+            "address": {
+              "description": "",
+              "type": "string"
+            },
+            "admin_state_up": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "configuration": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": true,
+              "description": "",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "metadata": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "port": {
+              "description": "",
+              "example": 80,
+              "type": "integer"
+            },
+            "project_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "properties": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "protocol": {
+              "description": "",
+              "type": "string"
+            },
+            "shared": {
+              "default": false,
+              "description": "",
+              "type": "boolean"
+            },
+            "size": {
+              "description": "",
+              "example": 1,
+              "type": "integer"
+            },
+            "spec": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "example": "ACTIVE",
+              "type": "string"
+            },
+            "tags": {
+              "description": "",
+              "items": {
+                "description": "",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tenant_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "type": {
+              "description": "",
+              "example": "vnf_package",
+              "type": "string"
+            },
+            "url": {
+              "description": "",
+              "format": "uri",
+              "type": "string"
+            },
+            "value": {
+              "description": "",
+              "type": "string"
+            },
+            "version": {
+              "description": "",
+              "example": "1",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf_package"
+      ],
+      "type": "object"
+    },
+    "vnf_patch": {
+      "description": "",
+      "properties": {
+        "vnf": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "vim_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vnfd_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf"
+      ],
+      "type": "object"
+    },
+    "vnf_update": {
+      "description": "",
+      "properties": {
+        "vnf": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "vim_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            },
+            "vnfd_id": {
+              "description": "",
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnf"
+      ],
+      "type": "object"
+    },
+    "vnfd_create": {
+      "description": "",
+      "properties": {
+        "vnfd": {
+          "description": "",
+          "properties": {
+            "attributes": {
+              "description": "",
+              "properties": {
+                "vnfd": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "service_types": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "service_type": {
+                    "description": "",
+                    "example": "vnfd",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnfd"
+      ],
+      "type": "object"
+    },
+    "vnfd_patch": {
+      "description": "",
+      "properties": {
+        "vnfd": {
+          "description": "",
+          "properties": {
+            "attributes": {
+              "description": "",
+              "properties": {
+                "vnfd": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "service_types": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "service_type": {
+                    "description": "",
+                    "example": "vnfd",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnfd"
+      ],
+      "type": "object"
+    },
+    "vnfd_update": {
+      "description": "",
+      "properties": {
+        "vnfd": {
+          "description": "",
+          "properties": {
+            "attributes": {
+              "description": "",
+              "properties": {
+                "vnfd": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "description": {
+              "description": "Optional description",
+              "example": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "Human-readable name",
+              "example": "example",
+              "type": "string"
+            },
+            "service_types": {
+              "description": "",
+              "items": {
+                "description": "",
+                "properties": {
+                  "service_type": {
+                    "description": "",
+                    "example": "vnfd",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "vnfd"
+      ],
+      "type": "object"
+    }
+  },
+  "service": "tacker",
+  "source": "generated-from-api-ref-catalog"
+}

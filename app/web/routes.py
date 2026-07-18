@@ -291,20 +291,42 @@ async def ui_openstack_microversions(request: Request) -> JSONResponse:
 
 @router.post("/ui/api/demo/load", include_in_schema=False)
 async def ui_demo_load(request: Request) -> JSONResponse:
-    """Load synthetic OpenStack cloud (~1000 servers + full topology)."""
+    """Load synthetic OpenStack cloud (size: small | large | big)."""
+
+    from app.openstack.demo_cloud import DEMO_SIZE_DEFAULT, resolve_demo_size
+
+    size = DEMO_SIZE_DEFAULT
+    try:
+        payload = await request.json()
+    except Exception:
+        payload = {}
+    if isinstance(payload, dict) and payload.get("size"):
+        size = str(payload["size"])
+    elif request.query_params.get("size"):
+        size = str(request.query_params.get("size"))
+    try:
+        resolve_demo_size(size)
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail=str(error)) from error
 
     pool = _database_pool(request)
     try:
         async with pool.acquire() as connection:
             async with connection.transaction():
-                result = await seed_openstack_demo(connection)
+                result = await seed_openstack_demo(connection, size=size)
             summary = await openstack_demo_summary(connection)
     except Exception as error:
         raise HTTPException(
             status_code=500, detail=f"failed to load OpenStack demo cloud: {error}"
         ) from error
     return JSONResponse(
-        {"ok": True, "profile": result["profile"], "summary": summary, "seed": result}
+        {
+            "ok": True,
+            "profile": result["profile"],
+            "size": result.get("size"),
+            "summary": summary,
+            "seed": result,
+        }
     )
 
 
@@ -323,7 +345,7 @@ async def ui_demo_unload(request: Request) -> JSONResponse:
             summary = await openstack_demo_summary(connection)
     except Exception as error:
         raise HTTPException(
-            status_code=500, detail=f"failed to remove demo data: {error}"
+            status_code=500, detail=f"failed to reset to minimal cluster: {error}"
         ) from error
     return JSONResponse(
         {"ok": True, "profile": result.get("profile", "minimal"), "summary": summary}

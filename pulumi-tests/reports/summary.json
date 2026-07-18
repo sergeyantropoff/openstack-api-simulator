@@ -2,8 +2,14 @@
   "series_count": 4,
   "pulumi_ok": 4,
   "pulumi_fail": 0,
-  "http_ok": 4721,
+  "http_ok": 6514,
   "http_fail": 0,
+  "http_critical": 0,
+  "http_declared": 4721,
+  "http_head": 1793,
+  "http_total": 6514,
+  "http_expected": 6514,
   "coverage_incomplete": 0,
-  "collections_only": false
+  "collections_only": false,
+  "definition": "100% = HTTP contract matrix (pack ops + synthetic HEAD), not pulumi_openstack resource count"
 }

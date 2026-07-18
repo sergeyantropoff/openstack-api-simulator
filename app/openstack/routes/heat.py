@@ -146,6 +146,52 @@ async def show_stack_by_id(
     return {"stack": _stack(row)}
 
 
+async def _update_stack(
+    *,
+    project_id: Any,
+    stack_id: str | None,
+    stack_name: str | None,
+    request: Request,
+    conn: Connection,
+) -> dict[str, object]:
+    payload = await request.json()
+    stack = payload.get("stack") or payload
+    if stack_id:
+        row = await conn.fetchrow(
+            "SELECT * FROM os_stacks WHERE project_id=$1 AND id::text=$2",
+            project_id,
+            stack_id,
+        )
+    else:
+        row = await conn.fetchrow(
+            """SELECT * FROM os_stacks
+               WHERE project_id=$1 AND (id::text=$2 OR stack_name=$2)
+               ORDER BY created_at DESC LIMIT 1""",
+            project_id,
+            stack_name,
+        )
+    if row is None:
+        raise OpenStackError("StackNotFound", "Stack not found", status_code=404)
+    desc = stack.get("description") if "description" in stack else row["description"]
+    template = stack.get("template") if isinstance(stack.get("template"), dict) else None
+    parameters = stack.get("parameters") if isinstance(stack.get("parameters"), dict) else None
+    await conn.execute(
+        """UPDATE os_stacks
+           SET description=$1,
+               template=COALESCE($2::jsonb, template),
+               parameters=COALESCE($3::jsonb, parameters),
+               updated_at=now(),
+               stack_status='UPDATE_COMPLETE'
+           WHERE id=$4""",
+        desc,
+        json.dumps(template) if template is not None else None,
+        json.dumps(parameters) if parameters is not None else None,
+        row["id"],
+    )
+    row = await conn.fetchrow("SELECT * FROM os_stacks WHERE id=$1", row["id"])
+    return {"stack": _stack(row)}
+
+
 @router.put("/v1/{tenant_id}/stacks/{id}")
 @router.patch("/v1/{tenant_id}/stacks/{id}")
 async def update_stack_by_id(
@@ -156,23 +202,33 @@ async def update_stack_by_id(
     ctx: Annotated[TokenContext, Depends(require_project_token)],
 ) -> dict[str, object]:
     _ = tenant_id
-    payload = await request.json()
-    stack = payload.get("stack") or payload
-    row = await conn.fetchrow(
-        "SELECT * FROM os_stacks WHERE project_id=$1 AND (id::text=$2 OR stack_name=$2) ORDER BY created_at DESC LIMIT 1",
-        ctx.project_id,
-        id,
+    return await _update_stack(
+        project_id=ctx.project_id,
+        stack_id=None,
+        stack_name=id,
+        request=request,
+        conn=conn,
     )
-    if row is None:
-        raise OpenStackError("StackNotFound", "Stack not found", status_code=404)
-    desc = stack.get("description") if "description" in stack else row["description"]
-    await conn.execute(
-        "UPDATE os_stacks SET description=$1, updated_at=now(), stack_status='UPDATE_COMPLETE' WHERE id=$2",
-        desc,
-        row["id"],
+
+
+@router.put("/v1/{tenant_id}/stacks/{stack_name}/{stack_id}")
+@router.patch("/v1/{tenant_id}/stacks/{stack_name}/{stack_id}")
+async def update_stack_by_name(
+    tenant_id: str,
+    stack_name: str,
+    stack_id: str,
+    request: Request,
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    _ = tenant_id, stack_name
+    return await _update_stack(
+        project_id=ctx.project_id,
+        stack_id=stack_id,
+        stack_name=None,
+        request=request,
+        conn=conn,
     )
-    row = await conn.fetchrow("SELECT * FROM os_stacks WHERE id=$1", row["id"])
-    return {"stack": _stack(row)}
 
 
 @router.delete("/v1/{tenant_id}/stacks/{id}", status_code=204)

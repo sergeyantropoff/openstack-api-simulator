@@ -6,12 +6,16 @@ import argparse
 import asyncio
 import json
 import os
-import sys
 
 import asyncpg
 
 from app.config import get_settings
-from app.openstack.demo_cloud import clear_openstack_state, seed_openstack_demo
+from app.openstack.demo_cloud import (
+    DEMO_CLUSTER_SIZES,
+    clear_openstack_state,
+    resolve_demo_size,
+    seed_openstack_demo,
+)
 from app.openstack.seed import seed_openstack
 
 
@@ -20,22 +24,28 @@ async def _run(profile: str, password: str) -> dict[str, object]:
     conn = await asyncpg.connect(settings.database_url.get_secret_value())
     try:
         async with conn.transaction():
-            if profile in {"demo", "demo-cloud", "openstack-demo-cloud"}:
-                return await seed_openstack_demo(conn, password=password)
-            if profile in {"minimal", "lab", "small"}:
+            key = profile.strip().lower()
+            if key in {"minimal", "lab"}:
                 await clear_openstack_state(conn)
                 return await seed_openstack(conn, password=password)
-            raise SystemExit(f"unknown profile: {profile} (use minimal|demo)")
+            # demo / demo-small / small / large / big / openstack-demo-cloud:…
+            try:
+                cfg = resolve_demo_size(key)
+            except ValueError as exc:
+                known = "minimal | demo | demo-small | demo-large | demo-big | small | large | big"
+                raise SystemExit(f"unknown profile: {profile} (use {known})") from exc
+            return await seed_openstack_demo(conn, size=cfg.name, password=password)
     finally:
         await conn.close()
 
 
 def main(argv: list[str] | None = None) -> int:
+    sizes = ", ".join(sorted(DEMO_CLUSTER_SIZES))
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--profile",
         default=os.environ.get("SEED_PROFILE", "minimal"),
-        help="minimal | demo",
+        help=f"minimal | demo | demo-small | demo-large | demo-big | {sizes}",
     )
     parser.add_argument("--password", default=os.environ.get("OS_PASSWORD", "secret"))
     args = parser.parse_args(argv)

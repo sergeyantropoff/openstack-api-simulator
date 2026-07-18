@@ -24,4 +24,4 @@ make seed-demo
 
 ## Microversion отклонён
 
-Понизьте запрошенную compute microversion или сбросьте переопределения в Web UI.
+Понизьте запрошенную compute microversion или примените более раннюю серию в API catalog.
