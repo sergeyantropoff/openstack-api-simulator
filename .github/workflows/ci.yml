@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  offline:
+    name: Offline quality gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Prepare .env
+        run: test -f .env || cp .env.example .env
+
+      - name: Build development image
+        run: docker compose build simulator dev
+
+      - name: Ruff format check
+        run: docker compose run --rm --no-deps dev ruff format --check .
+
+      - name: Ruff lint
+        run: docker compose run --rm --no-deps dev ruff check .
+
+      - name: Mypy
+        run: docker compose run --rm --no-deps dev mypy
+
+      - name: Offline pytest + coverage
+        run: >
+          docker compose run --rm --no-deps dev
+          pytest -m "not integration and not compatibility"
+          --cov=app --cov-report=term-missing --cov-report=xml

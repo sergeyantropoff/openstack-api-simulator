@@ -1,0 +1,57 @@
+# Example: public Ingress + Let's Encrypt (cert-manager) + Hub image + demo seed.
+#
+#   helm upgrade --install os-sim ./helm/openstack-api-simulator \
+#     -n openstack-sim --create-namespace \
+#     -f helm/openstack-api-simulator/values-ingress-example.yaml \
+#     --set certManager.email=you@example.com \
+#     --set ingress.hosts[0].host=os-sim.example.com \
+#     --set ingress.tls[0].hosts[0]=os-sim.example.com \
+#     --set secret.ticketSigningKey="$(openssl rand -hex 32)" \
+#     --set postgresql.auth.password="$(openssl rand -hex 16)"
+
+image:
+  repository: inecs/openstack-api-simulator
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+secret:
+  create: true
+  ticketSigningKey: "replace-me"
+
+gateway:
+  enabled: true
+
+postgresql:
+  enabled: true
+  auth:
+    username: openstack
+    password: "replace-me-db-password"
+    database: openstack_simulator
+
+seed:
+  enabled: true
+  profile: demo
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: os-sim.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: openstack-api-simulator-tls
+      hosts:
+        - os-sim.example.com
+
+certManager:
+  enabled: true
+  createClusterIssuer: true
+  createStagingIssuer: true
+  email: you@example.com
+  issuerName: letsencrypt-prod
+  stagingIssuerName: letsencrypt-staging
+  # Set true first to validate HTTP-01 against Let's Encrypt staging.
+  useStaging: false
+  solverIngressClassName: nginx

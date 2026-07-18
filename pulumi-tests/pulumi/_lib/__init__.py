@@ -1,0 +1,1 @@
+# Pulumi OpenStack coverage helpers.

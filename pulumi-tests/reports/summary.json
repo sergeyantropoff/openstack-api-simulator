@@ -1,0 +1,9 @@
+{
+  "series_count": 4,
+  "pulumi_ok": 4,
+  "pulumi_fail": 0,
+  "http_ok": 4721,
+  "http_fail": 0,
+  "coverage_incomplete": 0,
+  "collections_only": false
+}

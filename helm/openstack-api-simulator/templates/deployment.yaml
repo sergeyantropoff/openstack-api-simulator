@@ -1,0 +1,142 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "openstack-api-simulator.fullname" . }}
+  labels:
+    {{- include "openstack-api-simulator.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "openstack-api-simulator.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: simulator
+  template:
+    metadata:
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "openstack-api-simulator.labels" . | nindent 8 }}
+        app.kubernetes.io/component: simulator
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "openstack-api-simulator.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if and .Values.migrate.enabled (not .Values.migrate.asJob) }}
+      initContainers:
+        - name: migrate
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: {{ include "openstack-api-simulator.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "openstack-api-simulator.secretName" . }}
+                  key: DATABASE_URL
+            - name: LOG_LEVEL
+              value: {{ .Values.config.logLevel | quote }}
+          command:
+            - python
+            - -c
+            - |
+              import asyncio
+              import os
+              import sys
+              import time
+
+              import asyncpg
+
+              dsn = os.environ["DATABASE_URL"]
+              deadline = time.time() + 300
+              while True:
+                  try:
+                      async def ping() -> None:
+                          conn = await asyncpg.connect(dsn=dsn, timeout=5)
+                          await conn.close()
+
+                      asyncio.run(ping())
+                      break
+                  except Exception as exc:  # noqa: BLE001 - wait until Postgres accepts connections
+                      if time.time() >= deadline:
+                          print(f"database not ready: {exc}", file=sys.stderr)
+                          raise
+                      print(f"waiting for database: {exc}")
+                      time.sleep(3)
+
+              from app.db.migrate_cli import run
+
+              asyncio.run(run())
+          resources:
+            {{- toYaml .Values.migrate.resources | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      {{- end }}
+      containers:
+        - name: simulator
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: {{ include "openstack-api-simulator.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: APP_HOST
+              value: "0.0.0.0"
+            - name: APP_PORT
+              value: "8080"
+            - name: LOG_LEVEL
+              value: {{ .Values.config.logLevel | quote }}
+            - name: REQUEST_ID_HEADER
+              value: {{ .Values.config.requestIdHeader | quote }}
+{{- if .Values.config.openstackSeries }}
+            - name: OPENSTACK_SERIES
+              value: {{ .Values.config.openstackSeries | quote }}
+{{- end }}
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "openstack-api-simulator.secretName" . }}
+                  key: DATABASE_URL
+            - name: TICKET_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "openstack-api-simulator.secretName" . }}
+                  key: TICKET_SIGNING_KEY
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

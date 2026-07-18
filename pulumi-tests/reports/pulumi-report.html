@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Pulumi OpenStack coverage</title>
+  <style>
+    :root { --bg:#0f1419; --panel:#1a222c; --text:#e7ecf3; --muted:#9aa7b8; --ok:#3dd68c; --fail:#ff6b6b; --border:#2a3544; }
+    body { margin:0; font-family:"IBM Plex Sans",sans-serif; background:radial-gradient(1000px 500px at 0% 0%,#1b2a3d,var(--bg)); color:var(--text); }
+    header, main { max-width:1200px; margin:0 auto; padding:1.5rem; }
+    .summary, .cards { display:grid; gap:.75rem; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); margin:1rem 0; }
+    .summary div, .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:1rem; }
+    .ok { color:var(--ok); font-weight:600; } .fail { color:var(--fail); font-weight:600; }
+    .muted { color:var(--muted); }
+    table { width:100%; border-collapse:collapse; background:var(--panel); border:1px solid var(--border); border-radius:10px; overflow:hidden; font-size:.9rem; }
+    th, td { padding:.45rem .6rem; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }
+    th { color:var(--muted); background:#121820; }
+    tr.fail { background:rgba(255,107,107,.08); }
+    code { font-family:ui-monospace,monospace; font-size:.82rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pulumi OpenStack API coverage</h1>
+    <p class="muted">Generated 2026-07-17 13:12:06 UTC · pulumi_openstack primary + HTTP pack probe with non-empty checks</p>
+  </header>
+  <main>
+    <div class="summary">
+      <div><strong>4</strong><span class="muted"> series</span></div>
+      <div><strong class="ok">4</strong><span class="muted"> pulumi stacks ok</span></div>
+      <div><strong class="fail">0</strong><span class="muted"> pulumi failures</span></div>
+      <div><strong class="ok">4721</strong><span class="muted"> http ops ok</span></div>
+      <div><strong class="fail">0</strong><span class="muted"> http / nonempty fails</span></div>
+    </div>
+    <h2>Series</h2>
+    <div class="cards">
+            <div class="card">
+              <h3>yoga</h3>
+              <p class="muted">pulumi_openstack + HTTP pack probe</p>
+              <div class="stats">
+                <span class="ok">pulumi exports ok=26</span>
+                <span class="fail">empty exports=0</span>
+              </div>
+              <div class="stats">
+                <span class="ok">http ok=1060</span>
+                <span class="fail">http fail=0 nonempty_fail=0</span>
+                <span>http total=1060/1060</span>
+              </div>
+              <div class="stats muted">
+                methods: GET=404 POST=168 PUT=171 PATCH=155 DELETE=162
+                
+              </div>
+            </div>
+            <div class="card">
+              <h3>antelope</h3>
+              <p class="muted">pulumi_openstack + HTTP pack probe</p>
+              <div class="stats">
+                <span class="ok">pulumi exports ok=26</span>
+                <span class="fail">empty exports=0</span>
+              </div>
+              <div class="stats">
+                <span class="ok">http ok=1108</span>
+                <span class="fail">http fail=0 nonempty_fail=0</span>
+                <span>http total=1108/1108</span>
+              </div>
+              <div class="stats muted">
+                methods: GET=422 POST=177 PUT=178 PATCH=162 DELETE=169
+                
+              </div>
+            </div>
+            <div class="card">
+              <h3>caracal</h3>
+              <p class="muted">pulumi_openstack + HTTP pack probe</p>
+              <div class="stats">
+                <span class="ok">pulumi exports ok=26</span>
+                <span class="fail">empty exports=0</span>
+              </div>
+              <div class="stats">
+                <span class="ok">http ok=1196</span>
+                <span class="fail">http fail=0 nonempty_fail=0</span>
+                <span>http total=1196/1196</span>
+              </div>
+              <div class="stats muted">
+                methods: GET=453 POST=192 PUT=192 PATCH=176 DELETE=183
+                
+              </div>
+            </div>
+            <div class="card">
+              <h3>dalmatian</h3>
+              <p class="muted">pulumi_openstack + HTTP pack probe</p>
+              <div class="stats">
+                <span class="ok">pulumi exports ok=26</span>
+                <span class="fail">empty exports=0</span>
+              </div>
+              <div class="stats">
+                <span class="ok">http ok=1357</span>
+                <span class="fail">http fail=0 nonempty_fail=0</span>
+                <span>http total=1357/1357</span>
+              </div>
+              <div class="stats muted">
+                methods: GET=514 POST=217 PUT=217 PATCH=201 DELETE=208
+                
+              </div>
+            </div></div>
+    <h2>Failures</h2>
+    <table>
+      <thead><tr><th>Series</th><th>Service</th><th>Operation</th><th>Method</th><th>Path</th><th>HTTP</th><th>Detail</th></tr></thead>
+      <tbody><tr><td colspan="7">No failures</td></tr></tbody>
+    </table>
+  </main>
+</body>
+</html>

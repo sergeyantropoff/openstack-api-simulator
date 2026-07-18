@@ -1,0 +1,295 @@
+{
+  "checksum": "3019ae00375a923d1b5172424fb5ec2a6489d0f590515dbec3b5daa58e4ff19c",
+  "generated_at": "2026-07-16T00:28:30Z",
+  "major": 8,
+  "min_core_operations": {
+    "keystone": 40,
+    "neutron": 70,
+    "nova": 70
+  },
+  "operation_count": 1196,
+  "series": "caracal",
+  "service_count": 28,
+  "services": [
+    {
+      "checksum": "e41a65377cee6bd2cf246346cf4262cfcdd133fd5739cd2acf018bd5c67e5022",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "keystone",
+      "operation_count": 77,
+      "port": 5000,
+      "type": "identity",
+      "version_path": "/v3/"
+    },
+    {
+      "checksum": "257c3724735800fb741ecf0ce20077e58988f0f97af65229532669712c86309e",
+      "default_microversion": "2.1",
+      "max_microversion": "2.95",
+      "name": "nova",
+      "operation_count": 102,
+      "port": 8774,
+      "type": "compute",
+      "version_path": "/v2.1/"
+    },
+    {
+      "checksum": "ff2a12642935292bb06c8be7cb762000b1d88cb864d4f3d926dd03ad422c36a0",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "neutron",
+      "operation_count": 215,
+      "port": 9696,
+      "type": "network",
+      "version_path": "/v2.0/"
+    },
+    {
+      "checksum": "4d6f6d6435cd94d11f861541c3b51b3acf82216e1f7b5e6abd99dedd505882ff",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "glance",
+      "operation_count": 37,
+      "port": 9292,
+      "type": "image",
+      "version_path": "/v2/"
+    },
+    {
+      "checksum": "280432e72b6308aab490d15e435b18f23a4402c81b5990f22c2338e7dbba3e89",
+      "default_microversion": "3.0",
+      "max_microversion": "3.70",
+      "name": "cinder",
+      "operation_count": 98,
+      "port": 8776,
+      "type": "volumev3",
+      "version_path": "/v3/"
+    },
+    {
+      "checksum": "9b0f7f8c4d311ab54dfcb1f87ccd80dd73d008888dc16c09892c6143130999d6",
+      "default_microversion": "1.0",
+      "max_microversion": "1.38",
+      "name": "placement",
+      "operation_count": 30,
+      "port": 8003,
+      "type": "placement",
+      "version_path": "/"
+    },
+    {
+      "checksum": "5409d2082c5ef3d70dd41e2e0a73004378a24a845d7cef7c4f9c71cbe88a08d5",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "heat",
+      "operation_count": 38,
+      "port": 8004,
+      "type": "orchestration",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "110f08b8d22fd7bbce7b9340507018ac90cf9ace29df1b24caba200490922e4a",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "heat-cfn",
+      "operation_count": 8,
+      "port": 8000,
+      "type": "cloudformation",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "ed0cef8f5511f86ca4e81154777a9f7c4f204a463082510804248512efad5e0c",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "swift",
+      "operation_count": 10,
+      "port": 8080,
+      "type": "object-store",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "08b3f896984c4f831c8c1b1ffe270e8728b44843a03c394f16c4c6b85224a7d7",
+      "default_microversion": "1.1",
+      "max_microversion": "1.88",
+      "name": "ironic",
+      "operation_count": 58,
+      "port": 6385,
+      "type": "baremetal",
+      "version_path": "/"
+    },
+    {
+      "checksum": "1df8aed590f9a87039a28f2a356fa48d6b3fd6e395e56f9eaedc9a092358c6c6",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "octavia",
+      "operation_count": 74,
+      "port": 9876,
+      "type": "load-balancer",
+      "version_path": "/v2/"
+    },
+    {
+      "checksum": "81e872b7d6d83f420c46752d7b7e89e1a645d0e600892bcf95d636498c87be66",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "barbican",
+      "operation_count": 25,
+      "port": 9311,
+      "type": "key-manager",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "c802d02a84de93d041aa398cea3dd0a7558073a40ab25389c36eb72fbc5204fa",
+      "default_microversion": "2.0",
+      "max_microversion": "2.79",
+      "name": "manila",
+      "operation_count": 44,
+      "port": 8786,
+      "type": "sharev2",
+      "version_path": "/v2/"
+    },
+    {
+      "checksum": "42270b545f315f614d597eba560b52e4dca15fcf76a0a181cfe95b58174416ee",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "designate",
+      "operation_count": 37,
+      "port": 9001,
+      "type": "dns",
+      "version_path": "/v2/"
+    },
+    {
+      "checksum": "815487cb9a7bec9ec243319f7b00c11ee55fc75c1cc6f580e566cb3fefc95b7e",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "magnum",
+      "operation_count": 25,
+      "port": 9511,
+      "type": "container-infra",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "82279f949f829afbea00e081020031fd2f80317c9bdd851c71b9a3585a1508ff",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "zun",
+      "operation_count": 27,
+      "port": 9517,
+      "type": "container",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "a2623e7f75d08034afc16baa036447f7b360449c7a43c10d9234e2972a9e8514",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "trove",
+      "operation_count": 31,
+      "port": 8779,
+      "type": "database",
+      "version_path": "/v1.0/"
+    },
+    {
+      "checksum": "7a6c08894e76b15c16097a5c0d32e342929f918bdd74f9b534c8b9fcdeafffd9",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "mistral",
+      "operation_count": 37,
+      "port": 8989,
+      "type": "workflowv2",
+      "version_path": "/v2/"
+    },
+    {
+      "checksum": "127dace8ffb6d5021c0279fee07d70e840cb71f97335f888af19324ceec54ad0",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "aodh",
+      "operation_count": 19,
+      "port": 8042,
+      "type": "alarming",
+      "version_path": "/v2/"
+    },
+    {
+      "checksum": "7325fdd4e8061f8f7bf4f9ac10b427c1be174b79e162de4522b17acc22924261",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "cloudkitty",
+      "operation_count": 25,
+      "port": 8889,
+      "type": "rating",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "04fbe1c4a3d7f15dabdab2dd254854bbfc033e5203a32c84d0b095175d82a989",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "freezer",
+      "operation_count": 31,
+      "port": 9090,
+      "type": "backup",
+      "version_path": "/v2/"
+    },
+    {
+      "checksum": "368cca700081675995e07cae64cb87b6b2755cd67f9c2f051242305ec1409d12",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "blazar",
+      "operation_count": 19,
+      "port": 1234,
+      "type": "reservation",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "cef9528b0f94356b57d44bc373b7aa5ba71ce8b19a5ef50084cf7be5795a15b8",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "vitrage",
+      "operation_count": 30,
+      "port": 8999,
+      "type": "rca",
+      "version_path": "/"
+    },
+    {
+      "checksum": "a1e57fe87224993ec57472bd97f41465f1e51894c4a612d5b77566a2a3a4c8b0",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "masakari",
+      "operation_count": 19,
+      "port": 15868,
+      "type": "instance-ha",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "b0c0fa19997dc13381a217d53ca4fbf32ca6bac4eba45a24566580867d235c89",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "tacker",
+      "operation_count": 30,
+      "port": 9890,
+      "type": "nfv-orchestration",
+      "version_path": "/"
+    },
+    {
+      "checksum": "1182149d717f60116653c7ca7ce2d550cf000ea114a78afbfd0cd6dffea6778f",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "adjutant",
+      "operation_count": 24,
+      "port": 5050,
+      "type": "admin-logic",
+      "version_path": "/"
+    },
+    {
+      "checksum": "f71a34fd98e7a174e7f9184681ab88541cb69c471a0fec51a9713febb08f0845",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "watcher",
+      "operation_count": 25,
+      "port": 9322,
+      "type": "infra-optim",
+      "version_path": "/v1/"
+    },
+    {
+      "checksum": "b520c616eef9a8aaa1c2ab485afb8a04db3867fbca0a9e77f59e0291ef8121b9",
+      "default_microversion": null,
+      "max_microversion": null,
+      "name": "zaqar",
+      "operation_count": 1,
+      "port": 8888,
+      "type": "messaging",
+      "version_path": "/v2/"
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+# Pulumi OpenStack coverage lab.
+# Usage from repo root:
+#   make pulumi-tests
+#   docker compose -f pulumi-tests/docker-compose.yml --profile test run --rm pulumi-runner
+name: openstack-pulumi-tests
+
+networks:
+  lab:
+    driver: bridge
+
+volumes:
+  lab-postgres-data:
+  lab-reports:
+
+x-os-env: &os-env
+  OS_AUTH_URL: http://api-gateway:5000/v3
+  OS_USERNAME: admin
+  OS_PASSWORD: secret
+  OS_PROJECT_NAME: demo
+  OS_USER_DOMAIN_NAME: Default
+  OS_PROJECT_DOMAIN_NAME: Default
+  OS_REGION_NAME: RegionOne
+  OS_IDENTITY_API_VERSION: "3"
+  OS_GATEWAY_URL: http://api-gateway:5000
+
+services:
+  postgres:
+    image: postgres:17.5-bookworm
+    networks: [lab]
+    environment:
+      POSTGRES_DB: openstack_simulator
+      POSTGRES_USER: openstack
+      POSTGRES_PASSWORD: openstack
+    volumes:
+      - lab-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openstack -d openstack_simulator"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  migrate:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: runtime
+    networks: [lab]
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+    environment:
+      DATABASE_URL: postgresql://openstack:openstack@postgres:5432/openstack_simulator
+      PYTHONPATH: /workspace
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: ["python"]
+    command: ["-m", "app.db.migrate_cli"]
+    restart: "no"
+
+  simulator:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: dev
+    networks: [lab]
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+    environment:
+      DATABASE_URL: postgresql://openstack:openstack@postgres:5432/openstack_simulator
+      PYTHONPATH: /workspace
+      APP_PORT: "8080"
+      LOG_LEVEL: INFO
+      TICKET_SIGNING_KEY: lab-signing-key
+      OPENSTACK_SERIES: dalmatian
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    entrypoint: []
+    command:
+      [
+        "uvicorn",
+        "app.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8080",
+        "--reload",
+        "--reload-dir",
+        "/workspace/app",
+      ]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health/live', timeout=2)",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 15s
+
+  seed:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: runtime
+    networks: [lab]
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+    environment:
+      DATABASE_URL: postgresql://openstack:openstack@postgres:5432/openstack_simulator
+      PYTHONPATH: /workspace
+    depends_on:
+      simulator:
+        condition: service_healthy
+    entrypoint: ["python"]
+    command: ["-m", "app.openstack.seed_cli", "--profile", "demo"]
+    restart: "no"
+
+  api-gateway:
+    image: nginx:1.28-alpine
+    networks: [lab]
+    depends_on:
+      simulator:
+        condition: service_healthy
+    volumes:
+      - ../docker/gateway/openstack-ports.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../docker/tls/server.crt:/etc/nginx/tls/server.crt:ro
+      - ../docker/tls/server.key:/etc/nginx/tls/server.key:ro
+    ports:
+      - "127.0.0.1:15000:5000"
+
+  pulumi-runner:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.pulumi-runner
+    networks: [lab]
+    working_dir: /suite
+    volumes:
+      - ./:/suite
+      - ..:/workspace
+      - ./reports:/reports
+      - lab-reports:/reports-volume
+    environment:
+      <<: *os-env
+      PYTHONPATH: /workspace:/suite/pulumi
+      WORKSPACE: /workspace
+      REPORT_DIR: /reports
+      REPORT_PATH: /reports/pulumi-junit.xml
+      PULUMI_CONFIG_PASSPHRASE: lab
+      PULUMI_BACKEND_URL: file:///tmp/pulumi-state
+    depends_on:
+      seed:
+        condition: service_completed_successfully
+      api-gateway:
+        condition: service_started
+    profiles: ["test"]

@@ -1,0 +1,45 @@
+openstack-api-simulator {{ .Chart.AppVersion }} installed as release "{{ .Release.Name }}".
+
+Image: {{ include "openstack-api-simulator.image" . }}
+
+1. Check readiness:
+
+   kubectl -n {{ .Release.Namespace }} get pods -l "app.kubernetes.io/instance={{ .Release.Name }}"
+
+2. Access Keystone / Web UI:
+
+{{- if .Values.ingress.enabled }}
+   https://{{ (index .Values.ingress.hosts 0).host }}/
+   {{- if .Values.certManager.enabled }}
+   (TLS via cert-manager issuer {{ include "openstack-api-simulator.clusterIssuer" . }})
+   {{- end }}
+{{- else if .Values.gateway.enabled }}
+   kubectl -n {{ .Release.Namespace }} port-forward \
+     svc/{{ include "openstack-api-simulator.fullname" . }}-gateway 5000:5000 8774:8774 9696:9696
+
+   Then:
+     http://127.0.0.1:5000/          # Keystone + console
+     http://127.0.0.1:8774/v2.1/     # Nova
+     http://127.0.0.1:9696/v2.0/     # Neutron
+{{- else }}
+   kubectl -n {{ .Release.Namespace }} port-forward \
+     svc/{{ include "openstack-api-simulator.fullname" . }} {{ .Values.service.port }}:{{ .Values.service.port }}
+   Then open http://127.0.0.1:{{ .Values.service.port }}/
+   (path-based routing only — prefer gateway.enabled=true for real OpenStack clients)
+{{- end }}
+
+3. Seed OpenStack data (if seed job was disabled):
+
+   kubectl -n {{ .Release.Namespace }} exec deploy/{{ include "openstack-api-simulator.fullname" . }} -- \
+     python -m app.openstack.seed_cli --profile minimal
+
+   Demo cloud (~1000 servers):
+     python -m app.openstack.seed_cli --profile demo
+
+   Or: helm upgrade … --set seed.enabled=true --set seed.profile=demo
+
+Default Keystone login after seeding: admin / secret (project demo or admin).
+Demo cloud also enables ops/developer/auditor — password secret.
+Change secret.ticketSigningKey before exposing the cluster publicly.
+
+Docs: docs/kubernetes.md

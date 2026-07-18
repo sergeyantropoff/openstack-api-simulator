@@ -1,0 +1,8 @@
+config:
+  openstack:authUrl: http://127.0.0.1:5000/v3
+  openstack:userName: admin
+  openstack:password:
+    secure: AAABANNOlcqFB+nL7EdsJpTICXXoUIhfYk6vimDAk+KJcI5V8UM=
+  openstack:tenantName: demo
+  openstack:domainName: Default
+  openstack:region: RegionOne

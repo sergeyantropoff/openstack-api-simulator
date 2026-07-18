@@ -1,0 +1,75 @@
+{{- if .Values.gateway.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "openstack-api-simulator.fullname" . }}-gateway
+  labels:
+    {{- include "openstack-api-simulator.labels" . | nindent 4 }}
+    app.kubernetes.io/component: gateway
+data:
+  # Replaces nginx's stock default.conf (avoids conflicting listen 80).
+  default.conf: |
+    # OpenStack multi-port gateway (Helm). Mirrors docker/gateway/openstack-ports.conf.
+    upstream openstack_simulator {
+        server {{ include "openstack-api-simulator.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }};
+    }
+
+    map $server_port $openstack_service {
+        default   "simulator";
+        5000      "keystone";
+        8774      "nova";
+        9696      "neutron";
+        9292      "glance";
+        8776      "cinder";
+        8003      "placement";
+        8004      "heat";
+        8000      "heat-cfn";
+        8080      "swift";
+        6385      "ironic";
+        9876      "octavia";
+        9311      "barbican";
+        8786      "manila";
+        9001      "designate";
+        9511      "magnum";
+        9517      "zun";
+        8779      "trove";
+        8989      "mistral";
+        8042      "aodh";
+        8889      "cloudkitty";
+        9090      "freezer";
+        1234      "blazar";
+        8999      "vitrage";
+        15868     "masakari";
+        9890      "tacker";
+        5050      "adjutant";
+        9322      "watcher";
+        8888      "zaqar";
+        80        "horizon";
+    }
+
+    server {
+{{- range .Values.gateway.service.ports }}
+        listen {{ .port }};   # {{ .name }}
+{{- end }}
+
+        server_name _;
+
+        location / {
+            proxy_pass http://openstack_simulator;
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Port $server_port;
+            proxy_set_header X-OpenStack-Service $openstack_service;
+            proxy_set_header X-OpenStack-Route-Service $http_x_openstack_route_service;
+            proxy_set_header X-Request-ID $request_id;
+            proxy_set_header OpenStack-API-Version $http_openstack_api_version;
+            proxy_set_header X-OpenStack-Nova-API-Version $http_x_openstack_nova_api_version;
+            add_header X-OpenStack-Service $openstack_service always;
+            add_header Access-Control-Expose-Headers "X-Subject-Token,x-subject-token" always;
+            add_header X-Forwarded-Port $server_port always;
+        }
+    }
+{{- end }}

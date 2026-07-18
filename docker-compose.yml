@@ -1,0 +1,196 @@
+name: openstack-api-simulator
+
+x-simulator-env: &simulator-env
+  DATABASE_URL: postgresql://openstack:openstack@postgres:5432/openstack_simulator
+  # OpenStack-only by default (no Proxмоx contract handlers).
+  LOG_LEVEL: INFO
+  TICKET_SIGNING_KEY: development-only-signing-key-change-me
+  APP_PORT: "8080"
+
+x-dev-env: &dev-env
+  DATABASE_URL: postgresql://openstack:openstack@postgres:5432/openstack_simulator
+  TEST_DATABASE_URL: postgresql://openstack:openstack@postgres:5432/openstack_simulator
+  LOG_LEVEL: INFO
+  TICKET_SIGNING_KEY: development-only-signing-key-change-me
+  APP_PORT: "8080"
+
+networks:
+  simulator:
+    driver: bridge
+
+volumes:
+  postgres-data:
+
+services:
+  postgres:
+    image: postgres:17.5-bookworm
+    restart: unless-stopped
+    networks: [simulator]
+    environment:
+      POSTGRES_DB: openstack_simulator
+      POSTGRES_USER: openstack
+      POSTGRES_PASSWORD: openstack
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openstack -d openstack_simulator"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5433:5432"
+
+  migrate:
+    build:
+      context: .
+      target: runtime
+    image: openstack-api-simulator:0.1.0
+    networks: [simulator]
+    working_dir: /workspace
+    volumes:
+      # Always apply migrations from the working tree (not only the baked image).
+      - .:/workspace
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      <<: *simulator-env
+      PYTHONPATH: /workspace
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: ["python"]
+    command: ["-m", "app.db.migrate_cli"]
+    restart: "no"
+
+  # FastAPI process — internal only. Clients use api-gateway OpenStack ports.
+  simulator:
+    build:
+      context: .
+      target: dev
+    image: openstack-api-simulator-dev:0.1.0
+    restart: unless-stopped
+    networks: [simulator]
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      <<: *dev-env
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    entrypoint: []
+    command:
+      [
+        "uvicorn",
+        "app.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8080",
+        "--reload",
+        "--reload-dir",
+        "/workspace/app",
+        "--reload-include",
+        "*.html",
+      ]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health/ready', timeout=2)",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 8
+      start_period: 20s
+    expose:
+      - "8080"
+
+  # Publishes OpenStack default service ports → single simulator.
+  # See docs/ports.md and install-guide/firewalls-default-ports.html
+  api-gateway:
+    image: nginx:1.28.0-alpine
+    restart: unless-stopped
+    networks: [simulator]
+    depends_on:
+      simulator:
+        condition: service_healthy
+    ports:
+      - "80:80"  # openstack
+      - "443:443"  # openstack
+      - "1234:1234"  # openstack
+      - "5000:5000"  # openstack
+      - "5050:5050"  # openstack
+      - "8888:8888"  # openstack zaqar
+      - "9322:9322"  # openstack watcher
+      - "6385:6385"  # openstack
+      - "8000:8000"  # openstack
+      - "8003:8003"  # openstack
+      - "8004:8004"  # openstack
+      - "8042:8042"  # openstack
+      - "8080:8080"  # openstack
+      - "8774:8774"  # openstack
+      - "8776:8776"  # openstack
+      - "8779:8779"  # openstack
+      - "8786:8786"  # openstack
+      - "8889:8889"  # openstack
+      - "8989:8989"  # openstack
+      - "8999:8999"  # openstack
+      - "9001:9001"  # openstack
+      - "9090:9090"  # openstack
+      - "9292:9292"  # openstack
+      - "9311:9311"  # openstack
+      - "9511:9511"  # openstack
+      - "9517:9517"  # openstack
+      - "9696:9696"  # openstack
+      - "9876:9876"  # openstack
+      - "9890:9890"  # openstack
+      - "15868:15868"  # openstack
+    volumes:
+      - ./docker/gateway/openstack-ports.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./docker/tls/server.crt:/etc/nginx/tls/server.crt:ro
+      - ./docker/tls/server.key:/etc/nginx/tls/server.key:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget -qO- http://127.0.0.1:8774/health/live || exit 1",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+
+  dev:
+    profiles: [tools]
+    build:
+      context: .
+      target: dev
+    image: openstack-api-simulator-dev:0.1.0
+    networks: [simulator]
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      <<: *dev-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: []

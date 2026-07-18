@@ -1,0 +1,24 @@
+FROM python:3.13-slim
+RUN pip install --no-cache-dir \
+      "pulumi>=3.140,<4" \
+      "pulumi-openstack>=5.0,<6" \
+    && apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \
+    && curl -fsSL https://get.pulumi.com | sh \
+    && ln -sf /root/.pulumi/bin/pulumi /usr/local/bin/pulumi \
+    && /root/.pulumi/bin/pulumi plugin install resource openstack v5.3.1 \
+    && rm -rf /var/lib/apt/lists/*
+# App deps for HTTP pack probe (app.openstack.surface_probe).
+RUN pip install --no-cache-dir \
+    "asyncpg>=0.30,<0.31" \
+    "fastapi>=0.116,<0.117" \
+    "httpx>=0.28,<0.29" \
+    "pydantic>=2.11,<3" \
+    "pydantic-settings>=2.10,<3" \
+    "uvicorn[standard]>=0.35,<0.36"
+WORKDIR /suite
+ENV PYTHONPATH=/workspace:/suite/pulumi \
+    PULUMI_CONFIG_PASSPHRASE=lab \
+    PULUMI_BACKEND_URL=file:///tmp/pulumi-state \
+    WORKSPACE=/workspace \
+    REPORT_DIR=/reports
+CMD ["python3", "/suite/pulumi/run_suite.py"]

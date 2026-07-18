@@ -1,0 +1,23 @@
+{
+  "default_microversion": null,
+  "max_microversion": null,
+  "operations": [
+    {
+      "collection_key": null,
+      "introduced_in": "yoga",
+      "kind": "custom",
+      "method": "GET",
+      "operation_id": "zaqar_versions",
+      "path": "/v2",
+      "requires_auth": true,
+      "requires_project": false,
+      "resource_type": "version",
+      "service": "zaqar",
+      "status_code": 200
+    }
+  ],
+  "port": 8888,
+  "service": "zaqar",
+  "type": "messaging",
+  "version_path": "/v2/"
+}

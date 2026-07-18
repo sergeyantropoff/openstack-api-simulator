@@ -1,0 +1,21 @@
+{{- if .Values.gateway.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "openstack-api-simulator.fullname" . }}-gateway
+  labels:
+    {{- include "openstack-api-simulator.labels" . | nindent 4 }}
+    app.kubernetes.io/component: gateway
+spec:
+  type: {{ .Values.gateway.service.type }}
+  ports:
+    {{- range .Values.gateway.service.ports }}
+    - name: {{ .name | trunc 15 | trimSuffix "-" }}
+      port: {{ .port }}
+      targetPort: {{ .port }}
+      protocol: TCP
+    {{- end }}
+  selector:
+    {{- include "openstack-api-simulator.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: gateway
+{{- end }}

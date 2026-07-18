@@ -1,0 +1,176 @@
+---
+# OpenStack lab cookbook against openstack-api-simulator (Keystone :5000).
+# Uses ansible.builtin.uri so no galaxy collections are required.
+#   ansible-playbook -i inventory.ini playbook.yml
+
+- name: OpenStack API simulator cookbook
+  hosts: local
+  gather_facts: false
+  vars:
+    os_auth_url: "http://127.0.0.1:5000/v3"
+    os_nova: "http://127.0.0.1:8774"
+    os_neutron: "http://127.0.0.1:9696"
+    os_glance: "http://127.0.0.1:9292"
+    os_username: admin
+    os_password: secret
+    os_project: demo
+    os_domain: Default
+    server_name: "ansible-cookbook-vm"
+
+  tasks:
+    - name: Authenticate to Keystone
+      ansible.builtin.uri:
+        url: "{{ os_auth_url }}/auth/tokens"
+        method: POST
+        body_format: json
+        status_code: [201]
+        body:
+          auth:
+            identity:
+              methods: [password]
+              password:
+                user:
+                  name: "{{ os_username }}"
+                  domain: { name: "{{ os_domain }}" }
+                  password: "{{ os_password }}"
+            scope:
+              project:
+                name: "{{ os_project }}"
+                domain: { name: "{{ os_domain }}" }
+        return_content: true
+      register: auth
+
+    - name: Set token facts
+      ansible.builtin.set_fact:
+        os_token: "{{ auth.x_subject_token }}"
+        os_project_id: "{{ auth.json.token.project.id }}"
+
+    - name: List images
+      ansible.builtin.uri:
+        url: "{{ os_glance }}/v2/images"
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+        return_content: true
+      register: images
+
+    - name: Pick boot image
+      ansible.builtin.set_fact:
+        image_id: "{{ (images.json.images | selectattr('name', 'search', 'cirros') | list | first).id }}"
+
+    - name: List networks
+      ansible.builtin.uri:
+        url: "{{ os_neutron }}/v2.0/networks"
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+        return_content: true
+      register: networks
+
+    - name: Pick demo network
+      ansible.builtin.set_fact:
+        network_id: "{{ (networks.json.networks | selectattr('name', 'equalto', 'demo-net') | list | first).id }}"
+
+    - name: Create network (ansible-managed)
+      ansible.builtin.uri:
+        url: "{{ os_neutron }}/v2.0/networks"
+        method: POST
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+        body_format: json
+        status_code: [201, 200]
+        body:
+          network:
+            name: "ansible-app-net"
+            admin_state_up: true
+        return_content: true
+      register: net_create
+
+    - name: Create server
+      ansible.builtin.uri:
+        url: "{{ os_nova }}/v2.1/servers"
+        method: POST
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+          OpenStack-API-Version: "compute 2.79"
+        body_format: json
+        status_code: [202, 200, 201]
+        body:
+          server:
+            name: "{{ server_name }}"
+            flavorRef: "1"
+            imageRef: "{{ image_id }}"
+            networks:
+              - uuid: "{{ network_id }}"
+            metadata:
+              managed_by: ansible
+        return_content: true
+      register: server_create
+
+    - name: Set server id
+      ansible.builtin.set_fact:
+        server_id: "{{ server_create.json.server.id }}"
+
+    - name: Show server
+      ansible.builtin.uri:
+        url: "{{ os_nova }}/v2.1/servers/{{ server_id }}"
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+        return_content: true
+      register: server_show
+
+    - name: Write server metadata
+      ansible.builtin.uri:
+        url: "{{ os_nova }}/v2.1/servers/{{ server_id }}/metadata"
+        method: POST
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+        body_format: json
+        status_code: [200, 201]
+        body:
+          metadata:
+            playbook: openstack-cookbook
+            env: lab
+        return_content: true
+
+    - name: Read metadata
+      ansible.builtin.uri:
+        url: "{{ os_nova }}/v2.1/servers/{{ server_id }}/metadata"
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+        return_content: true
+      register: meta
+
+    - name: Stop server
+      ansible.builtin.uri:
+        url: "{{ os_nova }}/v2.1/servers/{{ server_id }}/action"
+        method: POST
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+        body_format: json
+        status_code: [202, 200, 204]
+        body:
+          "os-stop": null
+
+    - name: Delete server
+      ansible.builtin.uri:
+        url: "{{ os_nova }}/v2.1/servers/{{ server_id }}"
+        method: DELETE
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+        status_code: [204, 202, 200]
+
+    - name: Delete ansible network
+      ansible.builtin.uri:
+        url: "{{ os_neutron }}/v2.0/networks/{{ net_create.json.network.id }}"
+        method: DELETE
+        headers:
+          X-Auth-Token: "{{ os_token }}"
+        status_code: [204, 200]
+
+    - name: Summary
+      ansible.builtin.debug:
+        msg:
+          project_id: "{{ os_project_id }}"
+          server_was: "{{ server_id }}"
+          server_name: "{{ server_show.json.server.name }}"
+          metadata: "{{ meta.json.metadata }}"
+          images: "{{ images.json.images | length }}"

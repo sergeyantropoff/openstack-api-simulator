@@ -1,0 +1,7 @@
+auth_url     = "http://127.0.0.1:5000/v3"
+user_name    = "admin"
+password     = "secret"
+project_name = "demo"
+domain_name  = "Default"
+image_name   = "cirros"
+flavor_id    = "1"
