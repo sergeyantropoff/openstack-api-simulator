@@ -1,13 +1,13 @@
 **Language / Язык:** [English](README.md) | [Русский](README.ru.md)
 
-[![CI](https://github.com/inecs/openstack-api-simulator/actions/workflows/ci.yml/badge.svg)](https://github.com/inecs/openstack-api-simulator/actions/workflows/ci.yml)
-
 # openstack-api-simulator
 
 Лабораторный stateful-симулятор OpenStack API: аутентификация Keystone, multi-port
 шлюз на стандартных портах OpenStack, специализированные обработчики
 Nova/Neutron/Glance/Cinder/Heat/Swift/Ironic/Octavia и schema-complete покрытие
 остальных сервисов каталога (Yoga → Dalmatian).
+
+![Web-консоль](docs/images/web-ui/console-main.png)
 
 ## Быстрый старт (Compose)
 
@@ -199,6 +199,8 @@ Nginx выставляет `X-OpenStack-Service` / `X-Forwarded-Port`. Прил�
 
 Это **лабораторный surface-complete** симулятор (ответы в форме API-ref), а не
 бит-в-бит идентичный upstream OpenStack.
+
+Drawers консоли, параметры запроса и скриншоты: **[Web UI](docs/ru/web-ui.md)**.
 
 ## Лицензия
 

@@ -1,13 +1,13 @@
 **Language / Язык:** [English](README.md) | [Русский](README.ru.md)
 
-[![CI](https://github.com/inecs/openstack-api-simulator/actions/workflows/ci.yml/badge.svg)](https://github.com/inecs/openstack-api-simulator/actions/workflows/ci.yml)
-
 # openstack-api-simulator
 
 Stateful laboratory simulator for OpenStack APIs: Keystone auth, a multi-port
 gateway on OpenStack default ports, specialized
 Nova/Neutron/Glance/Cinder/Heat/Swift/Ironic/Octavia handlers, and
 schema-complete coverage for the remaining catalog services (Yoga → Dalmatian).
+
+![Web console](docs/images/web-ui/console-main.png)
 
 ## Quick start (Compose)
 
@@ -198,6 +198,8 @@ operation; specialized routers keep stateful happy-paths.
 
 This is a **lab surface-complete** simulator (API-ref shaped responses), not
 bit-identical upstream OpenStack.
+
+Console drawers, request parameters, and screenshots: **[Web UI](docs/web-ui.md)**.
 
 ## License
 
