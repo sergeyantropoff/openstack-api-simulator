@@ -67,6 +67,7 @@ def _envelope(key: str, inner: Str, *, required_inner: bool = True) -> Str:
 
 # --- Resource property libraries (api-ref style) ---
 
+
 def _name_desc() -> dict[str, Str]:
     return {
         "name": _s("Human-readable name", example="example"),
@@ -112,7 +113,9 @@ def props_network() -> Str:
             "admin_state_up": _b("Administrative state", default=True),
             "shared": _b("Shared across projects", default=False),
             "external": _b("External network", default=False),
-            "provider:network_type": _s("Provider network type", enum=["local", "flat", "vlan", "vxlan", "gre"]),
+            "provider:network_type": _s(
+                "Provider network type", enum=["local", "flat", "vlan", "vxlan", "gre"]
+            ),
             "provider:physical_network": _s("Physical network label"),
             "provider:segmentation_id": _i("Segmentation id"),
             "mtu": _i("MTU", minimum=68, example=1500),
@@ -268,7 +271,9 @@ def props_image() -> Str:
                 enum=["raw", "qcow2", "vmdk", "vdi", "iso", "aki", "ari", "ami"],
                 example="qcow2",
             ),
-            "visibility": _s("Visibility", enum=["public", "private", "shared", "community"], example="private"),
+            "visibility": _s(
+                "Visibility", enum=["public", "private", "shared", "community"], example="private"
+            ),
             "protected": _b("Protected"),
             "tags": _a(_s()),
             "min_disk": _i("Min disk GiB", minimum=0, example=0),
@@ -359,7 +364,11 @@ def props_alarm() -> Str:
     return _o(
         {
             **_name_desc(),
-            "type": _s("Alarm type", enum=["threshold", "event", "gnocchi_resources_threshold"], example="threshold"),
+            "type": _s(
+                "Alarm type",
+                enum=["threshold", "event", "gnocchi_resources_threshold"],
+                example="threshold",
+            ),
             "enabled": _b("Enabled", default=True),
             "alarm_actions": _a(_s("Webhook URL", fmt="uri")),
             "ok_actions": _a(_s(fmt="uri")),
@@ -369,7 +378,9 @@ def props_alarm() -> Str:
                 {
                     "meter_name": _s(example="cpu_util"),
                     "threshold": _i(example=80),
-                    "comparison_operator": _s(enum=["gt", "lt", "ge", "le", "eq", "ne"], example="gt"),
+                    "comparison_operator": _s(
+                        enum=["gt", "lt", "ge", "le", "eq", "ne"], example="gt"
+                    ),
                     "evaluation_periods": _i(example=1),
                     "period": _i(example=60),
                     "statistic": _s(enum=["avg", "max", "min", "sum", "count"], example="avg"),
@@ -400,7 +411,9 @@ def props_recordset() -> Str:
     return _o(
         {
             "name": _s("Recordset name", example="www.example.com."),
-            "type": _s("RR type", enum=["A", "AAAA", "CNAME", "MX", "TXT", "SRV", "NS", "PTR"], example="A"),
+            "type": _s(
+                "RR type", enum=["A", "AAAA", "CNAME", "MX", "TXT", "SRV", "NS", "PTR"], example="A"
+            ),
             "records": _a(_s("Record data"), "Records"),
             "ttl": _i("TTL", example=3600),
             "description": _s(),
@@ -432,7 +445,9 @@ def props_listener() -> Str:
         {
             **_name_desc(),
             "loadbalancer_id": _s(fmt="uuid"),
-            "protocol": _s(enum=["HTTP", "HTTPS", "TCP", "UDP", "TERMINATED_HTTPS"], example="HTTP"),
+            "protocol": _s(
+                enum=["HTTP", "HTTPS", "TCP", "UDP", "TERMINATED_HTTPS"], example="HTTP"
+            ),
             "protocol_port": _i(example=80),
             "connection_limit": _i(example=-1),
             "admin_state_up": _b(default=True),
@@ -584,7 +599,9 @@ def props_node() -> Str:  # ironic
                     "ipmi_password": _s(),
                 }
             ),
-            "properties": _o({"cpus": _i(example=4), "memory_mb": _i(example=8192), "local_gb": _i(example=100)}),
+            "properties": _o(
+                {"cpus": _i(example=4), "memory_mb": _i(example=8192), "local_gb": _i(example=100)}
+            ),
             "resource_class": _s(example="baremetal"),
             "conductor_group": _s(),
             "network_interface": _s(example="flat"),
@@ -661,7 +678,9 @@ def props_segment() -> Str:  # masakari
     return _o(
         {
             **_name_desc(),
-            "recovery_method": _s(enum=["auto", "reserved_host", "auto_priority", "rh_priority"], example="auto"),
+            "recovery_method": _s(
+                enum=["auto", "reserved_host", "auto_priority", "rh_priority"], example="auto"
+            ),
             "service_type": _s(enum=["compute"], example="compute"),
         },
         required=["name", "recovery_method", "service_type"],
@@ -713,7 +732,9 @@ def props_auth_token() -> Str:
                                     "user": _o(
                                         {
                                             "name": _s(example="admin"),
-                                            "domain": _o({"name": _s(example="Default")}, required=["name"]),
+                                            "domain": _o(
+                                                {"name": _s(example="Default")}, required=["name"]
+                                            ),
                                             "password": _s(example="secret"),
                                             "id": _s(fmt="uuid"),
                                         },
@@ -866,7 +887,9 @@ def props_server_group() -> Str:
     return _o(
         {
             "name": _s(example="example"),
-            "policies": _a(_s(enum=["affinity", "anti-affinity", "soft-affinity", "soft-anti-affinity"])),
+            "policies": _a(
+                _s(enum=["affinity", "anti-affinity", "soft-affinity", "soft-anti-affinity"])
+            ),
             "policy": _s(enum=["affinity", "anti-affinity", "soft-affinity", "soft-anti-affinity"]),
             "rules": _o({"max_server_per_host": _i(example=1)}),
         },
@@ -1054,7 +1077,10 @@ def props_trunk() -> Str:
 
 
 def props_qos_policy() -> Str:
-    return _o({**_name_desc(), "shared": _b(default=False), "is_default": _b(default=False)}, required=["name"])
+    return _o(
+        {**_name_desc(), "shared": _b(default=False), "is_default": _b(default=False)},
+        required=["name"],
+    )
 
 
 def props_rbac_policy() -> Str:
@@ -1063,7 +1089,9 @@ def props_rbac_policy() -> Str:
             "object_type": _s(example="network"),
             "object_id": _s(fmt="uuid"),
             "target_tenant": _s(fmt="uuid"),
-            "action": _s(enum=["access_as_shared", "access_as_external"], example="access_as_shared"),
+            "action": _s(
+                enum=["access_as_shared", "access_as_external"], example="access_as_shared"
+            ),
         },
         required=["object_type", "object_id", "target_tenant", "action"],
     )
@@ -1109,7 +1137,9 @@ def props_healthmonitor() -> Str:
     return _o(
         {
             **_name_desc(),
-            "type": _s(enum=["HTTP", "HTTPS", "PING", "TCP", "TLS-HELLO", "UDP-CONNECT"], example="HTTP"),
+            "type": _s(
+                enum=["HTTP", "HTTPS", "PING", "TCP", "TLS-HELLO", "UDP-CONNECT"], example="HTTP"
+            ),
             "delay": _i(example=5),
             "timeout": _i(example=3),
             "max_retries": _i(example=3),
@@ -1220,24 +1250,67 @@ _RESOURCE_PROPS: dict[str, Any] = {
     "firewall_group": props_firewall_group,
     "l7policy": props_l7policy,
     "healthmonitor": props_healthmonitor,
-    "volume_type": lambda: _o({**_name_desc(), "extra_specs": _o({}), "os-volume-type-access:is_public": _b(default=True)}, required=["name"]),
-    "consistencygroup": lambda: _o({**_name_desc(), "volume_types": _a(_s())}, required=["name", "volume_types"]),
-    "attachment": lambda: _o({"instance_uuid": _s(fmt="uuid"), "volume_uuid": _s(fmt="uuid"), "mode": _s(example="rw")}, required=["instance_uuid", "volume_uuid"]),
-    "share_network": lambda: _o({**_name_desc(), "neutron_net_id": _s(fmt="uuid"), "neutron_subnet_id": _s(fmt="uuid")}, required=["name"]),
-    "share_type": lambda: _o({**_name_desc(), "extra_specs": _o({"driver_handles_share_servers": _b(default=False)}), "is_public": _b(default=True)}, required=["name", "extra_specs"]),
+    "volume_type": lambda: _o(
+        {
+            **_name_desc(),
+            "extra_specs": _o({}),
+            "os-volume-type-access:is_public": _b(default=True),
+        },
+        required=["name"],
+    ),
+    "consistencygroup": lambda: _o(
+        {**_name_desc(), "volume_types": _a(_s())}, required=["name", "volume_types"]
+    ),
+    "attachment": lambda: _o(
+        {"instance_uuid": _s(fmt="uuid"), "volume_uuid": _s(fmt="uuid"), "mode": _s(example="rw")},
+        required=["instance_uuid", "volume_uuid"],
+    ),
+    "share_network": lambda: _o(
+        {**_name_desc(), "neutron_net_id": _s(fmt="uuid"), "neutron_subnet_id": _s(fmt="uuid")},
+        required=["name"],
+    ),
+    "share_type": lambda: _o(
+        {
+            **_name_desc(),
+            "extra_specs": _o({"driver_handles_share_servers": _b(default=False)}),
+            "is_public": _b(default=True),
+        },
+        required=["name", "extra_specs"],
+    ),
     "template": lambda: props_stack(),
-    "vnf": lambda: _o({**_name_desc(), "vnfd_id": _s(fmt="uuid"), "vim_id": _s(fmt="uuid")}, required=["name", "vnfd_id"]),
-    "vnfd": lambda: _o({**_name_desc(), "attributes": _o({"vnfd": _s()}), "service_types": _a(_o({"service_type": _s(example="vnfd")}))}, required=["name"]),
-    "ns": lambda: _o({**_name_desc(), "nsd_id": _s(fmt="uuid"), "vim_id": _s(fmt="uuid")}, required=["name", "nsd_id"]),
+    "vnf": lambda: _o(
+        {**_name_desc(), "vnfd_id": _s(fmt="uuid"), "vim_id": _s(fmt="uuid")},
+        required=["name", "vnfd_id"],
+    ),
+    "vnfd": lambda: _o(
+        {
+            **_name_desc(),
+            "attributes": _o({"vnfd": _s()}),
+            "service_types": _a(_o({"service_type": _s(example="vnfd")})),
+        },
+        required=["name"],
+    ),
+    "ns": lambda: _o(
+        {**_name_desc(), "nsd_id": _s(fmt="uuid"), "vim_id": _s(fmt="uuid")},
+        required=["name", "nsd_id"],
+    ),
     "nsd": lambda: _o({**_name_desc(), "attributes": _o({"nsd": _s()})}, required=["name"]),
     "action": lambda: _o({"action": _s(example="os-start"), "name": _s()}, required=["action"]),
-    "rating_module": lambda: _o({**_name_desc(), "enabled": _b(default=True), "priority": _i(example=1)}, required=["name"]),
+    "rating_module": lambda: _o(
+        {**_name_desc(), "enabled": _b(default=True), "priority": _i(example=1)}, required=["name"]
+    ),
     "hashmap_service": lambda: _o({**_name_desc()}, required=["name"]),
     "collector": lambda: _o({**_name_desc(), "url": _s(fmt="uri")}, required=["name", "url"]),
-    "template_definition": lambda: _o({**_name_desc(), "template": _s(), "type": _s()}, required=["name", "template"]),
-    "webhook": lambda: _o({**_name_desc(), "url": _s(fmt="uri"), "headers": _o({})}, required=["name", "url"]),
+    "template_definition": lambda: _o(
+        {**_name_desc(), "template": _s(), "type": _s()}, required=["name", "template"]
+    ),
+    "webhook": lambda: _o(
+        {**_name_desc(), "url": _s(fmt="uri"), "headers": _o({})}, required=["name", "url"]
+    ),
     "topology": lambda: _o({**_name_desc(), "graph": _o({})}, required=["name"]),
-    "template_version": lambda: _o({"id": _s(example="2021-04-16"), "type": _s(example="heat")}, required=["id"]),
+    "template_version": lambda: _o(
+        {"id": _s(example="2021-04-16"), "type": _s(example="heat")}, required=["id"]
+    ),
 }
 
 
@@ -1255,17 +1328,33 @@ def action_schema(action_name: str | None) -> Str:
     action = action_name if action_name and action_name != "*" else "os-start"
     bodies: dict[str, Str] = {
         "os-getConsoleOutput": _o({action: _o({"length": _i(example=20)})}, required=[action]),
-        "reboot": _o({action: _o({"type": _s(enum=["SOFT", "HARD"], example="SOFT")}, required=["type"])}, required=[action]),
-        "resize": _o({action: _o({"flavorRef": _s(example="2")}, required=["flavorRef"])}, required=[action]),
-        "rebuild": _o(
-            {action: _o({"imageRef": _s(fmt="uuid"), "name": _s(), "adminPass": _s()}, required=["imageRef"])},
+        "reboot": _o(
+            {action: _o({"type": _s(enum=["SOFT", "HARD"], example="SOFT")}, required=["type"])},
             required=[action],
         ),
-        "createImage": _o({action: _o({"name": _s(example="example"), "metadata": _o({})}, required=["name"])}, required=[action]),
+        "resize": _o(
+            {action: _o({"flavorRef": _s(example="2")}, required=["flavorRef"])}, required=[action]
+        ),
+        "rebuild": _o(
+            {
+                action: _o(
+                    {"imageRef": _s(fmt="uuid"), "name": _s(), "adminPass": _s()},
+                    required=["imageRef"],
+                )
+            },
+            required=[action],
+        ),
+        "createImage": _o(
+            {action: _o({"name": _s(example="example"), "metadata": _o({})}, required=["name"])},
+            required=[action],
+        ),
     }
     if action in bodies:
         return bodies[action]
-    return _o({action: {"type": "null", "description": f"Action {action} body (null object)"}}, required=[action])
+    return _o(
+        {action: {"type": "null", "description": f"Action {action} body (null object)"}},
+        required=[action],
+    )
 
 
 def schema_for_operation(op: dict[str, Any]) -> Str:

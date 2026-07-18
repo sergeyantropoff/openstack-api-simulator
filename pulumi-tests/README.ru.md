@@ -55,6 +55,21 @@ open reports/pulumi-report.html
 | `reports/series-<name>.json` | Детали pulumi + HTTP по серии |
 | `reports/summary.json` | Агрегаты (`http_total` / `http_expected`, `http_critical`) |
 
+## Последние результаты (2026-07-18)
+
+Полная matrix (`make test-pulumi` / `make pulumi-tests`):
+
+| Метрика | Значение |
+|---|---|
+| Серии | yoga → dalmatian (4) |
+| `pulumi_ok` | 4 / 4 |
+| HTTP probed | **6514 / 6514** (`declared` 4721 + синтетический `HEAD` 1793) |
+| `http_critical` | **0** |
+| По сериям | yoga 1464 · antelope 1530 · caracal 1649 · dalmatian 1871 |
+
+После прогона: `reports/pulumi-report.html`. Где лежат остальные тесты репозитория:
+[docs/ru/operations.md — Тестирование](../docs/ru/operations.md#тестирование).
+
 ## Approximate (не блокеры)
 
 Nova create может пропускать длинное окно `BUILD`; многие Nova actions только

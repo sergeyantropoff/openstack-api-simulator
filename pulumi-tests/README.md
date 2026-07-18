@@ -55,6 +55,21 @@ Pack sizes (ops, without HEAD): yoga ~1060 → antelope ~1108 → caracal ~1196 
 | `reports/series-<name>.json` | Per-series pulumi + HTTP details |
 | `reports/summary.json` | Aggregates (`http_total` / `http_expected`, `http_critical`) |
 
+## Latest results (2026-07-18)
+
+Full matrix (`make test-pulumi` / `make pulumi-tests`):
+
+| Metric | Value |
+|---|---|
+| Series | yoga → dalmatian (4) |
+| `pulumi_ok` | 4 / 4 |
+| HTTP probed | **6514 / 6514** (`declared` 4721 + synthetic `HEAD` 1793) |
+| `http_critical` | **0** |
+| Per series | yoga 1464 · antelope 1530 · caracal 1649 · dalmatian 1871 |
+
+Open `reports/pulumi-report.html` after a run. Pytest / smoke locations for the
+whole repo: [docs/operations.md — Testing](../docs/operations.md#testing).
+
 ## Approximate (not blockers)
 
 Nova create may skip a long `BUILD` window; many Nova actions only flip server

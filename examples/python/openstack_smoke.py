@@ -10,11 +10,58 @@ import urllib.error
 import urllib.request
 
 HOST = os.environ.get("OS_HOST", "127.0.0.1")
-KEYSTONE = sys.argv[1] if len(sys.argv) > 1 else f"http://{HOST}:5000"
 
 
 def _u(port: int, path: str) -> str:
     return f"http://{HOST}:{port}{path}"
+
+
+def request(
+    method: str,
+    url: str,
+    *,
+    data: dict | None = None,
+    token: str | None = None,
+    extra_headers: dict[str, str] | None = None,
+):
+    body = None if data is None else json.dumps(data).encode()
+    headers = {"Accept": "application/json"}
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+    if token:
+        headers["X-Auth-Token"] = token
+    if extra_headers:
+        headers.update(extra_headers)
+    req = urllib.request.Request(url, data=body, headers=headers, method=method)
+    try:
+        with urllib.request.urlopen(req, timeout=15) as res:
+            raw = res.read().decode()
+            return res.status, dict(res.headers), json.loads(raw) if raw else None
+    except urllib.error.HTTPError as exc:
+        raw = exc.read().decode()
+        try:
+            parsed = json.loads(raw) if raw else None
+        except json.JSONDecodeError:
+            parsed = raw
+        return exc.code, dict(exc.headers), parsed
+    except urllib.error.URLError as exc:
+        return 0, {}, {"error": str(exc.reason)}
+
+
+def _keystone_base() -> str:
+    if len(sys.argv) > 1:
+        return sys.argv[1].rstrip("/")
+    for key in ("OS_AUTH_URL", "OS_GATEWAY_URL"):
+        raw = (os.environ.get(key) or "").strip()
+        if raw:
+            return raw.rstrip("/").removesuffix("/v3")
+    # Prefer :5000; fall back to local Compose override (:15000) when AirPlay owns 5000.
+    for port in (5000, 15000):
+        url = f"http://{HOST}:{port}"
+        status, _, _ = request("GET", f"{url}/health/ready")
+        if status == 200:
+            return url
+    return f"http://{HOST}:5000"
 
 
 # (label, url, expected_json_key or None for version-only)
@@ -54,39 +101,8 @@ CHECKS: list[tuple[str, str, str | None]] = [
 ]
 
 
-def request(
-    method: str,
-    url: str,
-    *,
-    data: dict | None = None,
-    token: str | None = None,
-    extra_headers: dict[str, str] | None = None,
-):
-    body = None if data is None else json.dumps(data).encode()
-    headers = {"Accept": "application/json"}
-    if data is not None:
-        headers["Content-Type"] = "application/json"
-    if token:
-        headers["X-Auth-Token"] = token
-    if extra_headers:
-        headers.update(extra_headers)
-    req = urllib.request.Request(url, data=body, headers=headers, method=method)
-    try:
-        with urllib.request.urlopen(req, timeout=15) as res:
-            raw = res.read().decode()
-            return res.status, dict(res.headers), json.loads(raw) if raw else None
-    except urllib.error.HTTPError as exc:
-        raw = exc.read().decode()
-        try:
-            parsed = json.loads(raw) if raw else None
-        except json.JSONDecodeError:
-            parsed = raw
-        return exc.code, dict(exc.headers), parsed
-    except urllib.error.URLError as exc:
-        return 0, {}, {"error": str(exc.reason)}
-
-
 def main() -> int:
+    keystone = _keystone_base()
     auth = {
         "auth": {
             "identity": {
@@ -102,7 +118,7 @@ def main() -> int:
             "scope": {"project": {"name": "demo", "domain": {"name": "Default"}}},
         }
     }
-    status, headers, body = request("POST", f"{KEYSTONE}/v3/auth/tokens", data=auth)
+    status, headers, body = request("POST", f"{keystone}/v3/auth/tokens", data=auth)
     token = headers.get("X-Subject-Token") or headers.get("x-subject-token")
     print("auth", status, "token", bool(token))
     if status != 201 or not token:
@@ -145,8 +161,11 @@ def main() -> int:
             print("  FAIL", payload)
             failed += 1
 
-    # Root discovery per port
-    for port, name in [(5000, "keystone"), (8774, "nova"), (6385, "ironic"), (8080, "swift")]:
+    # Root discovery per port (Keystone may be remapped, e.g. host :15000).
+    from urllib.parse import urlparse
+
+    ks_port = urlparse(keystone).port or 5000
+    for port, name in [(ks_port, "keystone"), (8774, "nova"), (6385, "ironic"), (8080, "swift")]:
         st, _, payload = request("GET", _u(port, "/"))
         print(f"root.{name}", st, list((payload or {}).keys())[:3])
 

@@ -19,7 +19,7 @@
 | [Seed-профили](seed-profiles.md) | `minimal` / `demo` |
 | [Клиенты](clients.md) | SDK / CLI |
 | [Web UI](web-ui.md) | Консоль и drawers |
-| [Эксплуатация](operations.md) | Day-2, релиз, reseed |
+| [Эксплуатация](operations.md) | Day-2, релиз, reseed, **тесты** |
 | [Архитектура](architecture.md) | Компоненты и путь запроса |
 | [Безопасность](security.md) | Threat model лаборатории |
 | [Наблюдаемость](observability.md) | Health и логи |

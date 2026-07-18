@@ -112,17 +112,41 @@ make release-build   # local tags only
 См. [kubernetes.md](kubernetes.md) для логов, reseed через `kubectl exec` и
 удаления.
 
-## CI лаборатории покрытия API (pulumi-tests)
+## Тестирование
 
-Pulumi прогоняет каждую pack-операцию по сериям — см.
-[hypervisor-lab.md](hypervisor-lab.md).
+| Где | Что |
+|---|---|
+| `tests/unit/` | Офлайн unit (ASGI / FakeDatabase) |
+| `tests/openstack/` | Pack-контракты, registry, live surface / lifecycle |
+| `tests/integration/` | Интеграция с PostgreSQL |
+| `tests/compatibility/` | Surface probe и group smoke |
+| `examples/python/openstack_smoke.py` | Host multi-port smoke (`make smoke` / `make test-compatibility`) |
+| `examples/python/openstack_surface_probe.py` | Lifecycle-probe каждой pack-операции × серии |
+| [`pulumi-tests/`](../../pulumi-tests/README.ru.md) | Pulumi Layer B + полная HTTP-матрица (yoga→dalmatian) |
 
 ```bash
-make test-pulumi-smoke    # from repo root
-make test-pulumi
+make test                 # офлайн unit + contract (без Postgres)
+make test-integration     # -m integration (Postgres)
+make test-surface         # surface probe + tests/openstack против Compose
+make test-compatibility   # seed minimal + openstack_smoke.py
+make pulumi-tests         # полный сьют pulumi-tests (alias: make test-pulumi)
+make test-pulumi-smoke    # быстрый режим: collection GET + HEAD
 ```
 
-Отчёты: `pulumi-tests/reports/pulumi-report.html` и `pulumi-junit.xml`.
+Подробнее о Pulumi-лаборатории: [hypervisor-lab.md](hypervisor-lab.md).
+Отчёты: `pulumi-tests/reports/pulumi-report.html`, `pulumi-junit.xml`, `summary.json`.
+
+### Последние результаты лаборатории (2026-07-18)
+
+| Сьют | Результат |
+|---|---|
+| `make test` | 243 passed (34 deselected) |
+| `make test-integration` | 33 passed |
+| Surface probe (yoga→dalmatian) | 1464 / 1530 / 1649 / 1871 ops — **0 fail** |
+| `make pulumi-tests` (полная matrix) | HTTP **6514 / 6514**, `http_critical=0`, pulumi **4 / 4** серии |
+| Compatibility smoke | OK (авто Keystone `:5000` или локальный `:15000`) |
+
+Пересобрать HTML-отчёт: `make -C pulumi-tests report` после прогона.
 
 ## Обновления
 

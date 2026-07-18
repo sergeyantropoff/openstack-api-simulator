@@ -1,10 +1,8 @@
 """Catalog-scoped compatibility payload tests."""
 
 from datetime import UTC, datetime
-from pathlib import Path
 from typing import cast
 
-import pytest
 from httpx import ASGITransport, AsyncClient
 
 from app.compatibility import CompatibilityDimension, build_report
@@ -13,13 +11,6 @@ from app.contracts.model import Method, PathContract, Schema, Snapshot
 from app.main import create_app
 from app.web.compatibility_catalog import compatibility_payload
 from tests.unit.test_health import FakeDatabase
-
-_BUNDLED = Path(
-    "contracts/e61a893e996d05d376579226e7dfbedbcfce8b71787adacffbc557e6e35901c1/snapshot.json"
-)
-_PVE7 = Path(
-    "contracts/2cf632fa6ea4939ca9cb7998ade688150db25b0684600f53ac0ca95730f1d99f/snapshot.json"
-)
 
 
 def _snapshot(source_version: str, path: str) -> Snapshot:
@@ -83,11 +74,8 @@ def test_catalog_compatibility_reuses_runtime_report_for_matching_version() -> N
 
 
 async def test_ui_compatibility_endpoint_follows_selected_major() -> None:
-    if not _PVE7.is_file():
-        pytest.skip("PVE 7 bundled contract is unavailable")
-    settings = Settings(contract_snapshot=_BUNDLED)
     app = create_app(
-        settings=settings,
+        settings=Settings(contract_snapshot=None),
         database_factory=lambda _settings: FakeDatabase(True),
         worker_factories=(),
     )
@@ -99,30 +87,33 @@ async def test_ui_compatibility_endpoint_follows_selected_major() -> None:
     assert major9.status_code == 200
     body7 = major7.json()
     body9 = major9.json()
-    pve7_snapshot = Snapshot.model_validate_json(_PVE7.read_bytes())
-    assert body7["catalog_version"] == pve7_snapshot.source_version
-    assert body9["catalog_version"] == "9.2.3"
-    assert body7["total_declared"] == pve7_snapshot.method_count
-    bundled = Snapshot.model_validate_json(_BUNDLED.read_bytes())
-    assert body9["total_declared"] == bundled.method_count
+    assert body7["catalog_version"] == "openstack-antelope"
+    assert body9["catalog_version"] == "openstack-dalmatian"
+    assert body7["total_declared"] >= 1100
+    assert body9["total_declared"] >= 1300
     assert body7["major"] == 7
     assert body9["major"] == 9
-    # Legacy aliases are kept in implemented_methods so older majors report full coverage.
     assert body7["levels"]["implemented"]["count"] == body7["total_declared"]
     assert body9["levels"]["implemented"]["count"] == body9["total_declared"]
 
 
-async def test_ui_compatibility_covers_all_bundled_majors() -> None:
-    settings = Settings(contract_snapshot=_BUNDLED, compatibility_evidence=None)
+async def test_ui_compatibility_covers_all_openstack_series() -> None:
     app = create_app(
-        settings=settings,
+        settings=Settings(contract_snapshot=None, compatibility_evidence=None),
         database_factory=lambda _settings: FakeDatabase(True),
         worker_factories=(),
     )
+    expected = {
+        6: "openstack-yoga",
+        7: "openstack-antelope",
+        8: "openstack-caracal",
+        9: "openstack-dalmatian",
+    }
     async with app.router.lifespan_context(app):
         async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
-            for major in (6, 7, 8, 9):
+            for major, catalog_version in expected.items():
                 response = await client.get("/ui/api/compatibility", params={"major": major})
                 assert response.status_code == 200
                 body = response.json()
+                assert body["catalog_version"] == catalog_version
                 assert body["levels"]["implemented"]["count"] == body["total_declared"]

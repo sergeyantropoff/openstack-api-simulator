@@ -460,6 +460,22 @@ async def seed_discovery_documents(conn: Connection) -> dict[str, int]:
             },
         ),
         (
+            "cinder",
+            "quota_set_defaults",
+            "default",
+            {
+                "quota_set": {
+                    "volumes": 100,
+                    "snapshots": 100,
+                    "gigabytes": 1000,
+                    "backups": 10,
+                    "backup_gigabytes": 1000,
+                    "groups": 10,
+                    "per_volume_gigabytes": -1,
+                }
+            },
+        ),
+        (
             "nova",
             "console_auth_token_defaults",
             "default",

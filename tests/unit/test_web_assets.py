@@ -27,7 +27,7 @@ def test_console_html_is_read_from_disk() -> None:
     ):
         assert f'id="{required_id}"' in html, required_id
     assert "Apply as runtime" in html
-    assert "OPENSTACK_SERIES" in html
+    assert "yoga" in html and "dalmatian" in html
     assert 'id="help-drawer"' in html
     assert 'id="help-badge"' in html
     assert 'id="data-badge"' in html

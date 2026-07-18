@@ -112,17 +112,41 @@ make release-build   # local tags only
 See [kubernetes.md](kubernetes.md) for logs, reseed via `kubectl exec`, and
 uninstall.
 
-## API coverage lab CI (pulumi-tests)
+## Testing
 
-Pulumi probes every pack operation across series — see
-[hypervisor-lab.md](hypervisor-lab.md).
+| Location | What |
+|---|---|
+| `tests/unit/` | Offline unit tests (ASGI / FakeDatabase) |
+| `tests/openstack/` | Pack contracts, registry, live surface / lifecycle |
+| `tests/integration/` | Postgres-backed integration |
+| `tests/compatibility/` | Surface probe + group smoke markers |
+| `examples/python/openstack_smoke.py` | Host multi-port smoke (`make smoke` / `make test-compatibility`) |
+| `examples/python/openstack_surface_probe.py` | Lifecycle probe every pack op × series |
+| [`pulumi-tests/`](../pulumi-tests/README.md) | Pulumi Layer B + full HTTP matrix (yoga→dalmatian) |
 
 ```bash
-make test-pulumi-smoke    # from repo root
-make test-pulumi
+make test                 # offline unit + contract (no Postgres)
+make test-integration     # -m integration (Postgres)
+make test-surface         # surface probe + tests/openstack against Compose
+make test-compatibility   # seed minimal + openstack_smoke.py
+make pulumi-tests         # full pulumi-tests suite (alias: make test-pulumi)
+make test-pulumi-smoke    # fast collection GET + HEAD only
 ```
 
-Reports: `pulumi-tests/reports/pulumi-report.html` and `pulumi-junit.xml`.
+Details for the Pulumi lab: [hypervisor-lab.md](hypervisor-lab.md).
+Reports: `pulumi-tests/reports/pulumi-report.html`, `pulumi-junit.xml`, `summary.json`.
+
+### Latest lab results (2026-07-18)
+
+| Suite | Result |
+|---|---|
+| `make test` | 243 passed (34 deselected) |
+| `make test-integration` | 33 passed |
+| Surface probe (yoga→dalmatian) | 1464 / 1530 / 1649 / 1871 ops — **0 fail** |
+| `make pulumi-tests` (full matrix) | HTTP **6514 / 6514**, `http_critical=0`, pulumi **4 / 4** series |
+| Compatibility smoke | OK (auto Keystone `:5000` or local `:15000`) |
+
+Regenerate the HTML report anytime with `make -C pulumi-tests report` after a suite run.
 
 ## Upgrades
 

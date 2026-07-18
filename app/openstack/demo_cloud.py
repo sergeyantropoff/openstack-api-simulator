@@ -340,8 +340,7 @@ async def seed_openstack_demo(
 
     for i, az in enumerate(AZS):
         hosts = [
-            f"compute-{(j // len(AZS)) + 1:02d}.{az}"
-            for j in range(i, hypervisor_count, len(AZS))
+            f"compute-{(j // len(AZS)) + 1:02d}.{az}" for j in range(i, hypervisor_count, len(AZS))
         ]
         await conn.execute(
             """INSERT INTO os_aggregates(id, name, availability_zone, hosts, metadata)
@@ -586,8 +585,7 @@ async def seed_openstack_demo(
     # Distribute servers across all lab projects (incl. admin — tokens often use admin)
     tenant_cycle = ("admin", "demo", "production", "staging", "development", "demo")
     hypervisor_names = [
-        f"compute-{(i // len(AZS)) + 1:02d}.{AZS[i % len(AZS)]}"
-        for i in range(hypervisor_count)
+        f"compute-{(i // len(AZS)) + 1:02d}.{AZS[i % len(AZS)]}" for i in range(hypervisor_count)
     ]
 
     server_rows = []
@@ -1494,7 +1492,9 @@ async def seed_openstack_demo(
 
     # Nova server groups (specialized table) — denser in demo project
     for i in range(server_group_count):
-        pname = "demo" if i < max(1, server_group_count // 2) else tenant_cycle[i % len(tenant_cycle)]
+        pname = (
+            "demo" if i < max(1, server_group_count // 2) else tenant_cycle[i % len(tenant_cycle)]
+        )
         span = max(1, min(8, max(1, server_count // 4)))
         members = [
             str(oid(f"server:demo:{(3 + (i % span) * 6) % server_count}")),

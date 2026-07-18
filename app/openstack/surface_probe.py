@@ -496,7 +496,11 @@ def probe_operation(
     base = service_base_url(host, pack.name, port=pack.port)
     url = f"{base}{path}"
     method = (method_override or op.method).upper()
-    data = None if method in {"GET", "HEAD", "DELETE"} else _body_for(op, ctx=path_ctx, project_id=project_id)
+    data = (
+        None
+        if method in {"GET", "HEAD", "DELETE"}
+        else _body_for(op, ctx=path_ctx, project_id=project_id)
+    )
     mv = microversion_headers(pack, op)
     status, payload = http_request(
         method,
@@ -886,11 +890,7 @@ def probe_series_lifecycle(
                     local["server_id"] = rid
             # Swift: empty the container before DELETE so the API returns 204
             # (409 Conflict for a non-empty container is correct OpenStack behaviour).
-            if (
-                op.method == "DELETE"
-                and pack.name == "swift"
-                and op.resource_type == "container"
-            ):
+            if op.method == "DELETE" and pack.name == "swift" and op.resource_type == "container":
                 acct = local.get("account") or project_id
                 cname = local.get("container") or local.get("id")
                 if acct and cname:

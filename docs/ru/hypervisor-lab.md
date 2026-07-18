@@ -31,3 +31,18 @@ open reports/pulumi-report.html
 5. Destroy; HTML + JUnit
 
 См. [`pulumi-tests/README.ru.md`](../../pulumi-tests/README.ru.md).
+Карта pytest / smoke: [operations.md — Тестирование](operations.md#тестирование).
+
+## Последние результаты (2026-07-18)
+
+Полный сьют (`make pulumi-tests`, `collections_only=false`):
+
+| Серия | HTTP ok / total | Pulumi |
+|---|---:|---|
+| yoga | 1464 / 1464 | ok |
+| antelope | 1530 / 1530 | ok |
+| caracal | 1649 / 1649 | ok |
+| dalmatian | 1871 / 1871 | ok |
+| **Все** | **6514 / 6514** (`http_critical=0`) | **4 / 4** |
+
+Артефакты: `pulumi-tests/reports/pulumi-report.html`, `summary.json`.

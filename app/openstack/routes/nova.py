@@ -929,12 +929,36 @@ async def list_aggregates(
     return {"aggregates": [_aggregate_dict(r) for r in rows]}
 
 
-@router.get("/v2.1/os-aggregates/{aggregate_id}")
-async def show_aggregate(
-    aggregate_id: str,
+@router.post("/v2.1/os-aggregates", status_code=201)
+async def create_aggregate(
+    request: Request,
     conn: Annotated[Connection, Depends(get_conn)],
     _ctx: Annotated[TokenContext, Depends(require_project_token)],
 ) -> dict[str, object]:
+    payload = (await request.json()).get("aggregate") or {}
+    name = str(payload.get("name") or f"agg-{uuid4().hex[:8]}")
+    az = payload.get("availability_zone")
+    metadata = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
+    hosts = payload.get("hosts") if isinstance(payload.get("hosts"), list) else []
+    next_id = await conn.fetchval("SELECT COALESCE(MAX(id), 0) + 1 FROM os_aggregates")
+    row = await conn.fetchrow(
+        """INSERT INTO os_aggregates(id, name, availability_zone, hosts, metadata)
+           VALUES($1,$2,$3,$4::jsonb,$5::jsonb)
+           ON CONFLICT (name) DO UPDATE SET
+             availability_zone=EXCLUDED.availability_zone,
+             hosts=EXCLUDED.hosts,
+             metadata=EXCLUDED.metadata
+           RETURNING *""",
+        int(next_id or 1),
+        name,
+        None if az is None else str(az),
+        json.dumps(hosts),
+        json.dumps(metadata),
+    )
+    return {"aggregate": _aggregate_dict(row)}
+
+
+async def _fetch_aggregate(conn: Connection, aggregate_id: str) -> Any:
     row = await conn.fetchrow(
         """SELECT * FROM os_aggregates
            WHERE id::text=$1 OR name=$1
@@ -943,7 +967,106 @@ async def show_aggregate(
     )
     if row is None:
         raise OpenStackError("NotFound", f"aggregate {aggregate_id} not found", status_code=404)
-    return {"aggregate": _aggregate_dict(row)}
+    return row
+
+
+async def _show_aggregate_impl(conn: Connection, aggregate_id: str) -> dict[str, object]:
+    return {"aggregate": _aggregate_dict(await _fetch_aggregate(conn, aggregate_id))}
+
+
+async def _update_aggregate_impl(
+    request: Request, conn: Connection, aggregate_id: str
+) -> dict[str, object]:
+    row = await _fetch_aggregate(conn, aggregate_id)
+    body = await request.json()
+    payload = body.get("aggregate") if isinstance(body.get("aggregate"), dict) else body
+    if not isinstance(payload, dict):
+        payload = {}
+    name = str(payload.get("name") or row["name"])
+    az = payload.get("availability_zone", row["availability_zone"])
+    current = _aggregate_dict(row)
+    metadata = (
+        payload.get("metadata")
+        if isinstance(payload.get("metadata"), dict)
+        else current["metadata"]
+    )
+    hosts = payload.get("hosts") if isinstance(payload.get("hosts"), list) else current["hosts"]
+    updated = await conn.fetchrow(
+        """UPDATE os_aggregates
+           SET name=$2, availability_zone=$3, hosts=$4::jsonb, metadata=$5::jsonb
+           WHERE id=$1
+           RETURNING *""",
+        row["id"],
+        name,
+        None if az is None else str(az),
+        json.dumps(hosts),
+        json.dumps(metadata),
+    )
+    return {"aggregate": _aggregate_dict(updated)}
+
+
+async def _delete_aggregate_impl(conn: Connection, aggregate_id: str) -> Response:
+    row = await _fetch_aggregate(conn, aggregate_id)
+    await conn.execute("DELETE FROM os_aggregates WHERE id=$1", row["id"])
+    return Response(status_code=204)
+
+
+@router.get("/v2.1/os-aggregates/{aggregate_id}")
+async def show_aggregate(
+    aggregate_id: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    _ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    return await _show_aggregate_impl(conn, aggregate_id)
+
+
+@router.get("/v2.1/os-aggregates/{id}")
+async def show_aggregate_by_id(
+    id: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    _ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    return await _show_aggregate_impl(conn, id)
+
+
+@router.put("/v2.1/os-aggregates/{aggregate_id}")
+@router.patch("/v2.1/os-aggregates/{aggregate_id}")
+async def update_aggregate(
+    aggregate_id: str,
+    request: Request,
+    conn: Annotated[Connection, Depends(get_conn)],
+    _ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    return await _update_aggregate_impl(request, conn, aggregate_id)
+
+
+@router.put("/v2.1/os-aggregates/{id}")
+@router.patch("/v2.1/os-aggregates/{id}")
+async def update_aggregate_by_id(
+    id: str,
+    request: Request,
+    conn: Annotated[Connection, Depends(get_conn)],
+    _ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    return await _update_aggregate_impl(request, conn, id)
+
+
+@router.delete("/v2.1/os-aggregates/{aggregate_id}", status_code=204)
+async def delete_aggregate(
+    aggregate_id: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    _ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> Response:
+    return await _delete_aggregate_impl(conn, aggregate_id)
+
+
+@router.delete("/v2.1/os-aggregates/{id}", status_code=204)
+async def delete_aggregate_by_id(
+    id: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    _ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> Response:
+    return await _delete_aggregate_impl(conn, id)
 
 
 @router.get("/v2.1/os-services")
@@ -1559,6 +1682,33 @@ async def delete_server_tag(
     return Response(status_code=204)
 
 
+def _server_sg_dict(row: Any) -> dict[str, object]:
+    return {
+        "id": str(row["id"]),
+        "name": row["name"],
+        "description": row["description"],
+    }
+
+
+async def _fetch_server_security_group(
+    conn: Connection, project_id: UUID, security_group_id: str
+) -> Any:
+    row = await conn.fetchrow(
+        """SELECT * FROM os_security_groups
+           WHERE project_id=$1 AND (id::text=$2 OR name=$2)
+           LIMIT 1""",
+        project_id,
+        security_group_id,
+    )
+    if row is None:
+        raise OpenStackError(
+            "NotFound",
+            f"security_group {security_group_id} not found",
+            status_code=404,
+        )
+    return row
+
+
 @router.get("/v2.1/servers/{server_id}/os-security-groups")
 async def server_security_groups(
     server_id: str,
@@ -1570,11 +1720,74 @@ async def server_security_groups(
         "SELECT * FROM os_security_groups WHERE project_id=$1 ORDER BY name",
         ctx.project_id,
     )
+    return {"security_groups": [_server_sg_dict(r) for r in rows]}
+
+
+@router.post("/v2.1/servers/{server_id}/os-security-groups", status_code=201)
+async def create_server_security_group(
+    server_id: str,
+    request: Request,
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    _ = server_id
+    payload = (await request.json()).get("security_group") or {}
+    sg_name = str(payload.get("name") or f"sg-{uuid4().hex[:8]}")
+    sg_id = uuid4()
+    await conn.execute(
+        """INSERT INTO os_security_groups(id, project_id, name, description)
+           VALUES($1,$2,$3,$4)""",
+        sg_id,
+        ctx.project_id,
+        sg_name,
+        str(payload.get("description") or ""),
+    )
     return {
-        "security_groups": [
-            {"id": str(r["id"]), "name": r["name"], "description": r["description"]} for r in rows
-        ]
+        "security_group": {
+            "id": str(sg_id),
+            "name": sg_name,
+            "description": str(payload.get("description") or ""),
+        }
     }
+
+
+async def _show_server_sg_impl(
+    conn: Connection, project_id: UUID, security_group_id: str
+) -> dict[str, object]:
+    row = await _fetch_server_security_group(conn, project_id, security_group_id)
+    return {"security_group": _server_sg_dict(row)}
+
+
+async def _update_server_sg_impl(
+    request: Request, conn: Connection, project_id: UUID, security_group_id: str
+) -> dict[str, object]:
+    row = await _fetch_server_security_group(conn, project_id, security_group_id)
+    body = await request.json()
+    payload = body.get("security_group") if isinstance(body.get("security_group"), dict) else body
+    if not isinstance(payload, dict):
+        payload = {}
+    name = str(payload.get("name") or row["name"])
+    description = str(
+        payload.get("description") if "description" in payload else row["description"]
+    )
+    updated = await conn.fetchrow(
+        """UPDATE os_security_groups
+           SET name=$2, description=$3
+           WHERE id=$1
+           RETURNING *""",
+        row["id"],
+        name,
+        description,
+    )
+    return {"security_group": _server_sg_dict(updated)}
+
+
+async def _delete_server_sg_impl(
+    conn: Connection, project_id: UUID, security_group_id: str
+) -> Response:
+    row = await _fetch_server_security_group(conn, project_id, security_group_id)
+    await conn.execute("DELETE FROM os_security_groups WHERE id=$1", row["id"])
+    return Response(status_code=204)
 
 
 @router.get("/v2.1/servers/{server_id}/os-security-groups/{security_group_id}")
@@ -1585,26 +1798,66 @@ async def show_server_security_group(
     ctx: Annotated[TokenContext, Depends(require_project_token)],
 ) -> dict[str, object]:
     _ = server_id
-    row = await conn.fetchrow(
-        """SELECT * FROM os_security_groups
-           WHERE project_id=$1 AND (id::text=$2 OR name=$2)
-           LIMIT 1""",
-        ctx.project_id,
-        security_group_id,
-    )
-    if row is None:
-        raise OpenStackError(
-            "NotFound",
-            f"security_group {security_group_id} not found",
-            status_code=404,
-        )
-    return {
-        "security_group": {
-            "id": str(row["id"]),
-            "name": row["name"],
-            "description": row["description"],
-        }
-    }
+    return await _show_server_sg_impl(conn, ctx.project_id, security_group_id)
+
+
+@router.get("/v2.1/servers/{server_id}/os-security-groups/{id}")
+async def show_server_security_group_by_id(
+    server_id: str,
+    id: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    _ = server_id
+    return await _show_server_sg_impl(conn, ctx.project_id, id)
+
+
+@router.put("/v2.1/servers/{server_id}/os-security-groups/{security_group_id}")
+@router.patch("/v2.1/servers/{server_id}/os-security-groups/{security_group_id}")
+async def update_server_security_group(
+    server_id: str,
+    security_group_id: str,
+    request: Request,
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    _ = server_id
+    return await _update_server_sg_impl(request, conn, ctx.project_id, security_group_id)
+
+
+@router.put("/v2.1/servers/{server_id}/os-security-groups/{id}")
+@router.patch("/v2.1/servers/{server_id}/os-security-groups/{id}")
+async def update_server_security_group_by_id(
+    server_id: str,
+    id: str,
+    request: Request,
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> dict[str, object]:
+    _ = server_id
+    return await _update_server_sg_impl(request, conn, ctx.project_id, id)
+
+
+@router.delete("/v2.1/servers/{server_id}/os-security-groups/{security_group_id}", status_code=204)
+async def delete_server_security_group(
+    server_id: str,
+    security_group_id: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> Response:
+    _ = server_id
+    return await _delete_server_sg_impl(conn, ctx.project_id, security_group_id)
+
+
+@router.delete("/v2.1/servers/{server_id}/os-security-groups/{id}", status_code=204)
+async def delete_server_security_group_by_id(
+    server_id: str,
+    id: str,
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_project_token)],
+) -> Response:
+    _ = server_id
+    return await _delete_server_sg_impl(conn, ctx.project_id, id)
 
 
 @router.get("/v2.1/servers/{server_id}/topology")

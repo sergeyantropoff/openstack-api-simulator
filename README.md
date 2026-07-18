@@ -173,6 +173,8 @@ open pulumi-tests/reports/pulumi-report.html
 ```
 
 Details: **[docs/hypervisor-lab.md](docs/hypervisor-lab.md)**.
+Latest full-matrix result (2026-07-18): HTTP **6514 / 6514**, `http_critical=0`
+(yoga→dalmatian). Pytest / smoke map: [docs/operations.md — Testing](docs/operations.md#testing).
 
 Full matrix of **real OpenStack default ports** published 1:1 (Keystone `:5000`,
 Nova `:8774`, Neutron `:9696`, Glance `:9292`, Cinder `:8776`, …): see

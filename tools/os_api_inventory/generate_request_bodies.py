@@ -105,7 +105,9 @@ def main() -> int:
         print(f"  {name}: {count}")
     if args.series == "all":
         # Coverage check requires the project venv (Python 3.13 dataclasses).
-        print("Run coverage with: python tools/os_api_inventory/generate_request_bodies.py --coverage")
+        print(
+            "Run coverage with: python tools/os_api_inventory/generate_request_bodies.py --coverage"
+        )
     return 0
 
 

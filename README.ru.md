@@ -173,6 +173,8 @@ open pulumi-tests/reports/pulumi-report.html
 ```
 
 Подробности: **[docs/ru/hypervisor-lab.md](docs/ru/hypervisor-lab.md)**.
+Последний полный прогон (2026-07-18): HTTP **6514 / 6514**, `http_critical=0`
+(yoga→dalmatian). Карта pytest / smoke: [docs/ru/operations.md — Тестирование](docs/ru/operations.md#тестирование).
 
 Полная матрица **реальных портов OpenStack по умолчанию**, публикуемых 1:1
 (Keystone `:5000`, Nova `:8774`, Neutron `:9696`, Glance `:9292`, Cinder `:8776`, …):

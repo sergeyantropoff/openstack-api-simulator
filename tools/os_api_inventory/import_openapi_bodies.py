@@ -28,9 +28,7 @@ SERVICE_MAP = {
     "placement": "placement",
 }
 
-API_CONTENTS = (
-    "https://api.github.com/repos/gtema/openstack-openapi/contents/specs/{svc}?ref=main"
-)
+API_CONTENTS = "https://api.github.com/repos/gtema/openstack-openapi/contents/specs/{svc}?ref=main"
 
 
 def _load_yaml(text: str) -> dict[str, Any]:

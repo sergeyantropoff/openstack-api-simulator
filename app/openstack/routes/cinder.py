@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+import json
 from typing import Annotated, Any
-from uuid import uuid4
+from uuid import NAMESPACE_URL, uuid4, uuid5
 
 from asyncpg import Connection
 from fastapi import APIRouter, Depends, Request, Response
@@ -13,6 +14,16 @@ from app.openstack.deps import get_conn, require_project_token
 from app.openstack.errors import OpenStackError
 
 router = APIRouter(tags=["Cinder"])
+
+_DEFAULT_QUOTA_SET: dict[str, object] = {
+    "volumes": 100,
+    "snapshots": 100,
+    "gigabytes": 1000,
+    "backups": 10,
+    "backup_gigabytes": 1000,
+    "groups": 10,
+    "per_volume_gigabytes": -1,
+}
 
 
 def _volume(row: Any) -> dict[str, Any]:
@@ -43,6 +54,65 @@ async def cinder_versions(conn: Annotated[Connection, Depends(get_conn)]) -> dic
 
     return await require_doc(
         conn, service="cinder", resource_type="discovery_version", name="default"
+    )
+
+
+async def _quota_set_for(
+    conn: Connection,
+    *,
+    tenant_id: str,
+    project_id: Any,
+) -> dict[str, object]:
+    from app.openstack.db_docs import fetch_doc
+
+    row = await conn.fetchrow(
+        """SELECT data FROM os_api_objects
+           WHERE service='cinder' AND resource_type='quota_set'
+             AND (id::text=$1 OR name=$1 OR data->>'id'=$1 OR data->>'tenant_id'=$1)
+           ORDER BY updated_at DESC LIMIT 1""",
+        tenant_id,
+    )
+    if row is not None:
+        data = row["data"]
+        if isinstance(data, str):
+            data = json.loads(data)
+        quota = dict((data or {}).get("quota_set") or data or {})
+        quota.setdefault("id", tenant_id)
+        return {"quota_set": quota}
+    defaults = (
+        await fetch_doc(conn, service="cinder", resource_type="quota_set_defaults", name="default")
+        or {}
+    )
+    quota = dict((defaults.get("quota_set") or _DEFAULT_QUOTA_SET))
+    quota["id"] = tenant_id
+    # Stable per-tenant id that does not collide with Nova's project-UUID quota rows.
+    item_id = uuid5(NAMESPACE_URL, f"cinder:quota_set:{tenant_id}")
+    await conn.execute(
+        """INSERT INTO os_api_objects(id, service, resource_type, project_id, name, status, data)
+           VALUES($1,'cinder','quota_set',$2,$3,'ACTIVE',$4::jsonb)
+           ON CONFLICT (id) DO UPDATE SET data=EXCLUDED.data, updated_at=now()""",
+        item_id,
+        project_id,
+        tenant_id,
+        json.dumps({"id": tenant_id, "tenant_id": tenant_id, "quota_set": quota}),
+    )
+    return {"quota_set": quota}
+
+
+@router.get("/v3/os-quota-sets/{tenant_id}")
+@router.get("/v3/os-quota-sets/{id}")
+@router.get("/v3/{project_id}/os-quota-sets/{tenant_id}")
+@router.get("/v3/{project_id}/os-quota-sets/{id}")
+async def show_quota_set(
+    conn: Annotated[Connection, Depends(get_conn)],
+    ctx: Annotated[TokenContext, Depends(require_project_token)],
+    tenant_id: str | None = None,
+    id: str | None = None,
+    project_id: str | None = None,
+) -> dict[str, object]:
+    _ = project_id
+    return await _quota_set_for(
+        conn, tenant_id=tenant_id or id or str(ctx.project_id), project_id=ctx.project_id
     )
 
 

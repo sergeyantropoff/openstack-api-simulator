@@ -101,9 +101,7 @@ def flatten_schema_fields(
                 child_type = next((t for t in child_type if t != "null"), child_type[0])
             nested_props = child.get("properties")
             if (child_type == "object" or nested_props) and isinstance(nested_props, dict):
-                fields.extend(
-                    flatten_schema_fields(child, prefix=path, max_depth=max_depth - 1)
-                )
+                fields.extend(flatten_schema_fields(child, prefix=path, max_depth=max_depth - 1))
             elif child_type == "array":
                 items = child.get("items")
                 if isinstance(items, dict) and (
@@ -111,9 +109,7 @@ def flatten_schema_fields(
                 ):
                     # Expand one sample element so nested array object fields appear.
                     fields.extend(
-                        flatten_schema_fields(
-                            items, prefix=f"{path}.0", max_depth=max_depth - 1
-                        )
+                        flatten_schema_fields(items, prefix=f"{path}.0", max_depth=max_depth - 1)
                     )
                 else:
                     fields.append(
@@ -231,8 +227,10 @@ def unflatten_body(values: dict[str, Any]) -> dict[str, Any]:
                     return
                 while len(cur) <= idx:
                     cur.append([] if want_array else {})
-                if cur[idx] is None or (want_array and not isinstance(cur[idx], list)) or (
-                    not want_array and not isinstance(cur[idx], dict)
+                if (
+                    cur[idx] is None
+                    or (want_array and not isinstance(cur[idx], list))
+                    or (not want_array and not isinstance(cur[idx], dict))
                 ):
                     cur[idx] = [] if want_array else {}
                 cur = cur[idx]
