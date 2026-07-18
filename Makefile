@@ -169,24 +169,28 @@ smoke: ## Keystone → multi-service OpenStack smoke
 shell: ## Open an interactive shell in the development container
 	$(COMPOSE) run --rm --no-deps $(SERVICE_DEV) bash
 
-push: ## git add ., ask for commit message, push to origin + antropoff
-	@git add .
-	@if git diff --cached --quiet; then \
-		echo "Nothing to commit (working tree clean after git add .)."; \
+push: ## git add ., multiline commit message (Ctrl-D), push origin + antropoff
+	@set -e; \
+	git add .; \
+	echo "=== staged ==="; \
+	git status --short; \
+	echo; \
+	if git diff --cached --quiet; then \
+		echo "Nothing to commit — pushing current branch."; \
 	else \
 		if [ -n "$(MSG)" ]; then \
 			msg="$(MSG)"; \
 		else \
-			printf "Commit message: "; \
-			IFS= read -r msg < /dev/tty; \
+			echo "Enter commit message, then Ctrl-D:"; \
+			msg=$$(cat </dev/tty); \
 		fi; \
-		if [ -z "$$msg" ]; then \
-			echo "Empty commit message; aborting." >&2; \
-			exit 1; \
-		fi; \
+		if [ -z "$$msg" ]; then echo "Empty commit message, aborting." >&2; exit 1; fi; \
 		git commit -m "$$msg"; \
-	fi
-	git push origin HEAD
+	fi; \
+	echo "Pushing to origin and antropoff:"; \
+	git remote get-url --push origin | sed 's/^/  - /'; \
+	git remote get-url --push antropoff | sed 's/^/  - /'; \
+	git push origin HEAD; \
 	git push antropoff HEAD
 
 clean: ## Remove generated local artifacts
