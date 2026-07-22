@@ -13,6 +13,50 @@
 - Wrong user/password/domain (`Default`)
 - Project scope missing for project-scoped APIs
 - Token from a different simulator instance (reseed rotates IDs)
+- In the Web UI, HTTP 401 clears the local Keystone session and shows **Guest**
+  in the header; sign in again from Environment
+
+## Ingress returns branded HTML 404 / nginx 405 instead of JSON
+
+The simulator answers API errors as JSON (`error` / `itemNotFound` / `message`).
+If you see a site HTML “page not found” or plain nginx **405** page, the
+**Ingress / reverse proxy** replaced the upstream body (often via
+`custom-http-errors` on the ingress-nginx controller).
+
+Fix on the Ingress for this host (see
+`helm/openstack-api-simulator/values-ingress-example.yaml`):
+
+```yaml
+annotations:
+  nginx.ingress.kubernetes.io/proxy-intercept-errors: "false"
+  nginx.ingress.kubernetes.io/custom-http-errors: "502,503"
+```
+
+Then re-check with `Accept: application/json`. A missing compute instance should
+look like JSON (not HTML), for example:
+
+```json
+{"itemNotFound": {"code": 404, "message": "Instance 'missing-id' could not be found"}}
+```
+
+### Correct authenticated mutation (OpenStack)
+
+Use a Keystone token header and JSON body (OpenStack APIs are JSON, not
+form-urlencoded):
+
+```bash
+# after POST /v3/auth/tokens → X-Subject-Token
+TOKEN=...
+curl -sS -X POST "https://HOST:8774/v2.1/servers" \
+  -H "X-Auth-Token: $TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{"server":{"name":"demo","flavorRef":"...","imageRef":"...","networks":[{"uuid":"..."}]}}'
+```
+
+Keystone/UI via Ingress is usually `:443→5000`; Nova and other service ports
+still need port-forward / LoadBalancer / TCP Ingress unless you only call
+through the multi-port gateway Service.
 
 ## Empty lists after lifecycle probe
 

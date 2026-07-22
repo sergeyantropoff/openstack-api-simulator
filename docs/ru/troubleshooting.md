@@ -13,6 +13,50 @@
 - Неверный user/password/domain (`Default`)
 - Отсутствует project scope для project-scoped API
 - Токен от другого экземпляра simulator (reseed меняет ID)
+- В Web UI HTTP 401 очищает локальную сессию Keystone и показывает **Guest**
+  в шапке; войдите снова через Environment
+
+## Ingress отдаёт брендированный HTML 404 / nginx 405 вместо JSON
+
+Симулятор отвечает на ошибки API JSON (`error` / `itemNotFound` / `message`).
+Если видите HTML «page not found» или голую страницу nginx **405**, тело
+подменил **Ingress / reverse proxy** (часто `custom-http-errors` у
+ingress-nginx).
+
+Исправьте annotations Ingress для этого хоста (см.
+`helm/openstack-api-simulator/values-ingress-example.yaml`):
+
+```yaml
+annotations:
+  nginx.ingress.kubernetes.io/proxy-intercept-errors: "false"
+  nginx.ingress.kubernetes.io/custom-http-errors: "502,503"
+```
+
+Проверьте с `Accept: application/json`. Отсутствующий compute instance должен
+вернуться JSON (не HTML), например:
+
+```json
+{"itemNotFound": {"code": 404, "message": "Instance 'missing-id' could not be found"}}
+```
+
+### Корректная authenticated mutation (OpenStack)
+
+Токен Keystone в заголовке и JSON-тело (OpenStack API — JSON, не
+form-urlencoded):
+
+```bash
+# после POST /v3/auth/tokens → X-Subject-Token
+TOKEN=...
+curl -sS -X POST "https://HOST:8774/v2.1/servers" \
+  -H "X-Auth-Token: $TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{"server":{"name":"demo","flavorRef":"...","imageRef":"...","networks":[{"uuid":"..."}]}}'
+```
+
+Keystone/UI через Ingress обычно `:443→5000`; порты Nova и других сервисов
+по-прежнему нуждаются в port-forward / LoadBalancer / TCP Ingress, если вы не
+ходите через multi-port gateway Service.
 
 ## Пустые списки после lifecycle probe
 

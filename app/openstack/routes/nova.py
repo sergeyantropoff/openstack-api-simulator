@@ -125,7 +125,11 @@ async def _show_server(
         ctx.project_id,
     )
     if row is None:
-        raise OpenStackError("computeFault", "Instance could not be found", status_code=404)
+        raise OpenStackError(
+            "computeFault",
+            f"Instance '{resource_id}' could not be found",
+            status_code=404,
+        )
     return {"server": _server_dict(row)}
 
 
@@ -164,7 +168,11 @@ async def _update_server(
         ctx.project_id,
     )
     if row is None:
-        raise OpenStackError("computeFault", "Instance could not be found", status_code=404)
+        raise OpenStackError(
+            "computeFault",
+            f"Instance '{resource_id}' could not be found",
+            status_code=404,
+        )
     return {"server": _server_dict(row)}
 
 
@@ -299,7 +307,11 @@ async def delete_server(
         ctx.project_id,
     )
     if result.endswith("0"):
-        raise OpenStackError("computeFault", "Instance could not be found", status_code=404)
+        raise OpenStackError(
+            "computeFault",
+            f"Instance '{server_id}' could not be found",
+            status_code=404,
+        )
     return Response(status_code=204)
 
 
@@ -316,7 +328,11 @@ async def server_action(
         ctx.project_id,
     )
     if row is None:
-        raise OpenStackError("computeFault", "Instance could not be found", status_code=404)
+        raise OpenStackError(
+            "computeFault",
+            f"Instance '{server_id}' could not be found",
+            status_code=404,
+        )
     from fastapi.responses import JSONResponse
 
     action = await request.json()

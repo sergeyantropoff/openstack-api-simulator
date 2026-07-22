@@ -54,6 +54,10 @@ helm upgrade --install os-sim ./helm/openstack-api-simulator \
 5. Разворачивается nginx **api-gateway** со стандартными портами OpenStack (5000, 8774, 9696, …).
 6. Создаются ресурсы `ClusterIssuer` (`letsencrypt-prod` / `letsencrypt-staging`).
 7. Создаётся Ingress → gateway `:5000` (Keystone + Web UI) с TLS.
+8. Ставит annotations Ingress, чтобы nginx не подменял JSON 404/405
+   брендированными HTML-страницами (`proxy-intercept-errors: false`, узкий
+   `custom-http-errors`). См.
+   [Устранение неполадок](troubleshooting.md#ingress-отдаёт-брендированный-html-404--nginx-405-вместо-json).
 
 DNS для `os-sim.example.com` должен указывать на Ingress controller. Затем:
 

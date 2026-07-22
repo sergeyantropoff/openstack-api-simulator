@@ -54,6 +54,10 @@ What this does:
 5. Deploys nginx **api-gateway** with OpenStack default ports (5000, 8774, 9696, …).
 6. Creates `ClusterIssuer` resources (`letsencrypt-prod` / `letsencrypt-staging`).
 7. Creates an Ingress → gateway `:5000` (Keystone + Web UI) with TLS.
+8. Sets Ingress annotations so nginx does not replace API JSON 404/405 with
+   branded HTML error pages (`proxy-intercept-errors: false`, narrow
+   `custom-http-errors`). See
+   [Troubleshooting](troubleshooting.md#ingress-returns-branded-html-404--nginx-405-instead-of-json).
 
 DNS for `os-sim.example.com` must point at your Ingress controller. Then:
 

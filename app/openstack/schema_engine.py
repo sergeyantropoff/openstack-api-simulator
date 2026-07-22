@@ -438,7 +438,7 @@ async def _handle_show(
         item_id,
     )
     if row is None:
-        raise OpenStackError("NotFound", f"{op.resource_type} {item_id} not found", status_code=404)
+        raise OpenStackError("NotFound", f"{op.resource_type} '{item_id}' not found", status_code=404)
     return JSONResponse(_fixture_or_item(op, _row_item(row)), status_code=op.status_code)
 
 
