@@ -19,6 +19,7 @@
 | [Seed-профили](seed-profiles.md) | `minimal` / `demo` |
 | [Клиенты](clients.md) | SDK / CLI |
 | [Web UI](web-ui.md) | Консоль и drawers |
+| [CI/CD (Jenkins)](ci-cd.md) | VERSION, push Harbor/Hub, деплой |
 | [Эксплуатация](operations.md) | Day-2, релиз, reseed, **тесты** |
 | [Архитектура](architecture.md) | Компоненты и путь запроса |
 | [Безопасность](security.md) | Threat model лаборатории |

@@ -18,6 +18,7 @@ header on each page. Russian mirrors live under [`ru/`](ru/README.md).
 | [Seed profiles](seed-profiles.md) | `minimal` / `demo` |
 | [Clients](clients.md) | SDK / CLI |
 | [Web UI](web-ui.md) | Console drawers |
+| [CI/CD (Jenkins)](ci-cd.md) | VERSION, Harbor/Hub push, deploy |
 | [Operations](operations.md) | Day-2, release, reseed, **testing** |
 | [Architecture](architecture.md) | Components & request path |
 | [Security](security.md) | Lab threat model |

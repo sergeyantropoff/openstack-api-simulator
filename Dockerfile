@@ -26,6 +26,7 @@ ENV PATH="/opt/venv/bin:$PATH" \
 RUN groupadd --system --gid 10001 simulator \
     && useradd --system --uid 10001 --gid simulator --home-dir /app --no-create-home simulator
 COPY --from=builder /opt/venv /opt/venv
+COPY VERSION /app/VERSION
 WORKDIR /app
 USER 10001:10001
 # Internal listen only — public OpenStack ports are on api-gateway.

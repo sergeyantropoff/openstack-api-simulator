@@ -2,8 +2,8 @@ apiVersion: v2
 name: openstack-api-simulator
 description: Stateful OpenStack API simulator (PostgreSQL + multi-port nginx gateway) for labs and CI
 type: application
-version: 0.1.0
-appVersion: "0.1.0"
+version: 0.1.1
+appVersion: "0.1.1"
 home: https://github.com/inecs/openstack-api-simulator
 keywords:
   - openstack

@@ -19,6 +19,7 @@ from app.openstack.demo_cloud import openstack_demo_summary, seed_openstack_demo
 from app.openstack.seed import seed_openstack
 from app.web.assets import console_html
 from app.web.compatibility_catalog import compatibility_payload
+from app.version import get_app_version
 from app.web.contract_catalog import catalog_payload, list_majors, load_snapshot, method_payload
 
 router = APIRouter(tags=["Simulator"])
@@ -41,10 +42,13 @@ async def ui_versions(request: Request) -> JSONResponse:
     runtime_version = _runtime_version(request)
     # Prefer OpenStack contract packs when present.
     try:
-        return JSONResponse(openstack_series_majors(runtime_version))
+        payload = openstack_series_majors(runtime_version)
     except Exception:
         settings = _settings(request)
-        return JSONResponse(list_majors(runtime_version=runtime_version, settings=settings))
+        payload = list_majors(runtime_version=runtime_version, settings=settings)
+    if isinstance(payload, dict):
+        payload = {**payload, "app_version": get_app_version()}
+    return JSONResponse(payload)
 
 
 @router.get("/ui/api/catalog", include_in_schema=False)

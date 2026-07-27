@@ -6,7 +6,7 @@ PYTEST_OFFLINE := -m "not integration and not compatibility"
 # Docker Hub release image (runtime target only — not the local bind-mount "dev" image).
 DOCKERHUB_USER ?= inecs
 IMAGE_NAME ?= openstack-api-simulator
-VERSION ?= $(shell sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml)
+VERSION ?= $(shell cat VERSION 2>/dev/null || echo 0.1.0)
 DOCKER_IMAGE ?= $(DOCKERHUB_USER)/$(IMAGE_NAME)
 PUSH_LATEST ?= 1
 
@@ -16,12 +16,14 @@ OVERRIDE_EXAMPLE ?= docker-compose.override.example.yml
 OVERRIDE_FILE ?= docker-compose.override.yml
 COMPOSE_LOCAL ?= $(COMPOSE) -f docker-compose.yml -f $(OVERRIDE_FILE)
 
-.PHONY: help install format lint typecheck test test-unit test-integration test-contract test-compatibility test-surface evidence coverage run dev up up-local down down-local restart logs docker-build docker-up docker-down docker-logs docker-restart db-up db-down db-migrate db-reset api-import api-diff seed seed-demo smoke clean ci ci-all shell push release release-build release-up release-down release-seed helm-deps helm-template \
+.PHONY: bump-patch bump-minor version-commit  help install format lint typecheck test test-unit test-integration test-contract test-compatibility test-surface evidence coverage run dev up up-local down down-local restart logs docker-build docker-up docker-down docker-logs docker-restart db-up db-down db-migrate db-reset api-import api-diff seed seed-demo smoke clean ci ci-all shell push release release-build release-up release-down release-seed helm-deps helm-template \
 	test-pulumi-smoke test-pulumi pulumi-tests test-smoke-all-lab test-all-lab clean-test-resources \
 	request-bodies-generate request-bodies-import request-bodies-coverage
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "}; /^[a-zA-Z0-9_-]+:.*## / {printf "%-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+	@echo
+	@echo "Version: $$(cat VERSION 2>/dev/null || echo 0.1.0)  (make bump-patch | bump-minor)"
 
 install: ## Build runtime and development images
 	@test -f .env || cp .env.example .env
@@ -169,29 +171,41 @@ smoke: ## Keystone → multi-service OpenStack smoke
 shell: ## Open an interactive shell in the development container
 	$(COMPOSE) run --rm --no-deps $(SERVICE_DEV) bash
 
-push: ## git add ., multiline commit message (Ctrl-D), push origin + antropoff
+bump-patch: ## VERSION +0.0.1 (pyproject + Helm)
+	@PYTHONPATH=. python3 scripts/bump_version.py patch
+	@echo "VERSION → $$(cat VERSION)"
+
+bump-minor: ## VERSION +0.1.0 (pyproject + Helm)
+	@PYTHONPATH=. python3 scripts/bump_version.py minor
+	@echo "VERSION → $$(cat VERSION)"
+
+version-commit: ## Stage version files and commit "Bump version to …"
+	@git add VERSION pyproject.toml helm/openstack-api-simulator/Chart.yaml helm/openstack-api-simulator/values.yaml
+	@if git diff --cached --quiet; then \
+		echo "Nothing to commit for version files."; \
+	else \
+		git commit -m "Bump version to $$(cat VERSION)."; \
+	fi
+
+push: ## bump-patch + commit version + push origin
+	@$(MAKE) bump-patch
+	@$(MAKE) version-commit
 	@set -e; \
 	git add .; \
 	echo "=== staged ==="; \
 	git status --short; \
 	echo; \
 	if git diff --cached --quiet; then \
-		echo "Nothing to commit — pushing current branch."; \
+		echo "Nothing else to commit — pushing current branch."; \
 	else \
-		if [ -n "$(MSG)" ]; then \
-			msg="$(MSG)"; \
-		else \
-			echo "Enter commit message, then Ctrl-D:"; \
-			msg=$$(cat </dev/tty); \
-		fi; \
+		echo "Enter commit message for remaining changes, then Ctrl-D:"; \
+		msg=$$(cat </dev/tty); \
 		if [ -z "$$msg" ]; then echo "Empty commit message, aborting." >&2; exit 1; fi; \
 		git commit -m "$$msg"; \
 	fi; \
-	echo "Pushing to origin and antropoff:"; \
-	git remote get-url --push origin | sed 's/^/  - /'; \
-	git remote get-url --push antropoff | sed 's/^/  - /'; \
-	git push origin HEAD; \
-	git push antropoff HEAD
+	echo "Pushing to both remotes:"; \
+	git remote get-url --push --all origin | sed 's/^/  - /'; \
+	git push origin HEAD
 
 clean: ## Remove generated local artifacts
 	rm -rf .coverage coverage.xml htmlcov .mypy_cache .pytest_cache .ruff_cache
